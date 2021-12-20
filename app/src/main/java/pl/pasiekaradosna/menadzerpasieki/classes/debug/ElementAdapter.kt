@@ -1,4 +1,4 @@
-package pl.pasiekaradosna.menadzerpasieki.classes
+package pl.pasiekaradosna.menadzerpasieki.classes.debug
 
 import android.view.LayoutInflater
 import android.view.View

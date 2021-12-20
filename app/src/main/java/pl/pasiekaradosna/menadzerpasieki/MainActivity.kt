@@ -3,13 +3,10 @@ package pl.pasiekaradosna.menadzerpasieki
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import pl.pasiekaradosna.menadzerpasieki.classes.Element
-import pl.pasiekaradosna.menadzerpasieki.classes.ElementAdapter
+import pl.pasiekaradosna.menadzerpasieki.classes.debug.Element
+import pl.pasiekaradosna.menadzerpasieki.classes.debug.ElementAdapter
 
 class MainActivity : AppCompatActivity() {
 

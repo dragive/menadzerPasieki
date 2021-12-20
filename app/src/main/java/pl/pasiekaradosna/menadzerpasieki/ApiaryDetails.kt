@@ -3,8 +3,7 @@ package pl.pasiekaradosna.menadzerpasieki
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_apiary_details.*
-import pl.pasiekaradosna.menadzerpasieki.dal.MyDbHelper
+import pl.pasiekaradosna.menadzerpasieki.dal.TestDbHelper
 
 class ApiaryDetails : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +18,7 @@ class ApiaryDetails : AppCompatActivity() {
 
         val textView : TextView = findViewById(R.id.textView)
 
-        val myDbHelper = MyDbHelper(this)
+        val myDbHelper = TestDbHelper(this)
 
         textView.text = myDbHelper.readAllUsers().toString()
 
