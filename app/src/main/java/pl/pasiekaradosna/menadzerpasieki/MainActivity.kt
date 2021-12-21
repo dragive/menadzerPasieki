@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             catch (ex:Exception){
                 bError= true
                 Toast.makeText(this,"Unable to droped Table",Toast.LENGTH_SHORT).show()
-                Log.e(Settings.TAG, "123", ex)
+                Log.e(Settings.TAG, "Unable to droped Table", ex)
 
             }
             if(!bError){
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             catch (ex:Exception){
                 bError= true
                 Toast.makeText(this,"Unable to Create",Toast.LENGTH_SHORT).show()
-                Log.e(Settings.TAG, "123", ex)
+                Log.e(Settings.TAG, "Unable to Create", ex)
 
             }
             if(!bError){
@@ -70,6 +70,12 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
+        bMainApp.setOnClickListener {
+            val intent = Intent(this,MainScreen::class.java)
+            startActivity(intent)
+        }
+
 
     }
 }

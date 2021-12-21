@@ -10,10 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestMenadzerPasieki">
         <activity
+            android:name=".MainScreen"
+            android:exported="false"
+            android:label="@string/title_activity_main_screen" />
+        <activity
             android:name=".ApiaryDetails"
             android:exported="false"
-            android:parentActivityName=".MainActivity"
-            />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

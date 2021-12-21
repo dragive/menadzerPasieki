@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MenadzerPasieki</string>
+    <string name="title_activity_main_screen">MainScreen</string>
+    <string name="title_home">Home</string>
+    <string name="title_apiary">Dashboard</string>
+    <string name="title_todo">Notifications</string>
 </resources>
