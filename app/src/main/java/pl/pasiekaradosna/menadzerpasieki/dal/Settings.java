@@ -8,4 +8,6 @@ public abstract class Settings {
     public static final String TABLE_USERS = "USERS";
     public static final String DEBUG_TAG = "SqLiteTodoManager";
 
+    public static final String TAG = "menadzerPasieki";
+
 }
