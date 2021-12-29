@@ -50,7 +50,7 @@ class TestDbHelper(context: Context) : SQLiteOpenHelper(context,Settings.DATABAS
             """.trimIndent()
         val empList:ArrayList<String > = ArrayList<String >()
         val db = this.readableDatabase
-        var cursor: Cursor? = null
+        var cursor: Cursor?
 
         try{
             cursor = db.rawQuery(selectQuery, null)

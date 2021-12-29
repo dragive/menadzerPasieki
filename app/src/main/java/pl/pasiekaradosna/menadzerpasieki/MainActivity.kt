@@ -77,5 +77,11 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        bLocationTest.setOnClickListener {
+            val intent = Intent(this,LocationTestActivity::class.java)
+            startActivity(intent)
+        }
+
+
     }
 }

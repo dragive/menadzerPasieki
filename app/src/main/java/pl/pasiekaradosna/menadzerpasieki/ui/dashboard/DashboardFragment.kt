@@ -1,14 +1,19 @@
 package pl.pasiekaradosna.menadzerpasieki.ui.dashboard
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.fragment_dashboard.*
 import pl.pasiekaradosna.menadzerpasieki.R
+import pl.pasiekaradosna.menadzerpasieki.WeatherFragment
+import pl.pasiekaradosna.menadzerpasieki.dal.Settings
 import pl.pasiekaradosna.menadzerpasieki.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
@@ -31,10 +36,13 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textView2
+        //val textView: TextView = binding.textView2
         dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+            //textView.text = it
         })
+
+
+
         return root
     }
 
