@@ -16,7 +16,7 @@ class TestDbHelper(context: Context) : SQLiteOpenHelper(context,Settings.DATABAS
     private var sQLiteDatabase: SQLiteDatabase? =null
     override fun onCreate(db: SQLiteDatabase?) {
         sQLiteDatabase = db//dbase = getWriteableDatabase()
-        createTable()
+        createTable(db)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -25,7 +25,10 @@ class TestDbHelper(context: Context) : SQLiteOpenHelper(context,Settings.DATABAS
     }
 
     fun createTable(){
-        sQLiteDatabase = this.writableDatabase
+        createTable(this.writableDatabase)
+    }
+    private fun createTable(db: SQLiteDatabase?){
+        sQLiteDatabase = db
         try{
             val sql = "Create Table $TABLE_USERS (" +
                     "id integer primary key autoincrement," +
