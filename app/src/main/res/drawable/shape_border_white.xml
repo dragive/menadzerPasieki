@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
-    <corners
-        android:radius="3dp"/>
-    <stroke android:width="1dip" android:color="@color/darkest_Gray"/>
-<!--    <gradient-->
-<!--        android:startColor="@color/darkest_Gray"-->
-<!--        />-->
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- shadow -->
+    <item android:left="1dp" android:top="3dp">
+        <shape android:shape="rectangle">
+            <stroke android:width="2dp" android:color="@android:color/darker_gray" />
+            <corners android:radius="10dp" />
+        </shape>
+<!--    </item>-->
+<!--    &lt;!&ndash; foreground &ndash;&gt;-->
+<!--    <item android:bottom="3dp" android:right="1dp">-->
+<!--        <shape  android:shape="rectangle">-->
+<!--            <solid android:color="@android:color/darker_gray" />-->
+<!--            <corners android:radius="10dp" />-->
+<!--        </shape>-->
+    </item>
+</layer-list>

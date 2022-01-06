@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import pl.pasiekaradosna.menadzerpasieki.classes.debug.Element
 import pl.pasiekaradosna.menadzerpasieki.classes.debug.ElementAdapter
+import pl.pasiekaradosna.menadzerpasieki.dal.ApiaryManagerDbHelper
 import pl.pasiekaradosna.menadzerpasieki.dal.Settings
 import pl.pasiekaradosna.menadzerpasieki.dal.TestDbHelper
 
@@ -82,6 +83,45 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+
+
+        bClearDb2.setOnClickListener{
+            var bError = false
+            try{
+                ApiaryManagerDbHelper(this).dropTables()
+            }
+
+            catch (ex:Exception){
+                bError= true
+                Toast.makeText(this,"Unable to droped Table",Toast.LENGTH_SHORT).show()
+                Log.e(Settings.TAG, "Unable to droped Table", ex)
+
+            }
+            if(!bError){
+                Toast.makeText(this,"Dropped",Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
+
+        bCreateDb2.setOnClickListener{
+            var bError = false
+            try{
+                ApiaryManagerDbHelper(this).createTable()
+            }
+
+            catch (ex:Exception){
+                bError= true
+                Toast.makeText(this,"Unable to Create",Toast.LENGTH_SHORT).show()
+                Log.e(Settings.TAG, "Unable to Create", ex)
+
+            }
+            if(!bError){
+                Toast.makeText(this,"Created",Toast.LENGTH_SHORT).show()
+            }
+
+        }
 
     }
 }

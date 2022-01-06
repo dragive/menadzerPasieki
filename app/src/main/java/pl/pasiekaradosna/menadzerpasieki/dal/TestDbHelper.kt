@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.database.sqlite.SQLiteException
 import android.util.Log
-import android.widget.Toast
 import pl.pasiekaradosna.menadzerpasieki.dal.Settings.TABLE_USERS
 import pl.pasiekaradosna.menadzerpasieki.dal.Settings.TAG
 
