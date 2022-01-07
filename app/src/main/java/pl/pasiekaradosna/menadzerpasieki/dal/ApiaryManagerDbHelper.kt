@@ -5,12 +5,11 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import pl.pasiekaradosna.menadzerpasieki.dal.Settings.TABLE_APIARIES
-import pl.pasiekaradosna.menadzerpasieki.dal.Settings.TAG
+import pl.pasiekaradosna.menadzerpasieki.dal.Settings.*
 
 
 class ApiaryManagerDbHelper(context: Context) :
-    SQLiteOpenHelper(context, Settings.DATABASE_NAME, null, Settings.DATABASE_VERSION) {
+    SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     private var sQLiteDatabase: SQLiteDatabase? = null
     override fun onCreate(db: SQLiteDatabase?) {
         sQLiteDatabase = db
@@ -28,18 +27,59 @@ class ApiaryManagerDbHelper(context: Context) :
 
     private fun createTable(db: SQLiteDatabase?) {
         sQLiteDatabase = db
-        try {
-            val sql = """CREATE TABLE Apiaries (
+        var sqlList = ArrayList<String>()
+        sqlList.add(
+            """CREATE TABLE Apiaries (
                 id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
                 date_of_creation TEXT,
                 location TEXT
             );"""
-            Log.d(TAG, "sql executed: $sql")
+        )
 
-            sQLiteDatabase?.execSQL(sql)
+        sqlList.add(
+            """
+            CREATE TABLE $TABLE_HIVE (
+            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            apiary_id INTEGER,
+            queen_bread TEXT,
+            queen_birth_date TEXT
+            );"""
+        )
 
-            Log.d(TAG, sQLiteDatabase.toString())
+
+        sqlList.add(
+            """CREATE TABLE $TABLE_TASK (
+            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            create_date INTEGER NOT NULL,
+            "type" TEXT,
+            duration NUMERIC,
+            due_date TEXT
+            );"""
+        )
+        sqlList.add(
+            """CREATE TABLE $TABLE_HIVES_AND_TASKS (
+            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            complete INTEGER DEFAULT 0,
+            hive_id INTEGER NOT NULL,
+            task_id INTEGER NOT NULL
+            );"""
+        )
+//        sqlList.add("""""")
+//        sqlList.add("""""")
+//        sqlList.add("""""")
+
+
+        try {
+            sqlList.forEach { sql ->
+                Log.d(TAG, "sql executed: $sql")
+
+                sQLiteDatabase?.execSQL(sql)
+
+                Log.d(TAG, "DONE")
+            }
 
         } catch (ex: Exception) {
             Log.e(TAG, "onCreate", ex)
