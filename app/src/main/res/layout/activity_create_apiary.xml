@@ -6,4 +6,61 @@
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.apiaryManagement.CreateApiaryActivity">
 
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="381dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/ptApiaryCreationName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/apiary_creation_form_name_field_hint"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/ptLocationCoordinates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/apiary_creation_form_location_coordinates_hint"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bGetLocation"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/apiary_creation_form_current_location_button"
+                android:layout_margin="4dp"/>
+
+            <Button
+                android:id="@+id/bGetLocationFromMap"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="4dp"
+                android:layout_height="wrap_content"
+                android:text="@string/apiary_creation_form_current_location_from_map_button" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bApiaryCreateSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/apiary_creation_form_submit" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

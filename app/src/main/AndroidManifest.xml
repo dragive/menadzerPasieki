@@ -16,13 +16,13 @@
         <activity
             android:name=".ui.dashboard.apiaryManagement.CreateApiaryActivity"
             android:exported="false"
-            android:parentActivityName=".MainScreen"
+            android:parentActivityName=".MainScreenActivity"
             />
         <activity
             android:name=".LocationTestActivity"
             android:exported="false" />
         <activity
-            android:name=".MainScreen"
+            android:name=".MainScreenActivity"
             android:exported="false"
             android:label="@string/title_activity_main_screen" />
         <activity

@@ -9,7 +9,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import pl.pasiekaradosna.menadzerpasieki.databinding.ActivityMainScreenBinding
 
-class MainScreen : AppCompatActivity() {
+class MainScreenActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainScreenBinding
 

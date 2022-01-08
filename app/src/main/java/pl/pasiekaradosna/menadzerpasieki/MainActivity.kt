@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         bMainApp.setOnClickListener {
-            val intent = Intent(this,MainScreen::class.java)
+            val intent = Intent(this,MainScreenActivity::class.java)
             startActivity(intent)
         }
 

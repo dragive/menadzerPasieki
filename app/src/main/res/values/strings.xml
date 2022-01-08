@@ -4,6 +4,11 @@
     <string name="title_home">Home</string>
     <string name="title_apiary">Dashboard</string>
     <string name="title_todo">Notifications</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="apiary_creation_form_name_label">Name</string>
+    <string name="apiary_creation_form_name_field_hint">Name of apiary</string>
+    <string name="apiary_creation_form_submit">Submit</string>
+    <string name="apiary_creation_form_location_coordinates_hint">Location Coordinates</string>
+    <string name="apiary_creation_form_current_location_button">Get Current Location</string>
+    <string name="apiary_creation_form_current_location_from_map_button">Get Location From Map</string>
 </resources>
