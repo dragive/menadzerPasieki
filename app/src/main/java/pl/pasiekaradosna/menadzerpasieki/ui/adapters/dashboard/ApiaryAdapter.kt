@@ -28,7 +28,7 @@ class ApiaryAdapter (
         Log.d(TAG,"onBindViewHolder")
         holder.itemView.apply {
             tvApiaryName.text = element.name
-            Log.d(TAG,element.name)
+            Log.d(TAG, element.name!!)
         }
     }
 

@@ -155,6 +155,15 @@ class ApiaryManagerDbHelper(context: Context) :
         }
     }
 
+    fun createApiary(apiary: Apiary) {
+        try {
+            this.writableDatabase.insert(TABLE_APIARIES, null, apiary.mapToValues())
+            Log.i(TAG, "Inserted Values")
+        } catch (ex: Exception) {
+            Log.e(TAG, "Error inserting", ex)
+        }
+    }
+
     fun getAllApiaries(): List<Apiary>? {
         val db = this.readableDatabase
 

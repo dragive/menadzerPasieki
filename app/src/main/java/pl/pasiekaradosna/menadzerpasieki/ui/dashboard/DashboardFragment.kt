@@ -52,7 +52,7 @@ class DashboardFragment : Fragment() {
             startActivity(intent)
         }
         val list = ApiaryManagerDbHelper(requireContext()).getAllApiaries()
-        list?.forEach { apiary -> Log.d(Settings.TAG,apiary.name) }
+        list?.forEach { apiary -> Log.d(Settings.TAG,apiary.name!!) }
         apiaryAdapter = ApiaryAdapter(list!!)
 
         rvDashboardMenu.adapter = apiaryAdapter
