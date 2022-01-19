@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import pl.pasiekaradosna.menadzerpasieki.R
 import android.util.Log
 import kotlinx.android.synthetic.main.apiary_item.view.*
+import pl.pasiekaradosna.menadzerpasieki.dal.Settings
 import pl.pasiekaradosna.menadzerpasieki.dal.Settings.TAG
 
 class ApiaryAdapter (
@@ -29,6 +30,10 @@ class ApiaryAdapter (
         holder.itemView.apply {
             tvApiaryName.text = element.name
             Log.d(TAG, element.name!!)
+
+            this.setOnClickListener{
+                Log.i(TAG,"apiary onBindViewHolder")
+            }
         }
     }
 

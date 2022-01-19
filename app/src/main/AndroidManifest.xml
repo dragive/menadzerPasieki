@@ -26,7 +26,7 @@
             android:exported="false"
             android:label="@string/title_activity_main_screen" />
         <activity
-            android:name=".ApiaryDetails"
+            android:name=".ApiaryDetails2"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity

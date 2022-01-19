@@ -6,10 +6,10 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_apiary_details.*
 import pl.pasiekaradosna.menadzerpasieki.dal.TestDbHelper
 
-class ApiaryDetails : AppCompatActivity() {
+class ApiaryDetails2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_apiary_details)
+        setContentView(R.layout.activity_apiary_details_2)
 
         actionBar?.setHomeButtonEnabled(true);
     }

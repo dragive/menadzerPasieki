@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         rvMenu.layoutManager = LinearLayoutManager(this)
 
         bNextActivity.setOnClickListener {
-            val intent = Intent(this,ApiaryDetails::class.java)
+            val intent = Intent(this,ApiaryDetails2::class.java)
             startActivity(intent)
         }
 
