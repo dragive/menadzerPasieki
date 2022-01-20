@@ -16,7 +16,8 @@
         <activity
             android:name=".gui.ApiaryDetailsActivity"
             android:exported="false"
-            android:parentActivityName=".gui.MainScreenActivity"/>
+            android:parentActivityName=".gui.MainScreenActivity"
+            android:label="@string/ApiaryDetailsActivityTitle" />
         <activity
             android:name="pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.apiaryManagement.CreateApiaryActivity"
             android:exported="false"

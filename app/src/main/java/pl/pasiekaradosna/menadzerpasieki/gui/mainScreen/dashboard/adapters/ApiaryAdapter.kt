@@ -7,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import pl.pasiekaradosna.menadzerpasieki.R
-import android.util.Log
 import kotlinx.android.synthetic.main.apiary_item.view.*
 import pl.pasiekaradosna.menadzerpasieki.gui.ApiaryDetailsActivity
-import pl.pasiekaradosna.menadzerpasieki.data.Settings.TAG
 
 class ApiaryAdapter (
     private val elements: List<ApiaryData>
@@ -20,7 +18,6 @@ class ApiaryAdapter (
         class ApiaryViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ApiaryViewHolder {
-        Log.d(TAG,"onCreateViewHolder")
         return ApiaryViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.apiary_item, parent, false)
         )
@@ -28,10 +25,8 @@ class ApiaryAdapter (
 
     override fun onBindViewHolder(holder: ApiaryViewHolder, position: Int) {
         val element = elements[position]
-        Log.d(TAG,"onBindViewHolder")
         holder.itemView.apply {
             tvApiaryName.text = element.name
-            Log.d(TAG, element.name!!)
 
             this.setOnClickListener{
                 val intent = Intent(context, ApiaryDetailsActivity::class.java)
@@ -44,7 +39,6 @@ class ApiaryAdapter (
     }
 
     override fun getItemCount(): Int {
-        Log.d(TAG,"getItemCount: ${elements.size}")
         return elements.size
     }
 }
