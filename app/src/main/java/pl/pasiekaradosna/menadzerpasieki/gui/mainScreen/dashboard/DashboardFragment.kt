@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import pl.pasiekaradosna.menadzerpasieki.data.ApiaryManagerDbHelper
-import pl.pasiekaradosna.menadzerpasieki.data.Settings
 import pl.pasiekaradosna.menadzerpasieki.databinding.FragmentDashboardBinding
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.ApiaryAdapter
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.apiaryManagement.CreateApiaryActivity
@@ -52,7 +51,7 @@ class DashboardFragment : Fragment() {
             startActivity(intent)
         }
         val list = ApiaryManagerDbHelper(requireContext()).getAllApiaries()
-        list?.forEach { apiary -> Log.d(Settings.TAG,apiary.name!!) }
+
         apiaryAdapter = ApiaryAdapter(list!!)
 
         rvDashboardMenu.adapter = apiaryAdapter

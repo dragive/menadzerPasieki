@@ -9,7 +9,7 @@ import pl.pasiekaradosna.menadzerpasieki.data.Settings.TAG
 
 class ApiaryItemFragment : Activity(), View.OnClickListener {
     override fun onClick(view: View) {
-        Log.i(Settings.TAG, "OnClickListener")
+        Log.i(TAG, "OnClickListener")
     }
 
 }
