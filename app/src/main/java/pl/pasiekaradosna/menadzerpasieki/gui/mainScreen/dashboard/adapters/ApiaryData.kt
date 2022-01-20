@@ -2,7 +2,7 @@ package pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters
 
 import android.content.ContentValues
 
-data class Apiary(
+data class ApiaryData(
     val id: Int?,
     var name: String?,
     var dateOfCreation: String?,

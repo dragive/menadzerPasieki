@@ -15,7 +15,8 @@
         android:theme="@style/Theme.TestMenadzerPasieki">
         <activity
             android:name=".gui.ApiaryDetailsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".gui.MainScreenActivity"/>
         <activity
             android:name="pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.apiaryManagement.CreateApiaryActivity"
             android:exported="false"

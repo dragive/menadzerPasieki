@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import pl.pasiekaradosna.menadzerpasieki.data.Settings.*
-import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.Apiary
+import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.ApiaryData
 
 
 class ApiaryManagerDbHelper(context: Context) :
@@ -155,23 +155,23 @@ class ApiaryManagerDbHelper(context: Context) :
         }
     }
 
-    fun createApiary(apiary: Apiary) {
+    fun createApiary(apiaryData: ApiaryData) {
         try {
-            this.writableDatabase.insert(TABLE_APIARIES, null, apiary.mapToValues())
+            this.writableDatabase.insert(TABLE_APIARIES, null, apiaryData.mapToValues())
             Log.i(TAG, "Inserted Values")
         } catch (ex: Exception) {
             Log.e(TAG, "Error inserting", ex)
         }
     }
 
-    fun getAllApiaries(): List<Apiary>? {
+    fun getAllApiaries(): List<ApiaryData>? {
         val db = this.readableDatabase
 
         val selectQuery = """
             SELECT id, name, date_of_creation, location FROM $TABLE_APIARIES
             """.trimIndent()
 
-        val apiaryList = ArrayList<Apiary>()
+        val apiaryList = ArrayList<ApiaryData>()
 
         val cursor: Cursor?
 
@@ -187,7 +187,7 @@ class ApiaryManagerDbHelper(context: Context) :
                 val apiaryId = getInt(getColumnIndexOrThrow("id"))
                 val apiaryDateOfCreation = getString(getColumnIndexOrThrow("date_of_creation"))
                 val apiaryLocation = getString(getColumnIndexOrThrow("location"))
-                apiaryList.add(Apiary(apiaryId, apiaryName, apiaryDateOfCreation, apiaryLocation))
+                apiaryList.add(ApiaryData(apiaryId, apiaryName, apiaryDateOfCreation, apiaryLocation))
             }
         }
         cursor.close()

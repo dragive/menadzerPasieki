@@ -13,7 +13,7 @@ import pl.pasiekaradosna.menadzerpasieki.gui.ApiaryDetailsActivity
 import pl.pasiekaradosna.menadzerpasieki.data.Settings.TAG
 
 class ApiaryAdapter (
-    private val elements: List<Apiary>
+    private val elements: List<ApiaryData>
         ) : RecyclerView.Adapter<ApiaryAdapter.ApiaryViewHolder>(){
 
 
@@ -34,7 +34,7 @@ class ApiaryAdapter (
             Log.d(TAG, element.name!!)
 
             this.setOnClickListener{
-                val intent: Intent = Intent(context, ApiaryDetailsActivity::class.java)
+                val intent = Intent(context, ApiaryDetailsActivity::class.java)
                 val bundle = Bundle()
                 bundle.putInt("ApiaryId",elements[position].id!!)
                 intent.putExtras(bundle)
