@@ -14,23 +14,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestMenadzerPasieki">
         <activity
-            android:name=".ui.dashboard.apiaryManagement.CreateApiaryActivity"
-            android:exported="false"
-            android:parentActivityName=".MainScreenActivity"
-            />
-        <activity
-            android:name=".LocationTestActivity"
+            android:name=".gui.ApiaryDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".MainScreenActivity"
+            android:name="pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.apiaryManagement.CreateApiaryActivity"
+            android:exported="false"
+            android:parentActivityName=".gui.MainScreenActivity" />
+        <activity
+            android:name=".gui.LocationTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".gui.MainScreenActivity"
             android:exported="false"
             android:label="@string/title_activity_main_screen" />
         <activity
-            android:name=".ApiaryDetails2"
+            android:name=".gui.ApiaryDetails2Activity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".gui.MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".gui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

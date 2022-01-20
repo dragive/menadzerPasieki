@@ -1,4 +1,4 @@
-package pl.pasiekaradosna.menadzerpasieki
+package pl.pasiekaradosna.menadzerpasieki.gui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,11 +7,12 @@ import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import pl.pasiekaradosna.menadzerpasieki.R
 import pl.pasiekaradosna.menadzerpasieki.classes.debug.Element
 import pl.pasiekaradosna.menadzerpasieki.classes.debug.ElementAdapter
-import pl.pasiekaradosna.menadzerpasieki.dal.ApiaryManagerDbHelper
-import pl.pasiekaradosna.menadzerpasieki.dal.Settings
-import pl.pasiekaradosna.menadzerpasieki.dal.TestDbHelper
+import pl.pasiekaradosna.menadzerpasieki.data.ApiaryManagerDbHelper
+import pl.pasiekaradosna.menadzerpasieki.data.Settings
+import pl.pasiekaradosna.menadzerpasieki.data.TestDbHelper
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         rvMenu.layoutManager = LinearLayoutManager(this)
 
         bNextActivity.setOnClickListener {
-            val intent = Intent(this,ApiaryDetails2::class.java)
+            val intent = Intent(this, ApiaryDetails2Activity::class.java)
             startActivity(intent)
         }
 
@@ -73,13 +74,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         bMainApp.setOnClickListener {
-            val intent = Intent(this,MainScreenActivity::class.java)
+            val intent = Intent(this, MainScreenActivity::class.java)
             startActivity(intent)
         }
 
 
         bLocationTest.setOnClickListener {
-            val intent = Intent(this,LocationTestActivity::class.java)
+            val intent = Intent(this, LocationTestActivity::class.java)
             startActivity(intent)
         }
 

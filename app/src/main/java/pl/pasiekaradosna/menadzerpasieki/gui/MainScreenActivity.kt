@@ -1,4 +1,4 @@
-package pl.pasiekaradosna.menadzerpasieki
+package pl.pasiekaradosna.menadzerpasieki.gui
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import pl.pasiekaradosna.menadzerpasieki.R
 import pl.pasiekaradosna.menadzerpasieki.databinding.ActivityMainScreenBinding
 
 class MainScreenActivity : AppCompatActivity() {

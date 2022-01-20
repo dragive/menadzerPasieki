@@ -1,4 +1,4 @@
-package pl.pasiekaradosna.menadzerpasieki.dal
+package pl.pasiekaradosna.menadzerpasieki.data
 
 import android.content.ContentValues
 import android.content.Context
@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.database.sqlite.SQLiteException
 import android.util.Log
-import pl.pasiekaradosna.menadzerpasieki.dal.Settings.TABLE_USERS
-import pl.pasiekaradosna.menadzerpasieki.dal.Settings.TAG
+import pl.pasiekaradosna.menadzerpasieki.data.Settings.TABLE_USERS
+import pl.pasiekaradosna.menadzerpasieki.data.Settings.TAG
 
 
 class TestDbHelper(context: Context) : SQLiteOpenHelper(context,Settings.DATABASE_NAME,null,Settings.DATABASE_VERSION) {

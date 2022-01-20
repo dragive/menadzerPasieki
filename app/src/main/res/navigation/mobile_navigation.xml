@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="pl.pasiekaradosna.menadzerpasieki.ui.home.HomeFragment"
+        android:name="pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="pl.pasiekaradosna.menadzerpasieki.ui.dashboard.DashboardFragment"
+        android:name="pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.DashboardFragment"
         android:label="@string/title_apiary"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="pl.pasiekaradosna.menadzerpasieki.ui.notifications.NotificationsFragment"
+        android:name="pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.notifications.NotificationsFragment"
         android:label="@string/title_todo"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

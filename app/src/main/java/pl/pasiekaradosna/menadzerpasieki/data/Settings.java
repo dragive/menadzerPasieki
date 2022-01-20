@@ -1,4 +1,4 @@
-package pl.pasiekaradosna.menadzerpasieki.dal;
+package pl.pasiekaradosna.menadzerpasieki.data;
 
 public abstract class Settings {
 

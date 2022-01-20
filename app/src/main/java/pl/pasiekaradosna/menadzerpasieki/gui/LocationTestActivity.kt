@@ -1,4 +1,4 @@
-package pl.pasiekaradosna.menadzerpasieki
+package pl.pasiekaradosna.menadzerpasieki.gui
 
 import android.Manifest
 import android.content.Context
@@ -11,13 +11,13 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
 import kotlinx.android.synthetic.main.activity_location_test.*
-import pl.pasiekaradosna.menadzerpasieki.dal.Settings
+import pl.pasiekaradosna.menadzerpasieki.data.Settings
 import java.lang.Exception
 import android.location.LocationManager
 import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
-import com.google.android.gms.tasks.CancellationToken
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.Task
+import pl.pasiekaradosna.menadzerpasieki.R
 
 
 class LocationTestActivity : AppCompatActivity() {

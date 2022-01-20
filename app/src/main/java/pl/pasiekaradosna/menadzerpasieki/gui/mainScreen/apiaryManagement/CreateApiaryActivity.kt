@@ -1,4 +1,4 @@
-package pl.pasiekaradosna.menadzerpasieki.ui.dashboard.apiaryManagement
+package pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.apiaryManagement
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -16,16 +16,14 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.Task
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_create_apiary.*
 import kotlinx.android.synthetic.main.activity_location_test.*
 import kotlinx.android.synthetic.main.activity_location_test.bGetLocation
 import pl.pasiekaradosna.menadzerpasieki.R
-import pl.pasiekaradosna.menadzerpasieki.dal.ApiaryManagerDbHelper
-import pl.pasiekaradosna.menadzerpasieki.dal.Settings
-import pl.pasiekaradosna.menadzerpasieki.ui.adapters.dashboard.Apiary
+import pl.pasiekaradosna.menadzerpasieki.data.ApiaryManagerDbHelper
+import pl.pasiekaradosna.menadzerpasieki.data.Settings
+import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.Apiary
 import java.lang.Exception
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*

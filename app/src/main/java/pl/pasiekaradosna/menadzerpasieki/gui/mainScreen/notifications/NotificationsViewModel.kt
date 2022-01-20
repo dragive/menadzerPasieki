@@ -1,4 +1,4 @@
-package pl.pasiekaradosna.menadzerpasieki.ui.notifications
+package pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package pl.pasiekaradosna.menadzerpasieki.ui.dashboard
+package pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,11 +11,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_dashboard.*
-import pl.pasiekaradosna.menadzerpasieki.dal.ApiaryManagerDbHelper
-import pl.pasiekaradosna.menadzerpasieki.dal.Settings
+import pl.pasiekaradosna.menadzerpasieki.data.ApiaryManagerDbHelper
+import pl.pasiekaradosna.menadzerpasieki.data.Settings
 import pl.pasiekaradosna.menadzerpasieki.databinding.FragmentDashboardBinding
-import pl.pasiekaradosna.menadzerpasieki.ui.adapters.dashboard.ApiaryAdapter
-import pl.pasiekaradosna.menadzerpasieki.ui.dashboard.apiaryManagement.CreateApiaryActivity
+import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.ApiaryAdapter
+import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.apiaryManagement.CreateApiaryActivity
 
 class DashboardFragment : Fragment() {
 

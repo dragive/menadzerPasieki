@@ -1,4 +1,4 @@
-package pl.pasiekaradosna.menadzerpasieki.dal
+package pl.pasiekaradosna.menadzerpasieki.data
 
 import android.content.ContentValues
 import android.content.Context
@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import pl.pasiekaradosna.menadzerpasieki.dal.Settings.*
-import pl.pasiekaradosna.menadzerpasieki.ui.adapters.dashboard.Apiary
+import pl.pasiekaradosna.menadzerpasieki.data.Settings.*
+import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.Apiary
 
 
 class ApiaryManagerDbHelper(context: Context) :

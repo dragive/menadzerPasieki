@@ -1,4 +1,4 @@
-package pl.pasiekaradosna.menadzerpasieki.ui.adapters.dashboard
+package pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters
 
 import android.content.ContentValues
 

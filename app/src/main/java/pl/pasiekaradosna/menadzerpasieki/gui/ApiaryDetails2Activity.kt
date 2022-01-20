@@ -1,12 +1,13 @@
-package pl.pasiekaradosna.menadzerpasieki
+package pl.pasiekaradosna.menadzerpasieki.gui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_apiary_details.*
-import pl.pasiekaradosna.menadzerpasieki.dal.TestDbHelper
+import kotlinx.android.synthetic.main.activity_apiary_details_2.*
+import pl.pasiekaradosna.menadzerpasieki.R
+import pl.pasiekaradosna.menadzerpasieki.data.TestDbHelper
 
-class ApiaryDetails2 : AppCompatActivity() {
+class ApiaryDetails2Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_apiary_details_2)

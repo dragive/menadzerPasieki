@@ -1,5 +1,7 @@
-package pl.pasiekaradosna.menadzerpasieki.ui.adapters.dashboard
+package pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import pl.pasiekaradosna.menadzerpasieki.R
 import android.util.Log
 import kotlinx.android.synthetic.main.apiary_item.view.*
-import pl.pasiekaradosna.menadzerpasieki.dal.Settings
-import pl.pasiekaradosna.menadzerpasieki.dal.Settings.TAG
+import pl.pasiekaradosna.menadzerpasieki.gui.ApiaryDetailsActivity
+import pl.pasiekaradosna.menadzerpasieki.data.Settings.TAG
 
 class ApiaryAdapter (
     private val elements: List<Apiary>
@@ -32,7 +34,11 @@ class ApiaryAdapter (
             Log.d(TAG, element.name!!)
 
             this.setOnClickListener{
-                Log.i(TAG,"apiary onBindViewHolder")
+                val intent: Intent = Intent(context, ApiaryDetailsActivity::class.java)
+                val bundle = Bundle()
+                bundle.putInt("ApiaryId",elements[position].id!!)
+                intent.putExtras(bundle)
+                context.startActivity(intent)
             }
         }
     }
