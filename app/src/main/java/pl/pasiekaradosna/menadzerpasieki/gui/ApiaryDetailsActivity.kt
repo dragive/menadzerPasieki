@@ -21,24 +21,24 @@ class ApiaryDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_apiary_details)
         actionBar?.setHomeButtonEnabled(true)
 
+        id = intent?.getIntExtra("ApiaryId", -1)!!
 
-        val id = intent?.getIntExtra("ApiaryId", -1)
-
-
-        if(id == -1){
+        if (id == -1) {
             finish()
         }
-
-
     }
 
     override fun onStart() {
         super.onStart()
 
-        var fragment: ApiaryItemFragment = this.supportFragmentManager.fragments[0] as ApiaryItemFragment
-        fragment.tvApiaryName.text= "123"
-        //tvApiaryName.text = ApiaryManagerDbHelper(this).getAllApiaries()?.stream()
-          //  ?.filter { o -> o.id == this.id }?.collect(Collectors.toList())?.get(0)?.name;
+        var fragment: ApiaryItemFragment =
+            this.supportFragmentManager.fragments[0] as ApiaryItemFragment
+        fragment.tvApiaryName.text = ApiaryManagerDbHelper(this)
+            .getAllApiaries()?.stream()
+        ?.filter { o -> o.id == this.id }
+            ?.collect(Collectors.toList())
+            ?.get(0)
+            ?.name.toString()
 
     }
 
