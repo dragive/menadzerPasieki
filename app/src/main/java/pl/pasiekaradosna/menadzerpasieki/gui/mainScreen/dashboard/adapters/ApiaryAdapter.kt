@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import pl.pasiekaradosna.menadzerpasieki.R
-import kotlinx.android.synthetic.main.apiary_item.view.*
+import kotlinx.android.synthetic.main.fragment_apiary_item.view.*
 import pl.pasiekaradosna.menadzerpasieki.gui.ApiaryDetailsActivity
 
 class ApiaryAdapter (
@@ -19,7 +19,7 @@ class ApiaryAdapter (
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ApiaryViewHolder {
         return ApiaryViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.apiary_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.fragment_apiary_item, parent, false)
         )
     }
 

@@ -1,15 +1,32 @@
 package pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard
 
-import android.app.Activity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import pl.pasiekaradosna.menadzerpasieki.R
 import pl.pasiekaradosna.menadzerpasieki.data.Settings
-import pl.pasiekaradosna.menadzerpasieki.data.Settings.TAG
 
-class ApiaryItemFragment : Activity(), View.OnClickListener {
-    override fun onClick(view: View) {
-        Log.i(TAG, "OnClickListener")
+class ApiaryItemFragment : Fragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_apiary_item,null)
     }
+
+    override fun onStart() {
+        super.onStart()
+        test()
+    }
+
+
+    fun test(){
+        Log.d(Settings.TAG, "ApiaryItemFragment TEST")
+    }
+
 
 }

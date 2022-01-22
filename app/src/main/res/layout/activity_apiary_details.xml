@@ -20,13 +20,6 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,28 +28,62 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="220dp"
+
+                > <!-- TODO dodanie obramowania -->
 
 
-                <TextView
-                    android:id="@+id/tvApiaryDetailsTitle"
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/fcvApiaryItem"
+                    android:name="pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.ApiaryItemFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout="@layout/fragment_apiary_item"
+                    android:layout_marginBottom="25dp"/>
+
+                <Button
+                    android:id="@+id/bApiaryDetailsEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="12dp"
-                    android:fontWeight="700"
-                    android:text="@string/ApiaryDetailsActivityTitleOfApiary"
-                    android:textSize="20sp"
+                    android:text="@string/ApiaryDetailsEditButton"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/fcvApiaryItem" /> <!-- TODO dodanie obsługi edycji -->
+
+                <TextView
+                    android:id="@+id/tvApiaryDetailsSubtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="List of assigned Hives:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bApiaryDetailsEdit"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="20sp"
+                    android:layout_marginTop="30dp"/>
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                tools:listitem="@layout/fragment_hive_summary"
                 >
 
             </androidx.recyclerview.widget.RecyclerView>
+
+            </ScrollView>
+
         </LinearLayout>
-    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,5 +12,5 @@
     <string name="apiary_creation_form_current_location_button">Get Current Location</string>
     <string name="apiary_creation_form_current_location_from_map_button">Get Location From Map</string>
     <string name="ApiaryDetailsActivityTitle">Apiary Details</string>
-    <string name="ApiaryDetailsActivityTitleOfApiary">Jakaś nazwa do uzupełnienia</string>
+    <string name="ApiaryDetailsEditButton">Edit</string>
 </resources>
