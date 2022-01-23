@@ -13,9 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestMenadzerPasieki">
-        <activity
-            android:name=".HiveAddActivity"
-            android:exported="false" />
+
         <activity
             android:name=".gui.ApiaryDetailsActivity"
             android:exported="false"
@@ -23,6 +21,10 @@
             android:parentActivityName=".gui.MainScreenActivity" />
         <activity
             android:name=".gui.mainScreen.apiaryManagement.CreateApiaryActivity"
+            android:exported="false"
+            android:parentActivityName=".gui.MainScreenActivity" />
+        <activity
+            android:name=".gui.mainScreen.hive.CreateHiveActivity"
             android:exported="false"
             android:parentActivityName=".gui.MainScreenActivity" />
         <activity

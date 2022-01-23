@@ -9,11 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_dashboard.*
-import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
+import kotlinx.android.synthetic.main.fragment_dashboard.fabCreateNewApiary
+import kotlinx.android.synthetic.main.fragment_dashboard.rvDashboardMenu
 import pl.pasiekaradosna.menadzerpasieki.databinding.FragmentDashboardBinding
-import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.apiary.ApiaryAdapter
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.apiaryManagement.CreateApiaryActivity
+import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.apiary.ApiaryAdapter
+import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
 
 class DashboardFragment : Fragment() {
 

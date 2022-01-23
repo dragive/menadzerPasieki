@@ -1,6 +1,6 @@
 package pl.pasiekaradosna.menadzerpasieki.classes.main.apiary
 
-class Hive(): Item() {
+class Hives(): Item() {
 
     var systemName: String? = null
     constructor(systemName :String?) : this() {

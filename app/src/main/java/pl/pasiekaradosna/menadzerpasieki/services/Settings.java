@@ -10,7 +10,7 @@ public abstract class Settings {
 
 
     public static final String TABLE_APIARIES = "Apiaries";
-    public static final String TABLE_HIVE = "Hive";
+    public static final String TABLE_HIVES = "Hive";
     public static final String TABLE_USERS = "users";
     public static final String TABLE_TASK = "Task";
     public static final String TABLE_HIVES_AND_TASKS = "Hives_tasks";

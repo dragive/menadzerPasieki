@@ -1,12 +1,14 @@
 package pl.pasiekaradosna.menadzerpasieki.gui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_apiary_details.fcvApiaryItem
+import kotlinx.android.synthetic.main.activity_apiary_details.fabCreateNewHive
 import kotlinx.android.synthetic.main.fragment_apiary_item.tvHiveName
 import pl.pasiekaradosna.menadzerpasieki.R
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.ApiaryItemFragment
+import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.hive.CreateHiveActivity
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
 
 class ApiaryDetailsActivity : AppCompatActivity() {
@@ -23,6 +25,7 @@ class ApiaryDetailsActivity : AppCompatActivity() {
         if (id == -1) {
             finish()
         }
+
     }
 
     override fun onStart() {
@@ -37,10 +40,18 @@ class ApiaryDetailsActivity : AppCompatActivity() {
             .getApiaryById(id)
             ?.name.toString()
 
-        fcvApiaryItem.setOnClickListener {
-//todo NOW            val intent: Intent = Intent(this,)
-            //todo hive fragment
+
+
+
+        fabCreateNewHive.setOnClickListener { view ->
+            try {
+                val intent = Intent(this, CreateHiveActivity::class.java)
+                startActivity(intent)
+            } catch (err: Exception) {
+            }
         }
+
+
 
 
     }

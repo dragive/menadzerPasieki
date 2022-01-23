@@ -14,4 +14,7 @@
     <string name="ApiaryDetailsActivityTitle">Apiary Details</string>
     <string name="ApiaryDetailsEditButton">Edit</string>
     <string name="ApiaryDetailsDeleteButton">Delete</string>
+    <string name="HiveAddActivityETName">Name</string>
+    <string name="HiveAddActivityETQueenBreed">Queen Breed</string>
+    <string name="HiveAddActivityBSubmit">Submit</string>
 </resources>
