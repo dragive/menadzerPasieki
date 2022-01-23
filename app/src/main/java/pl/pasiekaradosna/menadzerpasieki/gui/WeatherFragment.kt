@@ -1,11 +1,19 @@
 package pl.pasiekaradosna.menadzerpasieki.gui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import java.io.IOException
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import pl.pasiekaradosna.menadzerpasieki.R
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -20,6 +28,9 @@ class WeatherFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private val client = OkHttpClient()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -31,7 +42,8 @@ class WeatherFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-//        https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=52.12257&lon=20.44369
+        run("https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=52.12257&lon=20.44369")
+//
     }
 
     override fun onCreateView(
@@ -59,5 +71,22 @@ class WeatherFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun run(url: String) {//todo https://stackoverflow.com/questions/52802071/kotlin-parse-json
+        val request = Request.Builder()
+            .addHeader("User-Agent","pasiekaradosna.pl pasiekaradosna@gmail.com")
+            .url(url)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e(TAG, "OnFailure run in weatherFragment", e)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                Log.i(TAG, "OK: " + response.body()?.string())
+            }
+        })
     }
 }
