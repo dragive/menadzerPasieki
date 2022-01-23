@@ -73,7 +73,7 @@ class WeatherFragment : Fragment() {
             }
     }
 
-    private fun run(url: String) {//todo https://stackoverflow.com/questions/52802071/kotlin-parse-json
+    private fun run(url: String) {
         val request = Request.Builder()
             .addHeader("User-Agent","pasiekaradosna.pl pasiekaradosna@gmail.com")
             .url(url)
@@ -86,6 +86,7 @@ class WeatherFragment : Fragment() {
 
             override fun onResponse(call: Call, response: Response) {
                 Log.i(TAG, "OK: " + response.body()?.string())
+                //todo https://stackoverflow.com/questions/52802071/kotlin-parse-json
             }
         })
     }
