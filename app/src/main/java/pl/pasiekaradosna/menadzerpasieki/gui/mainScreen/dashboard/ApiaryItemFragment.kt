@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import pl.pasiekaradosna.menadzerpasieki.R
-import pl.pasiekaradosna.menadzerpasieki.data.Settings
+import pl.pasiekaradosna.menadzerpasieki.services.Settings
 
 class ApiaryItemFragment : Fragment() {
     override fun onCreateView(

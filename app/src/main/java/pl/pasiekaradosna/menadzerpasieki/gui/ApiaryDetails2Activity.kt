@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_apiary_details_2.*
 import pl.pasiekaradosna.menadzerpasieki.R
-import pl.pasiekaradosna.menadzerpasieki.data.TestDbHelper
+import pl.pasiekaradosna.menadzerpasieki.classes.debug.TestDbHelper
 
 class ApiaryDetails2Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

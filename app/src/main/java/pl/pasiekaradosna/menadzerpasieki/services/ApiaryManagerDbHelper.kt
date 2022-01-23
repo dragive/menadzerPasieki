@@ -1,4 +1,4 @@
-package pl.pasiekaradosna.menadzerpasieki.data
+package pl.pasiekaradosna.menadzerpasieki.services
 
 import android.content.ContentValues
 import android.content.Context
@@ -7,8 +7,15 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import pl.pasiekaradosna.menadzerpasieki.data.Settings.*
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.apiary.ApiaryData
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.DATABASE_NAME
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.DATABASE_VERSION
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_APIARIES
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_HIVE
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_HIVES_AND_TASKS
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_TASK
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_USERS
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
 
 
 class ApiaryManagerDbHelper(context: Context) :
@@ -144,7 +151,7 @@ class ApiaryManagerDbHelper(context: Context) :
         }
     }
 
-    fun insertValue(field: String) {
+    fun insertValueTest(field: String) {
         val values = ContentValues()
         values.put("field", field)
         try {
@@ -187,11 +194,56 @@ class ApiaryManagerDbHelper(context: Context) :
                 val apiaryId = getInt(getColumnIndexOrThrow("id"))
                 val apiaryDateOfCreation = getString(getColumnIndexOrThrow("date_of_creation"))
                 val apiaryLocation = getString(getColumnIndexOrThrow("location"))
-                apiaryList.add(ApiaryData(apiaryId, apiaryName, apiaryDateOfCreation, apiaryLocation))
+                apiaryList.add(
+                    ApiaryData(
+                        apiaryId,
+                        apiaryName,
+                        apiaryDateOfCreation,
+                        apiaryLocation
+                    )
+                )
             }
         }
         cursor.close()
         return apiaryList
+    }
+
+    fun getApiaryById(id:Int): ApiaryData? {
+        val db = this.readableDatabase
+
+        val selectQuery = """
+            SELECT id, name, date_of_creation, location FROM $TABLE_APIARIES
+             where id = $id
+            """.trimIndent()
+
+        lateinit var apiaryResult:ApiaryData
+
+        val cursor: Cursor?
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: SQLiteException) {
+            Log.e(TAG, "Select all apiaries error\n", e)
+            return null
+        }
+        with(cursor) {
+            while (moveToNext()) {
+                val apiaryName = getString(getColumnIndexOrThrow("name"))
+                val apiaryId = getInt(getColumnIndexOrThrow("id"))
+                val apiaryDateOfCreation = getString(getColumnIndexOrThrow("date_of_creation"))
+                val apiaryLocation = getString(getColumnIndexOrThrow("location"))
+                apiaryResult=
+                    ApiaryData(
+                        apiaryId,
+                        apiaryName,
+                        apiaryDateOfCreation,
+                        apiaryLocation
+                    )
+
+            }
+        }
+        cursor.close()
+        return apiaryResult
     }
 
 }

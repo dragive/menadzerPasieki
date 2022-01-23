@@ -10,9 +10,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import pl.pasiekaradosna.menadzerpasieki.R
 import pl.pasiekaradosna.menadzerpasieki.classes.debug.Element
 import pl.pasiekaradosna.menadzerpasieki.classes.debug.ElementAdapter
-import pl.pasiekaradosna.menadzerpasieki.data.ApiaryManagerDbHelper
-import pl.pasiekaradosna.menadzerpasieki.data.Settings
-import pl.pasiekaradosna.menadzerpasieki.data.TestDbHelper
+import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
+import pl.pasiekaradosna.menadzerpasieki.services.Settings
+import pl.pasiekaradosna.menadzerpasieki.classes.debug.TestDbHelper
 
 class MainActivity : AppCompatActivity() {
 

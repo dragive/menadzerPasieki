@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
 import kotlinx.android.synthetic.main.activity_location_test.*
-import pl.pasiekaradosna.menadzerpasieki.data.Settings
+import pl.pasiekaradosna.menadzerpasieki.services.Settings
 import java.lang.Exception
 import android.location.LocationManager
 import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY

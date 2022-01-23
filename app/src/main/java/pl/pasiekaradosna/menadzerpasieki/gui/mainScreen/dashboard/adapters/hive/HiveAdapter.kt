@@ -21,7 +21,7 @@ class HiveAdapter(
     override fun onBindViewHolder(holder: HiveViewHolder, position: Int) {
         val element = elements[position]
 
-        holder.itemView.apply{
+        holder.itemView.apply {
             TODO("Dodanie przypisania wartości do pól")
         }
     }

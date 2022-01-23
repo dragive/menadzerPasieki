@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_apiary_item.view.tvHiveName
 import pl.pasiekaradosna.menadzerpasieki.R
-import kotlinx.android.synthetic.main.fragment_apiary_item.view.*
 import pl.pasiekaradosna.menadzerpasieki.gui.ApiaryDetailsActivity
 
 class ApiaryAdapter(
@@ -27,7 +27,7 @@ class ApiaryAdapter(
     override fun onBindViewHolder(holder: ApiaryViewHolder, position: Int) {
         val element = elements[position]
         holder.itemView.apply {
-            tvApiaryName.text = element.name
+            tvHiveName.text = element.name
 
             this.setOnClickListener {
                 val intent = Intent(context, ApiaryDetailsActivity::class.java)

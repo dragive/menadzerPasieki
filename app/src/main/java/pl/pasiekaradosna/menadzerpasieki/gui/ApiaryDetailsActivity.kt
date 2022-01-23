@@ -1,17 +1,13 @@
 package pl.pasiekaradosna.menadzerpasieki.gui
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_apiary_details.*
-import kotlinx.android.synthetic.main.fragment_apiary_item.*
-import kotlinx.android.synthetic.main.fragment_apiary_item.view.*
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_apiary_details.fcvApiaryItem
+import kotlinx.android.synthetic.main.fragment_apiary_item.tvHiveName
 import pl.pasiekaradosna.menadzerpasieki.R
-import pl.pasiekaradosna.menadzerpasieki.data.ApiaryManagerDbHelper
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.ApiaryItemFragment
-import java.util.function.Predicate
-import java.util.stream.Collectors
+import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
 
 class ApiaryDetailsActivity : AppCompatActivity() {
 
@@ -32,21 +28,18 @@ class ApiaryDetailsActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-
-        // Pobranie fragemntu
+        // Pobranie fragmentu
         var fragment: ApiaryItemFragment =
             this.supportFragmentManager.fragments[0] as ApiaryItemFragment
 
         //przypisanie wartości nazwy do odpowiedniego pola
-        fragment.tvApiaryName.text = ApiaryManagerDbHelper(this)
-            .getAllApiaries()?.stream()
-        ?.filter { o -> o.id == this.id }
-            ?.collect(Collectors.toList())
-            ?.get(0)
+        fragment.tvHiveName.text = ApiaryManagerDbHelper(this)
+            .getApiaryById(id)
             ?.name.toString()
 
         fcvApiaryItem.setOnClickListener {
 //todo NOW            val intent: Intent = Intent(this,)
+            //todo hive fragment
         }
 
 

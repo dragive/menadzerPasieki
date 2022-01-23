@@ -20,8 +20,8 @@ import kotlinx.android.synthetic.main.activity_create_apiary.*
 import kotlinx.android.synthetic.main.activity_location_test.*
 import kotlinx.android.synthetic.main.activity_location_test.bGetLocation
 import pl.pasiekaradosna.menadzerpasieki.R
-import pl.pasiekaradosna.menadzerpasieki.data.ApiaryManagerDbHelper
-import pl.pasiekaradosna.menadzerpasieki.data.Settings
+import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
+import pl.pasiekaradosna.menadzerpasieki.services.Settings
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.apiary.ApiaryData
 import java.lang.Exception
 import java.time.LocalDateTime

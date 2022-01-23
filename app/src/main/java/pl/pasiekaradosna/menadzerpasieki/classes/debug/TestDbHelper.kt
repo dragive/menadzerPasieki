@@ -1,17 +1,21 @@
-package pl.pasiekaradosna.menadzerpasieki.data
+package pl.pasiekaradosna.menadzerpasieki.classes.debug
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
 import android.database.sqlite.SQLiteException
+import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import pl.pasiekaradosna.menadzerpasieki.data.Settings.TABLE_USERS
-import pl.pasiekaradosna.menadzerpasieki.data.Settings.TAG
+import pl.pasiekaradosna.menadzerpasieki.services.Settings
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_USERS
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
 
 
-class TestDbHelper(context: Context) : SQLiteOpenHelper(context,Settings.DATABASE_NAME,null,Settings.DATABASE_VERSION) {
+class TestDbHelper(context: Context) : SQLiteOpenHelper(context,
+    Settings.DATABASE_NAME,null,
+    Settings.DATABASE_VERSION
+) {
     private var sQLiteDatabase: SQLiteDatabase? =null
     override fun onCreate(db: SQLiteDatabase?) {
         sQLiteDatabase = db//dbase = getWriteableDatabase()
