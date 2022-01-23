@@ -10,16 +10,17 @@ import pl.pasiekaradosna.menadzerpasieki.R
 import kotlinx.android.synthetic.main.fragment_apiary_item.view.*
 import pl.pasiekaradosna.menadzerpasieki.gui.ApiaryDetailsActivity
 
-class ApiaryAdapter (
+class ApiaryAdapter(
     private val elements: List<ApiaryData>
-        ) : RecyclerView.Adapter<ApiaryAdapter.ApiaryViewHolder>(){
+) : RecyclerView.Adapter<ApiaryAdapter.ApiaryViewHolder>() {
 
 
-        class ApiaryViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
+    class ApiaryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ApiaryViewHolder {
         return ApiaryViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.fragment_apiary_item, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.fragment_apiary_item, parent, false)
         )
     }
 
@@ -28,10 +29,10 @@ class ApiaryAdapter (
         holder.itemView.apply {
             tvApiaryName.text = element.name
 
-            this.setOnClickListener{
+            this.setOnClickListener {
                 val intent = Intent(context, ApiaryDetailsActivity::class.java)
                 val bundle = Bundle()
-                bundle.putInt("ApiaryId",elements[position].id!!)
+                bundle.putInt("ApiaryId", elements[position].id!!)
                 intent.putExtras(bundle)
                 context.startActivity(intent)
             }
