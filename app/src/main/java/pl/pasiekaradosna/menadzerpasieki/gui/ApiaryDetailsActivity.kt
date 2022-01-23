@@ -4,10 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_apiary_details.bApiaryDetailsDelete
 import kotlinx.android.synthetic.main.activity_apiary_details.fabCreateNewHive
 import kotlinx.android.synthetic.main.activity_apiary_details.rcApiaryDetailsHiveList
+import kotlinx.android.synthetic.main.fragment_apiary_item.tvApiaryLocation
 import kotlinx.android.synthetic.main.fragment_apiary_item.tvHiveName
 import kotlinx.android.synthetic.main.fragment_apiary_item.tvHivesNumber
 import pl.pasiekaradosna.menadzerpasieki.R
@@ -42,12 +45,16 @@ class ApiaryDetailsActivity : AppCompatActivity() {
         // Pobranie fragmentu
         var fragment: ApiaryItemFragment =
             this.supportFragmentManager.fragments[0] as ApiaryItemFragment
+
         val apiaryManagerDbHelper = ApiaryManagerDbHelper(this)
 
-        //przypisanie wartości nazwy do odpowiedniego pola
-        fragment.tvHiveName.text = apiaryManagerDbHelper
+        val apiary = apiaryManagerDbHelper
             .getApiaryById(id)
-            ?.name.toString()
+
+        //przypisanie wartości nazwy do odpowiedniego pola
+        fragment.tvHiveName.text = apiary?.name.toString()
+
+        fragment.tvApiaryLocation.text = apiary?.location.toString()
 
         fragment.tvHivesNumber.text = apiaryManagerDbHelper.countAllHivesByApiaryId(id).toString()
 
@@ -72,6 +79,16 @@ class ApiaryDetailsActivity : AppCompatActivity() {
             rcApiaryDetailsHiveList.adapter = hiveAdapter
 
             rcApiaryDetailsHiveList.layoutManager = LinearLayoutManager(this)
+        }
+
+        bApiaryDetailsDelete.setOnClickListener {
+            finish()
+            if(ApiaryManagerDbHelper(this).deleteApiary(id)){
+                Toast.makeText(this,"Deleted Apiary",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                Toast.makeText(this,"Error occurred while deleting apiary! ",Toast.LENGTH_LONG).show()
+            }
         }
 
     }

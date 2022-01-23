@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="100dp"
     tools:context=".gui.mainScreen.dashboard.ApiaryItemFragment">
 
     <TextView
@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="17dp"
         android:text="Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -34,7 +34,14 @@
             android:id="@+id/tvHivesNumberLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ilość"/>
+            android:text="@string/ApiaryItemFragmentAmountOfHives"/>
+
+
+        <TextView
+            android:id="@+id/tvHivesLocationLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ApiaryItemFragmentLocation"/>
 
     </LinearLayout>
 
@@ -55,6 +62,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"/>
+
+        <TextView
+            android:id="@+id/tvApiaryLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="---"/>
 
     </LinearLayout>
 

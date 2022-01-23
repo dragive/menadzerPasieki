@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_apiary_item.view.tvApiaryLocation
 import kotlinx.android.synthetic.main.fragment_apiary_item.view.tvHiveName
 import kotlinx.android.synthetic.main.fragment_apiary_item.view.tvHivesNumber
 import pl.pasiekaradosna.menadzerpasieki.R
@@ -36,6 +37,8 @@ class ApiaryAdapter(
                 element.id?.let {
                     ApiaryManagerDbHelper(this.context).countAllHivesByApiaryId(it).toString()
                 }
+            tvApiaryLocation.text = element.location
+
             this.setOnClickListener {
                 try{val intent = Intent(context, ApiaryDetailsActivity::class.java)
                 val bundle = Bundle()

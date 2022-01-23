@@ -300,7 +300,7 @@ class ApiaryManagerDbHelper(context: Context) :
         return countHives()
     }
 
-    fun countAllHivesByApiaryId(apiaryId:Int):Int{
+    fun countAllHivesByApiaryId(apiaryId: Int): Int {
         return countHives(apiaryId)
     }
 
@@ -344,18 +344,32 @@ class ApiaryManagerDbHelper(context: Context) :
     }
 
 
-    fun insertHive(hiveData: HiveData) :Boolean {
-        Log.d(TAG,"hives list in DB:"+this.getAllHivesByApiaryId(hiveData.apiaryId))
+    fun insertHive(hiveData: HiveData): Boolean {
+        Log.d(TAG, "hives list in DB:" + this.getAllHivesByApiaryId(hiveData.apiaryId))
         try {
 
             val r = this.writableDatabase.insert(TABLE_HIVES, null, hiveData.mapToValues())
             Log.i(TAG, "Inserted Values?")
-            return r!=-1L
+            return r != -1L
         } catch (ex: Exception) {
             Log.e(TAG, "Error inserting", ex)
             return false
         }
 
+    }
+
+    fun deleteApiary(apiaryId: Int): Boolean {
+        var b: Boolean = false
+        try {
+            val args = Array(1){apiaryId.toString()}
+            val affectedRows =
+                this.writableDatabase.delete(TABLE_APIARIES, "id=?", args)
+
+            b = 1 <= affectedRows
+        } catch (err: Exception) {
+            Log.e(TAG,"Error while deleting from $TABLE_APIARIES id $apiaryId! err: ", err)
+        }
+        return b
     }
 
 }
