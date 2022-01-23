@@ -1,4 +1,4 @@
-package pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters
+package pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.apiary
 
 import android.content.Intent
 import android.os.Bundle

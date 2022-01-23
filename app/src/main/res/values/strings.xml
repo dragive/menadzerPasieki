@@ -13,4 +13,5 @@
     <string name="apiary_creation_form_current_location_from_map_button">Get Location From Map</string>
     <string name="ApiaryDetailsActivityTitle">Apiary Details</string>
     <string name="ApiaryDetailsEditButton">Edit</string>
+    <string name="ApiaryDetailsDeleteButton">Delete</string>
 </resources>

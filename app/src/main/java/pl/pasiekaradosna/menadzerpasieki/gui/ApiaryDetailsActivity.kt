@@ -1,5 +1,6 @@
 package pl.pasiekaradosna.menadzerpasieki.gui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -31,14 +32,23 @@ class ApiaryDetailsActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+
+        // Pobranie fragemntu
         var fragment: ApiaryItemFragment =
             this.supportFragmentManager.fragments[0] as ApiaryItemFragment
+
+        //przypisanie wartości nazwy do odpowiedniego pola
         fragment.tvApiaryName.text = ApiaryManagerDbHelper(this)
             .getAllApiaries()?.stream()
         ?.filter { o -> o.id == this.id }
             ?.collect(Collectors.toList())
             ?.get(0)
             ?.name.toString()
+
+        fcvApiaryItem.setOnClickListener {
+//todo NOW            val intent: Intent = Intent(this,)
+        }
+
 
     }
 

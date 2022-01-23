@@ -54,6 +54,17 @@
                     android:layout_marginTop="20dp"
                     app:layout_constraintTop_toBottomOf="@id/fcvApiaryItem" /> <!-- TODO dodanie obsługi edycji -->
 
+
+                <Button
+                    android:id="@+id/bApiaryDetailsDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ApiaryDetailsDeleteButton"
+                    app:layout_constraintStart_toEndOf="@id/bApiaryDetailsEdit"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/fcvApiaryItem" /> <!-- TODO dodanie obsługi usuwania -->
+
                 <TextView
                     android:id="@+id/tvApiaryDetailsSubtitle"
                     android:layout_width="wrap_content"

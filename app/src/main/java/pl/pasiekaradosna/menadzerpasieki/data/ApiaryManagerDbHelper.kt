@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import pl.pasiekaradosna.menadzerpasieki.data.Settings.*
-import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.ApiaryData
+import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.apiary.ApiaryData
 
 
 class ApiaryManagerDbHelper(context: Context) :

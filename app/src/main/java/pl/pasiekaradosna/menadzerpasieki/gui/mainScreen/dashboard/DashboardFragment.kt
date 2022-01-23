@@ -2,7 +2,6 @@ package pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import pl.pasiekaradosna.menadzerpasieki.data.ApiaryManagerDbHelper
 import pl.pasiekaradosna.menadzerpasieki.databinding.FragmentDashboardBinding
-import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.ApiaryAdapter
+import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.apiary.ApiaryAdapter
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.apiaryManagement.CreateApiaryActivity
 
 class DashboardFragment : Fragment() {
