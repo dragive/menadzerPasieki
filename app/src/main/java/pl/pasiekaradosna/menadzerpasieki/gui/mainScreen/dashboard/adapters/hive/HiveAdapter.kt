@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_hive_summary.view.tvHiveListItemBreed
 import pl.pasiekaradosna.menadzerpasieki.R
 
 class HiveAdapter(
@@ -22,7 +23,7 @@ class HiveAdapter(
         val element = elements[position]
 
         holder.itemView.apply {
-            TODO("Dodanie przypisania wartości do pól")
+            this.tvHiveListItemBreed.text = element.name
         }
     }
 

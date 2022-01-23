@@ -2,18 +2,26 @@ package pl.pasiekaradosna.menadzerpasieki.gui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_apiary_details.fabCreateNewHive
+import kotlinx.android.synthetic.main.activity_apiary_details.rcApiaryDetailsHiveList
 import kotlinx.android.synthetic.main.fragment_apiary_item.tvHiveName
+import kotlinx.android.synthetic.main.fragment_apiary_item.tvHivesNumber
 import pl.pasiekaradosna.menadzerpasieki.R
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.ApiaryItemFragment
+import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.hive.HiveAdapter
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.hive.CreateHiveActivity
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
 
 class ApiaryDetailsActivity : AppCompatActivity() {
 
     var id: Int = -1
+
+    private lateinit var hiveAdapter: HiveAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,11 +42,14 @@ class ApiaryDetailsActivity : AppCompatActivity() {
         // Pobranie fragmentu
         var fragment: ApiaryItemFragment =
             this.supportFragmentManager.fragments[0] as ApiaryItemFragment
+        val apiaryManagerDbHelper = ApiaryManagerDbHelper(this)
 
         //przypisanie wartości nazwy do odpowiedniego pola
-        fragment.tvHiveName.text = ApiaryManagerDbHelper(this)
+        fragment.tvHiveName.text = apiaryManagerDbHelper
             .getApiaryById(id)
             ?.name.toString()
+
+        fragment.tvHivesNumber.text = apiaryManagerDbHelper.countAllHivesByApiaryId(id).toString()
 
 
 
@@ -46,13 +57,22 @@ class ApiaryDetailsActivity : AppCompatActivity() {
         fabCreateNewHive.setOnClickListener { view ->
             try {
                 val intent = Intent(this, CreateHiveActivity::class.java)
+                intent.putExtra("ApiaryId", this.id)
+
                 startActivity(intent)
             } catch (err: Exception) {
+                Log.e(TAG, "ERROR while goinf to CreateHiveActivity", err)
             }
         }
 
+        val list = ApiaryManagerDbHelper(this).getAllHivesByApiaryId(id)
+        if (list != null) {
+            hiveAdapter = HiveAdapter(list)
 
+            rcApiaryDetailsHiveList.adapter = hiveAdapter
 
+            rcApiaryDetailsHiveList.layoutManager = LinearLayoutManager(this)
+        }
 
     }
 

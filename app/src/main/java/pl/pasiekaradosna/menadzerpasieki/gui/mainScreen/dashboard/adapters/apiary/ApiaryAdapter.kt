@@ -2,13 +2,17 @@ package pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.apia
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_apiary_item.view.tvHiveName
+import kotlinx.android.synthetic.main.fragment_apiary_item.view.tvHivesNumber
 import pl.pasiekaradosna.menadzerpasieki.R
 import pl.pasiekaradosna.menadzerpasieki.gui.ApiaryDetailsActivity
+import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
 
 class ApiaryAdapter(
     private val elements: List<ApiaryData>
@@ -28,13 +32,19 @@ class ApiaryAdapter(
         val element = elements[position]
         holder.itemView.apply {
             tvHiveName.text = element.name
-
+            tvHivesNumber.text =
+                element.id?.let {
+                    ApiaryManagerDbHelper(this.context).countAllHivesByApiaryId(it).toString()
+                }
             this.setOnClickListener {
-                val intent = Intent(context, ApiaryDetailsActivity::class.java)
+                try{val intent = Intent(context, ApiaryDetailsActivity::class.java)
                 val bundle = Bundle()
                 bundle.putInt("ApiaryId", elements[position].id!!)
                 intent.putExtras(bundle)
-                context.startActivity(intent)
+                context.startActivity(intent)}
+                catch (err:Exception){
+                    Log.e(TAG,"ERROR while apiary activity details", err)
+                }
             }
         }
     }

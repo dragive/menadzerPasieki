@@ -77,7 +77,7 @@
             </ScrollView>
 
             <Button
-                android:id="@+id/bSubmit"
+                android:id="@+id/bHiveAddSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/HiveAddActivityBSubmit" />

@@ -342,4 +342,20 @@ class ApiaryManagerDbHelper(context: Context) :
         return ret
 
     }
+
+
+    fun insertHive(hiveData: HiveData) :Boolean {
+        Log.d(TAG,"hives list in DB:"+this.getAllHivesByApiaryId(hiveData.apiaryId))
+        try {
+
+            val r = this.writableDatabase.insert(TABLE_HIVES, null, hiveData.mapToValues())
+            Log.i(TAG, "Inserted Values?")
+            return r!=-1L
+        } catch (ex: Exception) {
+            Log.e(TAG, "Error inserting", ex)
+            return false
+        }
+
+    }
+
 }

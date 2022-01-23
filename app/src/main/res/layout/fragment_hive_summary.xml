@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/tvApiaryName">
+        app:layout_constraintTop_toBottomOf="@+id/tvHiveName">
 
 
         <LinearLayout
@@ -39,14 +39,14 @@
             tools:layout_editor_absoluteY="52dp">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tvHiveListItemBreedLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Breed:" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/tvHiveListItemBreed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
