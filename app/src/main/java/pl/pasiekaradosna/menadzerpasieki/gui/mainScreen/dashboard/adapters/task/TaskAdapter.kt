@@ -5,7 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_task_item.view.tvFragmentTaskItemName
+import kotlinx.android.synthetic.main.fragment_task_item.view.tvFragmentTaskItemNameOfHive
 import pl.pasiekaradosna.menadzerpasieki.R
+import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
 
 class TaskAdapter(
     private val elements: List<TaskData>
@@ -31,7 +33,7 @@ class TaskAdapter(
 //                }?.count()!! > 0)
 
                 tvFragmentTaskItemName.text = element.name
-//todo            tvFragmentTaskItemNameOfHive.text=  ApiaryManagerDbHelper(context).getHiveById(element.hiveId)?.name
+            tvFragmentTaskItemNameOfHive.text=  ApiaryManagerDbHelper(context).getHiveById(element.hiveId)?.name
 
         }
     }
