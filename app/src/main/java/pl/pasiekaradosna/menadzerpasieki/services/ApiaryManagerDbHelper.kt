@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.apiary.ApiaryData
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.hive.HiveData
+import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.task.TaskData
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.DATABASE_NAME
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.DATABASE_VERSION
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_APIARIES
@@ -62,14 +63,17 @@ class ApiaryManagerDbHelper(context: Context) :
 
         sqlList.add(
             """CREATE TABLE $TABLE_TASK (
-            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
-            create_date INTEGER NOT NULL,
-            "type" TEXT,
-            duration NUMERIC,
-            due_date TEXT
+            description text not null,
+            hive_id INTEGER NOT NULL
+
             );"""
         )
+        /*
+                    duration NUMERIC,
+            due_date TEXT
+         */
         sqlList.add(
             """CREATE TABLE $TABLE_HIVES_AND_TASKS (
             id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -238,6 +242,46 @@ class ApiaryManagerDbHelper(context: Context) :
         return apiaryList
     }
 
+
+
+
+    fun getAllTasks(): List<TaskData>? {
+        val db = this.readableDatabase
+
+        val selectQuery = """
+            SELECT id, name, description, hive_id FROM $TABLE_TASK
+            """.trimIndent()
+
+        val taskList = ArrayList<TaskData>()
+
+        val cursor: Cursor?
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: SQLiteException) {
+            Log.e(TAG, "Select  apiaries error\n", e)
+            return null
+        }
+        with(cursor) {
+            while (moveToNext()) {
+                val taskName = getString(getColumnIndexOrThrow("name"))
+                val taskId = getInt(getColumnIndexOrThrow("id"))
+                val taskDescription = getString(getColumnIndexOrThrow("description"))
+                val taskHiveId = getInt(getColumnIndexOrThrow("hive_id"))
+                taskList.add(
+                    TaskData(
+                        taskId,
+                        taskName,
+                        taskDescription,
+                        taskHiveId
+                    )
+                )
+            }
+        }
+        cursor.close()
+        return taskList
+    }
+
     fun getApiaryById(id: Int): ApiaryData? {
         val db = this.readableDatabase
 
@@ -324,6 +368,52 @@ class ApiaryManagerDbHelper(context: Context) :
         return hiveList
     }
 
+
+    fun getAllHives(): List<HiveData>? {
+        val db = this.readableDatabase
+
+        val selectQuery = """
+            SELECT             
+            id, 
+            name,
+            apiary_id,
+            queen_bread,
+            queen_birth_date 
+            FROM $TABLE_HIVES
+            """.trimIndent() //FIXME zmiana na BREED zamiast BREAD
+
+
+        val hiveList = ArrayList<HiveData>()
+
+        val cursor: Cursor?
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: SQLiteException) {
+            Log.e(TAG, "Select all hives error\n", e)
+            return null
+        }
+        with(cursor) {
+            while (moveToNext()) {
+                val hiveId = getInt(getColumnIndexOrThrow("id"))
+                val hiveName = getString(getColumnIndexOrThrow("name"))
+                val hiveApiaryId = getInt(getColumnIndexOrThrow("apiary_id"))
+                val hiveQueenBreed = getString(getColumnIndexOrThrow("queen_bread"))
+                val hiveQueenBirthDate = getString(getColumnIndexOrThrow("queen_birth_date"))
+                hiveList.add(
+                    HiveData(
+                        hiveId,
+                        hiveName,
+                        hiveApiaryId,
+                        hiveQueenBreed,
+                        hiveQueenBirthDate
+                    )
+                )
+            }
+        }
+        cursor.close()
+        return hiveList
+    }
 
     fun getHiveById(hiveId: Int): HiveData? {
         val db = this.readableDatabase
@@ -424,6 +514,23 @@ class ApiaryManagerDbHelper(context: Context) :
         try {
 
             val r = this.writableDatabase.insert(TABLE_HIVES, null, hiveData.mapToValues())
+            Log.i(TAG, "Inserted Values?")
+            return r != -1L
+        } catch (ex: Exception) {
+            Log.e(TAG, "Error inserting", ex)
+            return false
+        }
+
+    }
+
+
+    fun insertTask(taskData: TaskData): Boolean {
+//        Log.d(TAG, "task list in DB:" + this.getAllHivesByApiaryId(taskData.apiaryId))
+        try {
+
+            val r = this.writableDatabase
+                .insert(TABLE_TASK, null,
+                    taskData.mapToValues())
             Log.i(TAG, "Inserted Values?")
             return r != -1L
         } catch (ex: Exception) {

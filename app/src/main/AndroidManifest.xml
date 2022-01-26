@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestMenadzerPasieki">
         <activity
-            android:name=".CreateTaskActivity"
+            android:name=".gui.mainScreen.notifications.CreateTaskActivity"
             android:exported="false" />
         <activity
             android:name=".gui.mainScreen.dashboard.adapters.hive.HiveDetailsActivity"
