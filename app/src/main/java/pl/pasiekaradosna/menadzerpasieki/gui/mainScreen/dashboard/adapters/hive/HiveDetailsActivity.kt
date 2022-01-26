@@ -1,15 +1,18 @@
 package pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.hive
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_hive_details.bActivityHiveDetailsDelete
+import kotlinx.android.synthetic.main.activity_hive_details.bActivityHiveDetailsEdit
 import kotlinx.android.synthetic.main.activity_hive_details.tvHiveDetailsApiaryName
 import kotlinx.android.synthetic.main.activity_hive_details.tvHiveDetailsName
 import kotlinx.android.synthetic.main.activity_hive_details.tvHiveDetailsQueenBreed
 import kotlinx.android.synthetic.main.activity_hive_details.tvHiveDetailsQueenDateOfBirth
 import pl.pasiekaradosna.menadzerpasieki.R
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.apiary.ApiaryData
+import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.hive.CreateHiveActivity
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
 
@@ -53,5 +56,16 @@ class HiveDetailsActivity : AppCompatActivity() {
 
             finish()
         }
+
+        bActivityHiveDetailsEdit.setOnClickListener {
+            val intent = Intent(this,CreateHiveActivity::class.java)
+            intent.putExtra("ApiaryId",apiaryData!!.id)
+            intent.putExtra("HiveId",hiveData!!.id)
+
+            startActivity(intent)
+            finish()
+        }
+
+
     }
 }

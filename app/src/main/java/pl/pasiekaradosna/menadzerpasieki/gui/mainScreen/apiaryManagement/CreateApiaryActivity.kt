@@ -6,27 +6,26 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.Task
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 import kotlinx.android.synthetic.main.activity_create_apiary.*
 import kotlinx.android.synthetic.main.activity_location_test.*
 import kotlinx.android.synthetic.main.activity_location_test.bGetLocation
 import pl.pasiekaradosna.menadzerpasieki.R
+import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.apiary.ApiaryData
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
 import pl.pasiekaradosna.menadzerpasieki.services.Settings
-import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.apiary.ApiaryData
-import java.lang.Exception
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 class CreateApiaryActivity : AppCompatActivity() {
 
@@ -39,12 +38,27 @@ class CreateApiaryActivity : AppCompatActivity() {
 
     private var cancellationTokenSource = CancellationTokenSource()
 
+    private var apiaryId: Int = -1
+    private lateinit var apiaryData: ApiaryData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_apiary)
 
         actionBar?.setHomeButtonEnabled(true);
+
+        var apiaryIdWithNull = intent?.getIntExtra("ApiaryId", -1)
+
+
+        if (apiaryIdWithNull == null) {
+            apiaryIdWithNull = -1;
+            apiaryId = -1
+        }
+
+        if (apiaryIdWithNull != -1) {
+            apiaryData = ApiaryManagerDbHelper(this).getApiaryById(apiaryIdWithNull)!!
+            apiaryId = apiaryIdWithNull
+        }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -79,27 +93,23 @@ class CreateApiaryActivity : AppCompatActivity() {
             try {
                 pullLocation()
 
-            }
-            catch (ex: Exception){
-                Log.i(Settings.TAG,"Unable to get location")
-                Toast.makeText(this, "Unable to get Location!",Toast.LENGTH_SHORT).show()
+            } catch (ex: Exception) {
+                Log.i(Settings.TAG, "Unable to get location")
+                Toast.makeText(this, "Unable to get Location!", Toast.LENGTH_SHORT).show()
             }
         }
 
-        bApiaryCreateSubmit.setOnClickListener {
-            val name = ptApiaryCreationName.text.toString()
-            val coords = ptLocationCoordinates.text.toString()
-            val date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
-            if(name == ""){
-                Log.i(Settings.TAG,Date().toString())
-                Toast.makeText(this, "Name of Apiary cannot be empty!",Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
 
-            ApiaryManagerDbHelper(this).createApiary(ApiaryData(null,name,date,coords))
-            finish()
+        // Ustawienie listenerów
+        if (apiaryId == -1) {
+
+            setCreateListener()
+        } else {
+
+            setValuesToView()
+
+            setUpdateListener()
         }
-
     }
 
     override fun onRequestPermissionsResult(
@@ -129,12 +139,12 @@ class CreateApiaryActivity : AppCompatActivity() {
 
 
     private fun pullLocation(): List<String>? {
-        Log.i(
-            Settings.TAG,
-            "true " + (getSystemService(Context.LOCATION_SERVICE) as LocationManager).isProviderEnabled(
-                LocationManager.GPS_PROVIDER
-            )
-        )
+//        Log.i(
+//            Settings.TAG,
+//            "true " + (getSystemService(Context.LOCATION_SERVICE) as LocationManager).isProviderEnabled(
+//                LocationManager.GPS_PROVIDER
+//            )
+//        )
         if ((getSystemService(Context.LOCATION_SERVICE) as LocationManager).isProviderEnabled(
                 LocationManager.GPS_PROVIDER
             )
@@ -163,17 +173,60 @@ class CreateApiaryActivity : AppCompatActivity() {
 
                     Log.i(Settings.TAG, "Longitude: $longitude, Latitude: $latitude")
 //                    tvLocation.text = "$latitude $longitude"
-                    ptLocationCoordinates.setText("$latitude, $longitude")
+                    etLocationCoordinates.setText("$latitude, $longitude")
 
                 } else {
                     Log.i(Settings.TAG, "Lokalizacja to null")
                 }
             })
         } else {
-            Toast.makeText(this, "Trun on GPS!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Trun on GPS!", Toast.LENGTH_SHORT).show()//todo
         }
 
         return listOf(this.latitude.toString(), this.longitude.toString())
+    }
+
+
+    private fun setCreateListener() {
+        bApiaryCreateSubmit.setOnClickListener {
+            val name = etApiaryCreationName.text.toString()
+            val coords = etLocationCoordinates.text.toString()
+            val date =
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+            if (name == "") {
+                Log.i(Settings.TAG, Date().toString())
+                Toast.makeText(this, "Name of Apiary cannot be empty!", Toast.LENGTH_SHORT) //todo
+                    .show()
+                return@setOnClickListener
+            }
+
+            ApiaryManagerDbHelper(this).createApiary(ApiaryData(null, name, date, coords))
+            finish()
+        }
+    }
+
+
+    private fun setUpdateListener() {
+        bApiaryCreateSubmit.setOnClickListener {
+            val name = etApiaryCreationName.text.toString()
+            val coords = etLocationCoordinates.text.toString()
+            val date =
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+            if (name == "") {
+                Log.i(Settings.TAG, Date().toString())
+                Toast.makeText(this, "Name of Apiary cannot be empty!", Toast.LENGTH_SHORT)//todo
+                    .show()
+                return@setOnClickListener
+            }
+
+            ApiaryManagerDbHelper(this).updateApiary(ApiaryData(apiaryId, name, date, coords))
+            finish()
+        }
+    }
+
+    private fun setValuesToView() {
+        etApiaryCreationName.setText(apiaryData.name)
+        etLocationCoordinates.setText(apiaryData.location)
 
     }
 }

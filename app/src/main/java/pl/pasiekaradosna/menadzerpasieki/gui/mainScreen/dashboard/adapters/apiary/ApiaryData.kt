@@ -10,7 +10,7 @@ data class ApiaryData(
 ) {
     fun mapToValues(): ContentValues {
         val values = ContentValues()
-        if (id != null) {
+        if (id != null && id != -1) {
             values.put("id", id)
         }
         values.put("name", name)

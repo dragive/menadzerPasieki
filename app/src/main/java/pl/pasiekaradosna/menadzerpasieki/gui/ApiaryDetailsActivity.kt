@@ -8,12 +8,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_apiary_details.bApiaryDetailsDelete
+import kotlinx.android.synthetic.main.activity_apiary_details.bApiaryDetailsEdit
 import kotlinx.android.synthetic.main.activity_apiary_details.fabCreateNewHive
 import kotlinx.android.synthetic.main.activity_apiary_details.rcApiaryDetailsHiveList
 import kotlinx.android.synthetic.main.fragment_apiary_item.tvApiaryLocation
-import kotlinx.android.synthetic.main.fragment_apiary_item.tvHiveName
+import kotlinx.android.synthetic.main.fragment_apiary_item.tvHiveListItemName
 import kotlinx.android.synthetic.main.fragment_apiary_item.tvHivesNumber
 import pl.pasiekaradosna.menadzerpasieki.R
+import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.apiaryManagement.CreateApiaryActivity
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.ApiaryItemFragment
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.hive.HiveAdapter
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.hive.CreateHiveActivity
@@ -52,7 +54,7 @@ class ApiaryDetailsActivity : AppCompatActivity() {
             .getApiaryById(id)
 
         //przypisanie wartości nazwy do odpowiedniego pola
-        fragment.tvHiveName.text = apiary?.name.toString()
+        fragment.tvHiveListItemName.text = apiary?.name.toString()
 
         fragment.tvApiaryLocation.text = apiary?.location.toString()
 
@@ -100,6 +102,14 @@ class ApiaryDetailsActivity : AppCompatActivity() {
                     ).show()
                 }
             }
+        }
+
+        bApiaryDetailsEdit.setOnClickListener {
+            Log.d(TAG, "bApiaryDetailsEdit")
+            Log.d(TAG, "apiary!!.id!! " + apiary!!.id!!)
+            val intent = Intent(this, CreateApiaryActivity::class.java)
+            intent.putExtra("ApiaryId", apiary!!.id!!)
+            startActivity(intent)
         }
 
     }

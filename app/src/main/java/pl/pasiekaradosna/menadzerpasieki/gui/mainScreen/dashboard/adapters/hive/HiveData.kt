@@ -11,6 +11,9 @@ data class HiveData(
 ){
     fun mapToValues(): ContentValues {
         val values = ContentValues()
+        if(id!=null && id !=-1){
+            values.put("id",id)
+        }
         values.put("name", name)
         values.put("apiary_id", apiaryId)
         values.put("queen_bread", queenBreed)

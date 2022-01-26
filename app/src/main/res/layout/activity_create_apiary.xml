@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/ptApiaryCreationName"
+            android:id="@+id/etApiaryCreationName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/apiary_creation_form_name_field_hint"
@@ -23,7 +23,7 @@
             android:minHeight="48dp" />
 
         <EditText
-            android:id="@+id/ptLocationCoordinates"
+            android:id="@+id/etLocationCoordinates"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="1"

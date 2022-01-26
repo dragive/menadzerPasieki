@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_hive_summary.view.tvHiveListItemBreed
+import kotlinx.android.synthetic.main.fragment_hive_summary.view.tvHiveListItemName
 import pl.pasiekaradosna.menadzerpasieki.R
 import pl.pasiekaradosna.menadzerpasieki.services.Settings
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
 
 class HiveAdapter(
     private val elements: List<HiveData>
@@ -25,10 +27,10 @@ class HiveAdapter(
 
     override fun onBindViewHolder(holder: HiveViewHolder, position: Int) {
         val element = elements[position]
-
+            Log.d(TAG,"onBindViewHolder "+elements)
         holder.itemView.apply {
-            this.tvHiveListItemBreed.text = element.name
-
+            this.tvHiveListItemBreed.text = element.queenBreed
+            this.tvHiveListItemName.text = element.name
 
             this.setOnClickListener {
                 try{val intent = Intent(context, HiveDetailsActivity::class.java)

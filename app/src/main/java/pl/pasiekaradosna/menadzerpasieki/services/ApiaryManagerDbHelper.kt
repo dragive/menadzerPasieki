@@ -172,6 +172,35 @@ class ApiaryManagerDbHelper(context: Context) :
         }
     }
 
+
+    fun updateApiary(apiaryData: ApiaryData) {
+        try {
+            this.writableDatabase.update(
+                TABLE_APIARIES,
+                apiaryData.mapToValues(),
+                "id=?",
+                arrayOf(apiaryData.id.toString())
+            )
+            Log.i(TAG, "Inserted Values")
+        } catch (ex: Exception) {
+            Log.e(TAG, "Error inserting", ex)
+        }
+    }
+
+    fun updateHive(hiveData: HiveData) {
+        try {
+            this.writableDatabase.update(
+                TABLE_HIVES,
+                hiveData.mapToValues(),
+                "id=?",
+                arrayOf(hiveData.id.toString())
+            )
+            Log.i(TAG, "Inserted Values")
+        } catch (ex: Exception) {
+            Log.e(TAG, "Error inserting", ex)
+        }
+    }
+
     fun getAllApiaries(): List<ApiaryData>? {
         val db = this.readableDatabase
 
