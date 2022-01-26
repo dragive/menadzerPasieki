@@ -19,4 +19,8 @@
     <string name="HiveAddActivityBSubmit">Submit</string>
     <string name="ApiaryItemFragmentAmountOfHives">Amount of hives:</string>
     <string name="ApiaryItemFragmentLocation">Location of apiary:</string>
+    <string name="tvFragmentWeatherLabel">Weather:</string>
+    <string name="HiveDetailsApiaryNameLabel">Name of apiary</string>
+    <string name="HiveDetailsQueenBreedLabel">Queen breed</string>
+    <string name="HiveDetailsQueenDateOfBirthLabel">Queen date of birth</string>
 </resources>

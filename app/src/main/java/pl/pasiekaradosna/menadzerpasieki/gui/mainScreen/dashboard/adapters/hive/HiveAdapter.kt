@@ -1,11 +1,15 @@
 package pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.hive
 
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_hive_summary.view.tvHiveListItemBreed
 import pl.pasiekaradosna.menadzerpasieki.R
+import pl.pasiekaradosna.menadzerpasieki.services.Settings
 
 class HiveAdapter(
     private val elements: List<HiveData>
@@ -24,6 +28,18 @@ class HiveAdapter(
 
         holder.itemView.apply {
             this.tvHiveListItemBreed.text = element.name
+
+
+            this.setOnClickListener {
+                try{val intent = Intent(context, HiveDetailsActivity::class.java)
+                    val bundle = Bundle()
+                    bundle.putInt("HiveId", elements[position].id!!)
+                    intent.putExtras(bundle)
+                    context.startActivity(intent)}
+                catch (err:Exception){
+                    Log.e(Settings.TAG,"ERROR while Hive activity details", err)
+                }
+            }
         }
     }
 

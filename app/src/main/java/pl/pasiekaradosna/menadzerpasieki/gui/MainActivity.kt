@@ -1,18 +1,25 @@
 package pl.pasiekaradosna.menadzerpasieki.gui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.bClearDb
+import kotlinx.android.synthetic.main.activity_main.bClearDb2
+import kotlinx.android.synthetic.main.activity_main.bCreateDb
+import kotlinx.android.synthetic.main.activity_main.bCreateDb2
+import kotlinx.android.synthetic.main.activity_main.bLocationTest
+import kotlinx.android.synthetic.main.activity_main.bMainApp
+import kotlinx.android.synthetic.main.activity_main.bNextActivity
+import kotlinx.android.synthetic.main.activity_main.rvMenu
 import pl.pasiekaradosna.menadzerpasieki.R
 import pl.pasiekaradosna.menadzerpasieki.classes.debug.Element
 import pl.pasiekaradosna.menadzerpasieki.classes.debug.ElementAdapter
+import pl.pasiekaradosna.menadzerpasieki.classes.debug.TestDbHelper
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
 import pl.pasiekaradosna.menadzerpasieki.services.Settings
-import pl.pasiekaradosna.menadzerpasieki.classes.debug.TestDbHelper
 
 class MainActivity : AppCompatActivity() {
 

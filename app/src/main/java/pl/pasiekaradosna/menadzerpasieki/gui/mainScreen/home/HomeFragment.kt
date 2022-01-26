@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.fragment_home.fcvWeather
 import pl.pasiekaradosna.menadzerpasieki.databinding.FragmentHomeBinding
+import pl.pasiekaradosna.menadzerpasieki.gui.WeatherFragment
 
 class HomeFragment : Fragment() {
 
@@ -28,11 +30,18 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
         return root
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        fcvWeather.setOnClickListener {
+            (childFragmentManager.fragments[0] as WeatherFragment)
+            .getAndUpdateWeatherParameters()
+        }
+
     }
 
     override fun onDestroyView() {

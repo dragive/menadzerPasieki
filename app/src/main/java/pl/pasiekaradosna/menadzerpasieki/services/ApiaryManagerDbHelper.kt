@@ -296,6 +296,52 @@ class ApiaryManagerDbHelper(context: Context) :
     }
 
 
+    fun getHiveById(hiveId: Int): HiveData? {
+        val db = this.readableDatabase
+
+        val selectQuery = """
+            SELECT             
+            id, 
+            name,
+            apiary_id,
+            queen_bread,
+            queen_birth_date 
+            FROM $TABLE_HIVES
+            where id = $hiveId 
+            """.trimIndent() //FIXME zmiana na BREED zamiast BREAD
+
+
+        val hiveData: HiveData?
+
+        val cursor: Cursor?
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: SQLiteException) {
+            Log.e(TAG, "Select all hives error\n", e)
+            return null
+        }
+        with(cursor) {
+            moveToFirst()
+            val hiveId = getInt(getColumnIndexOrThrow("id"))
+            val hiveName = getString(getColumnIndexOrThrow("name"))
+            val hiveApiaryId = getInt(getColumnIndexOrThrow("apiary_id"))
+            val hiveQueenBreed = getString(getColumnIndexOrThrow("queen_bread"))
+            val hiveQueenBirthDate = getString(getColumnIndexOrThrow("queen_birth_date"))
+            hiveData = HiveData(
+                hiveId,
+                hiveName,
+                hiveApiaryId,
+                hiveQueenBreed,
+                hiveQueenBirthDate
+            )
+
+        }
+
+        cursor.close()
+        return hiveData
+    }
+
     fun countAllHives(): Int {
         return countHives()
     }
@@ -361,13 +407,28 @@ class ApiaryManagerDbHelper(context: Context) :
     fun deleteApiary(apiaryId: Int): Boolean {
         var b: Boolean = false
         try {
-            val args = Array(1){apiaryId.toString()}
+            val args = Array(1) { apiaryId.toString() }
             val affectedRows =
                 this.writableDatabase.delete(TABLE_APIARIES, "id=?", args)
 
             b = 1 <= affectedRows
         } catch (err: Exception) {
-            Log.e(TAG,"Error while deleting from $TABLE_APIARIES id $apiaryId! err: ", err)
+            Log.e(TAG, "Error while deleting from $TABLE_APIARIES id $apiaryId! err: ", err)
+        }
+        return b
+    }
+
+
+    fun deleteHive(hiveId: Int): Boolean {
+        var b: Boolean = false
+        try {
+            val args = Array(1) { hiveId.toString() }
+            val affectedRows =
+                this.writableDatabase.delete(TABLE_HIVES, "id=?", args)
+
+            b = 1 <= affectedRows
+        } catch (err: Exception) {
+            Log.e(TAG, "Error while deleting from $TABLE_HIVES id $hiveId! err: ", err)
         }
         return b
     }

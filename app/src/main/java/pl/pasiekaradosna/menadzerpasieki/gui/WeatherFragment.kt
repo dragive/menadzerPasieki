@@ -1,19 +1,29 @@
 package pl.pasiekaradosna.menadzerpasieki.gui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import java.io.IOException
+import kotlinx.android.synthetic.main.fragment_weather.tvWeatherCloudsTextView
+import kotlinx.android.synthetic.main.fragment_weather.tvWeatherTemperatureTextView
+import kotlinx.android.synthetic.main.fragment_weather.tvWeatherWindTextView
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
+import org.json.JSONObject
 import pl.pasiekaradosna.menadzerpasieki.R
+import pl.pasiekaradosna.menadzerpasieki.classes.weather.WeatherData
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.AIR_TEMPERATURE_UNIT
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.CLOUD_AREA_UNIT
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.WIND_SPEED_UNIT
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -24,7 +34,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [WeatherFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class WeatherFragment : Fragment() {
+class WeatherFragment : Fragment(), OnClickListener {
     private var param1: String? = null
     private var param2: String? = null
 
@@ -42,8 +52,8 @@ class WeatherFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        run("https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=52.12257&lon=20.44369")
-//
+        getAndUpdateWeatherParameters()
+
     }
 
     override fun onCreateView(
@@ -73,9 +83,14 @@ class WeatherFragment : Fragment() {
             }
     }
 
+    fun getAndUpdateWeatherParameters(){
+        Log.d(TAG,"getAndUpdateWeatherParameters")
+        run("https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=52.12257&lon=20.44369")
+    }
+
     private fun run(url: String) {
         val request = Request.Builder()
-            .addHeader("User-Agent","pasiekaradosna.pl pasiekaradosna@gmail.com")
+            .addHeader("User-Agent", "pasiekaradosna.pl pasiekaradosna@gmail.com")
             .url(url)
             .build()
 
@@ -85,9 +100,26 @@ class WeatherFragment : Fragment() {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                Log.i(TAG, "OK: " + response.body()?.string())
-                //todo https://stackoverflow.com/questions/52802071/kotlin-parse-json
+                try {
+                    val rawJson: String = response.body()?.string().toString()
+                    val json = JSONObject(rawJson)
+                    val weatherData =  WeatherData.parseFromJson(json)
+                    updateView(weatherData)
+                } catch (err: Exception) {
+                    Log.e(TAG, "Error while Calling Api", err)
+                }
             }
         })
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun updateView(weatherData: WeatherData){
+        this.tvWeatherCloudsTextView.text = "${weatherData.cloudAreaFraction} $CLOUD_AREA_UNIT"
+        this.tvWeatherTemperatureTextView.text = "${weatherData.airTemperature} $AIR_TEMPERATURE_UNIT"
+        this.tvWeatherWindTextView.text = "${weatherData.windSpeed} $WIND_SPEED_UNIT"
+    }
+
+    override fun onClick(v: View?) {
+        getAndUpdateWeatherParameters()
     }
 }

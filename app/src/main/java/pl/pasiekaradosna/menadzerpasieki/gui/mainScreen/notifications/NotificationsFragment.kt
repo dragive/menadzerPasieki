@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.fragment_notifications.fabCreateNewTask
 import pl.pasiekaradosna.menadzerpasieki.databinding.FragmentNotificationsBinding
 
 class NotificationsFragment : Fragment() {
@@ -35,6 +36,14 @@ class NotificationsFragment : Fragment() {
             textView.text = it
         })
         return root
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        fabCreateNewTask.setOnClickListener{
+            //todo
+        }
     }
 
     override fun onDestroyView() {

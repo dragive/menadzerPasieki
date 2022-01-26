@@ -82,12 +82,23 @@ class ApiaryDetailsActivity : AppCompatActivity() {
         }
 
         bApiaryDetailsDelete.setOnClickListener {
-            finish()
-            if(ApiaryManagerDbHelper(this).deleteApiary(id)){
-                Toast.makeText(this,"Deleted Apiary",Toast.LENGTH_SHORT).show()
-            }
-            else{
-                Toast.makeText(this,"Error occurred while deleting apiary! ",Toast.LENGTH_LONG).show()
+
+            var apiaryManagerDbHelper = ApiaryManagerDbHelper(this)
+
+            if (apiaryManagerDbHelper.countAllHivesByApiaryId(id) != 0) {
+                Toast.makeText(this, "Nie można usunąć pasieki!", Toast.LENGTH_SHORT).show()
+            } else {
+
+                if (apiaryManagerDbHelper.deleteApiary(id)) {
+                    Toast.makeText(this, "Deleted Apiary", Toast.LENGTH_SHORT).show()
+                    finish()
+                } else {
+                    Toast.makeText(
+                        this,
+                        "Error occurred while deleting apiary! ",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }
 

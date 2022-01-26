@@ -4,8 +4,7 @@
     <!-- Uprawnienia do lokalizacji -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <!--Uprawnenia do internetu-->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> <!-- Uprawnenia do internetu -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -15,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestMenadzerPasieki">
-
+        <activity
+            android:name=".gui.mainScreen.dashboard.adapters.hive.HiveDetailsActivity"
+            android:exported="false" />
         <activity
             android:name=".gui.ApiaryDetailsActivity"
             android:exported="false"
