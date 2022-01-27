@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">MenadzerPasieki</string>
     <string name="tvFragmentWeatherLabel">"Pogoda: "</string>
-    <string name="title_activity_main_screen">EkranStartowy</string>
-    <string name="title_home">EkranGlowny</string>
+    <string name="title_activity_main_screen">Ekran Startowy</string>
+    <string name="title_home">Ekran Glowny</string>
     <string name="title_apiary">Struktura</string>
     <string name="title_todo">Zadania</string>
     <string name="apiary_creation_form_name_label">Nazwa</string>
@@ -48,4 +48,6 @@
     <string name="ToastCompletedTask">Zadanie Wykonane</string>
     <string name="ToastEmptyNameOfApiary">Nazwa pasieki nie może być pusta</string>
     <string name="ToastPermissionDenied">Brak uprawnień</string>
+    <string name="TaskCreateName">Nazwa</string>
+    <string name="description">Opis</string>
 </resources>
