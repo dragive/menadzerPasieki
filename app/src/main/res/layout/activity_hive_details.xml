@@ -15,7 +15,8 @@
         android:text="Name of hive"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -135,21 +136,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Delete" />
+                android:text="@string/bActivityHiveDetailsDeleteText" />
 
             <Button
                 android:id="@+id/bActivityHiveDetailsEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Edit" />
+                android:text="@string/bActivityHiveDetailsEditText" />
 
             <Button
                 android:id="@+id/bActivityHiveDetailsAddTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Add Task" />
+                android:text="@string/bActivityHiveDetailsAddTaskText" />
 
     </LinearLayout>
 

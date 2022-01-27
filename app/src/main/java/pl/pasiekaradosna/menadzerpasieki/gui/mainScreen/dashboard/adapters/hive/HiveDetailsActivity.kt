@@ -26,6 +26,8 @@ class HiveDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hive_details)
 
+        actionBar?.setHomeButtonEnabled(true)
+
         val hiveId: Int = intent?.getIntExtra("HiveId",-1)!!
 
         Log.i(TAG,"HiveId in HiveDetailsActivity $hiveId")

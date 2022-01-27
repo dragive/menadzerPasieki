@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">MenadzerPasieki</string>
+    <string name="app_name">ApiaryManager</string>
     <string name="title_activity_main_screen">MainScreen</string>
     <string name="title_home">Home</string>
-    <string name="title_apiary">Dashboard</string>
-    <string name="title_todo">Notifications</string>
+    <string name="title_apiary">Structure</string>
+    <string name="title_todo">Tasks</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="apiary_creation_form_name_label">Name</string>
     <string name="apiary_creation_form_name_field_hint">Name of apiary</string>
@@ -23,4 +23,29 @@
     <string name="HiveDetailsApiaryNameLabel">Name of apiary</string>
     <string name="HiveDetailsQueenBreedLabel">Queen breed</string>
     <string name="HiveDetailsQueenDateOfBirthLabel">Queen date of birth</string>
+    <string name="WeatherTemperatureLabel">Temperature:</string>
+    <string name="WeatherRainLabel">Rain:</string>
+    <string name="WeatherWindLabel">Wind:</string>
+    <string name="FragmentTaskItemNameOfHiveLabel">Name of hive</string>
+    <string name="FragmentTaskItemDescOfHiveLabel">Description:</string>
+    <string name="SummaryFragmentTitle">Statistics</string>
+    <string name="SummaryFragmentApiaries">Apiaries:</string>
+    <string name="SummaryFragmentHives">Hives:</string>
+    <string name="SummaryFragmentTasks">Tasks:</string>
+    <string name="HiveListItemBreedLabel">Breed:</string>
+    <string name="bActivityHiveDetailsDeleteText">Delete</string>
+    <string name="bActivityHiveDetailsEditText">Edit</string>
+    <string name="bActivityHiveDetailsAddTaskText">Add Task</string>
+    <string name="bTaskCreateSubmitText">Submit</string>
+    <string name="tvHiveAddTitleText">To create a hive, pass some necessary Data:</string>
+    <string name="tvApiaryDetailsSubtitleText">List of assigned Hives:</string>
+    <string name="ToastCannotDeleteApiary">Cannot delete this apiary!</string>
+    <string name="ToastDeletedApiary">Deleted Apiary</string>
+    <string name="ToastErrorOccuredWgileDeletingApiary">"Error occurred while deleting apiary! "</string>
+    <string name="ToastUnableToCreateTaskNoHive">Unable to create task without hive!</string>
+    <string name="ToastHiveWasAddedSuccessfully">Hive was added</string>
+    <string name="ToastAddingTaskFailed">Hive was NOT added!</string>
+    <string name="ToastCompletedTask">Completed Task</string>
+    <string name="ToastEmptyNameOfApiary">Name of Apiary cannot be empty!</string>
+    <string name="ToastPermissionDenied">Permission denied</string>
 </resources>

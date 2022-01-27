@@ -469,7 +469,7 @@ class ApiaryManagerDbHelper(context: Context) :
         return countHives(apiaryId)
     }
 
-    private fun countHives(apiaryId: Int = -1): Int {
+    fun countHives(apiaryId: Int = -1): Int {
         val db = this.readableDatabase
 
         lateinit var selectQuery: String
@@ -508,6 +508,67 @@ class ApiaryManagerDbHelper(context: Context) :
 
     }
 
+
+
+    fun countApiaries(): Int {
+        val db = this.readableDatabase
+
+        var selectQuery: String = """
+                SELECT             
+                count(1) c
+                FROM $TABLE_APIARIES
+                """.trimIndent()
+        val cursor: Cursor?
+
+        var ret: Int
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: SQLiteException) {
+            Log.e(TAG, "Select all apiaries error\n", e)
+            return -1
+        }
+        with(cursor) {
+
+            moveToFirst()
+            ret = getInt(getColumnIndexOrThrow("c"))
+
+        }
+        cursor.close()
+        return ret
+
+    }
+
+
+
+    fun countTasks(): Int {
+        val db = this.readableDatabase
+
+        var selectQuery: String = """
+                SELECT             
+                count(1) c
+                FROM $TABLE_TASK
+                """.trimIndent()
+        val cursor: Cursor?
+
+        var ret: Int
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: SQLiteException) {
+            Log.e(TAG, "Select all TASK error\n", e)
+            return -1
+        }
+        with(cursor) {
+
+            moveToFirst()
+            ret = getInt(getColumnIndexOrThrow("c"))
+
+        }
+        cursor.close()
+        return ret
+
+    }
 
     fun insertHive(hiveData: HiveData): Boolean {
         Log.d(TAG, "hives list in DB:" + this.getAllHivesByApiaryId(hiveData.apiaryId))
@@ -568,5 +629,21 @@ class ApiaryManagerDbHelper(context: Context) :
         }
         return b
     }
+
+
+    fun deleteTask(taskId: Int): Boolean {
+        var b: Boolean = false
+        try {
+            val args = Array(1) { taskId.toString() }
+            val affectedRows =
+                this.writableDatabase.delete(TABLE_TASK, "id=?", args)
+
+            b = 1 <= affectedRows
+        } catch (err: Exception) {
+            Log.e(TAG, "Error while deleting from $TABLE_TASK id $taskId! err: ", err)
+        }
+        return b
+    }
+
 
 }

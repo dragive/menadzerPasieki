@@ -1,14 +1,17 @@
 package pl.pasiekaradosna.menadzerpasieki.gui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import java.io.IOException
+import kotlinx.android.synthetic.main.fragment_weather.ivIcon
 import kotlinx.android.synthetic.main.fragment_weather.tvWeatherCloudsTextView
 import kotlinx.android.synthetic.main.fragment_weather.tvWeatherTemperatureTextView
 import kotlinx.android.synthetic.main.fragment_weather.tvWeatherWindTextView
@@ -53,6 +56,14 @@ class WeatherFragment : Fragment(), OnClickListener {
         super.onStart()
 
         getAndUpdateWeatherParameters()
+
+
+        ivIcon.setOnLongClickListener {
+            val intent = Intent(context,MainActivity::class.java)
+            intent.putExtra("LUNCH",0)
+            startActivity(intent)
+            true
+        }
 
     }
 
@@ -121,5 +132,6 @@ class WeatherFragment : Fragment(), OnClickListener {
 
     override fun onClick(v: View?) {
         getAndUpdateWeatherParameters()
+        Toast.makeText(context,"Updated weather widget",Toast.LENGTH_SHORT).show()
     }
 }

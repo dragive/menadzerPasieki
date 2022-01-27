@@ -8,6 +8,7 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -23,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_create_apiary.*
 import kotlinx.android.synthetic.main.activity_location_test.*
 import kotlinx.android.synthetic.main.activity_location_test.bGetLocation
 import pl.pasiekaradosna.menadzerpasieki.R
+import pl.pasiekaradosna.menadzerpasieki.R.string
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.apiary.ApiaryData
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
 import pl.pasiekaradosna.menadzerpasieki.services.Settings
@@ -130,7 +132,7 @@ class CreateApiaryActivity : AppCompatActivity() {
                 pullLocation()
             } else {
                 Log.d(Settings.TAG, "toast" + object : Any() {}.javaClass.enclosingMethod.name)
-                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(string.ToastPermissionDenied), Toast.LENGTH_SHORT).show();
             }
 
 
@@ -195,7 +197,7 @@ class CreateApiaryActivity : AppCompatActivity() {
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
             if (name == "") {
                 Log.i(Settings.TAG, Date().toString())
-                Toast.makeText(this, "Name of Apiary cannot be empty!", Toast.LENGTH_SHORT) //todo
+                Toast.makeText(this, getString(string.ToastEmptyNameOfApiary), Toast.LENGTH_SHORT) //todo
                     .show()
                 return@setOnClickListener
             }
@@ -214,7 +216,7 @@ class CreateApiaryActivity : AppCompatActivity() {
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
             if (name == "") {
                 Log.i(Settings.TAG, Date().toString())
-                Toast.makeText(this, "Name of Apiary cannot be empty!", Toast.LENGTH_SHORT)//todo
+                Toast.makeText(this, getString(string.ToastEmptyNameOfApiary), Toast.LENGTH_SHORT)
                     .show()
                 return@setOnClickListener
             }
@@ -228,5 +230,16 @@ class CreateApiaryActivity : AppCompatActivity() {
         etApiaryCreationName.setText(apiaryData.name)
         etLocationCoordinates.setText(apiaryData.location)
 
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

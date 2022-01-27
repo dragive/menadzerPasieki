@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="90dp"
+    android:background="@drawable/shape_border_white"
+    android:layout_margin="3dp"
     tools:context=".gui.mainScreen.HiveSummaryFragment">
 
 
@@ -43,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Breed:" />
+                android:text="@string/HiveListItemBreedLabel" />
 
             <TextView
                 android:id="@+id/tvHiveListItemBreed"

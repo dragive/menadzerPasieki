@@ -50,9 +50,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/ApiaryDetailsEditButton"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    app:layout_constraintTop_toBottomOf="@id/fcvApiaryItem" /> <!-- TODO dodanie obsługi edycji -->
+                    app:layout_constraintTop_toBottomOf="@id/fcvApiaryItem" />
 
 
                 <Button
@@ -61,18 +61,18 @@
                     android:layout_height="wrap_content"
                     android:text="@string/ApiaryDetailsDeleteButton"
                     app:layout_constraintStart_toEndOf="@id/bApiaryDetailsEdit"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    app:layout_constraintTop_toBottomOf="@id/fcvApiaryItem" /> <!-- TODO dodanie obsługi usuwania -->
+                    app:layout_constraintTop_toBottomOf="@id/fcvApiaryItem" />
 
                 <TextView
                     android:id="@+id/tvApiaryDetailsSubtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="List of assigned Hives:"
+                    android:text="@string/tvApiaryDetailsSubtitleText"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/bApiaryDetailsEdit"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
                     android:textSize="20sp"
                     android:layout_marginTop="30dp"/>
 
@@ -89,7 +89,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcApiaryDetailsHiveList"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 tools:listitem="@layout/fragment_hive_summary"
                 >
 

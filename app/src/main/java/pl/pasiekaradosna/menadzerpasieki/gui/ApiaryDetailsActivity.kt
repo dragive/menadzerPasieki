@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_apiary_item.tvApiaryLocation
 import kotlinx.android.synthetic.main.fragment_apiary_item.tvHiveListItemName
 import kotlinx.android.synthetic.main.fragment_apiary_item.tvHivesNumber
 import pl.pasiekaradosna.menadzerpasieki.R
+import pl.pasiekaradosna.menadzerpasieki.R.string
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.apiaryManagement.CreateApiaryActivity
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.ApiaryItemFragment
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.hive.HiveAdapter
@@ -88,16 +89,16 @@ class ApiaryDetailsActivity : AppCompatActivity() {
             var apiaryManagerDbHelper = ApiaryManagerDbHelper(this)
 
             if (apiaryManagerDbHelper.countAllHivesByApiaryId(id) != 0) {
-                Toast.makeText(this, "Nie można usunąć pasieki!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(string.ToastCannotDeleteApiary), Toast.LENGTH_SHORT).show()
             } else {
 
                 if (apiaryManagerDbHelper.deleteApiary(id)) {
-                    Toast.makeText(this, "Deleted Apiary", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(string.ToastDeletedApiary), Toast.LENGTH_SHORT).show()
                     finish()
                 } else {
                     Toast.makeText(
                         this,
-                        "Error occurred while deleting apiary! ",
+                        getString(string.ToastErrorOccuredWgileDeletingApiary),
                         Toast.LENGTH_LONG
                     ).show()
                 }

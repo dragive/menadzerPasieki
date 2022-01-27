@@ -130,6 +130,10 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-
+        var req = intent?.getIntExtra("LUNCH",-1)
+            if(req == null || req == -1){
+                finish()
+                startActivity(Intent(this,MainScreenActivity::class.java))
+            }
     }
 }

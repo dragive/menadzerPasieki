@@ -3,9 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    tools:context=".gui.mainScreen.dashboard.adapters.task.TaskItemFragment" >
+    android:layout_height="wrap_content"
 
+    android:background="@drawable/shape_border_white"
+    android:layout_margin="3dp"
+    tools:context=".gui.mainScreen.dashboard.adapters.task.TaskItemFragment" >
+<!--TODO dodanie TV visible not visible ze nie ma tasków-->
     <TextView
         android:id="@+id/tvFragmentTaskItemName"
         android:layout_width="wrap_content"
@@ -15,28 +18,30 @@
         android:text="Name"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/tvFragmentTaskItemName"
-        android:layout_marginTop="5dp" >
+        app:layout_constraintTop_toBottomOf="@id/tvFragmentTaskItemName">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_margin="8dp">
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvFragmentTaskItemNameOfHiveLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Name of hive" />
+                android:text="@string/FragmentTaskItemNameOfHiveLabel" />
 
             <TextView
                 android:id="@+id/tvFragmentTaskItemNameOfHive"
@@ -45,5 +50,30 @@
                 android:layout_weight="1"
                 android:text="TextView" />
         </LinearLayout>
+
     </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvFragmentTaskItemDescLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/FragmentTaskItemDescOfHiveLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="3dp"
+        android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/tvFragmentTaskItemDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFragmentTaskItemDescLabel"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="10dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

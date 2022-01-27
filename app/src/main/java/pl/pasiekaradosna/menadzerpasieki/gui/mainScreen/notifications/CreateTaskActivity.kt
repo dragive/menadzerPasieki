@@ -1,6 +1,5 @@
 package pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.notifications
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -9,6 +8,7 @@ import kotlinx.android.synthetic.main.activity_create_task.bTaskCreateSubmit
 import kotlinx.android.synthetic.main.activity_create_task.edTaskCreateDescription
 import kotlinx.android.synthetic.main.activity_create_task.edTaskCreateName
 import pl.pasiekaradosna.menadzerpasieki.R.layout
+import pl.pasiekaradosna.menadzerpasieki.R.string
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.task.TaskData
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
@@ -33,15 +33,11 @@ class CreateTaskActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-//        bCreateTaskChooseHive.setOnClickListener {
-//            val intent = Intent(this,CreateTaskChooseHiveActivity::class.java)
-//            startActivity(intent)
-//        }
 
         bTaskCreateSubmit.setOnClickListener {
 
             if (hiveId == -1) {
-                Toast.makeText(this, "Unable to create task without hive!", Toast.LENGTH_SHORT)
+                Toast.makeText(this, getString(string.ToastUnableToCreateTaskNoHive), Toast.LENGTH_SHORT)
                     .show()
                 finish()
             } else {
@@ -61,8 +57,4 @@ class CreateTaskActivity : AppCompatActivity() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-    }
 }
