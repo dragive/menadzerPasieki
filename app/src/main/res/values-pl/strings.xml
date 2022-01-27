@@ -5,7 +5,7 @@
     <string name="title_activity_main_screen">EkranStartowy</string>
     <string name="title_home">EkranGlowny</string>
     <string name="title_apiary">Struktura</string>
-    <string name="title_todo">Zadamia</string>
+    <string name="title_todo">Zadania</string>
     <string name="apiary_creation_form_name_label">Nazwa</string>
     <string name="apiary_creation_form_name_field_hint">Nazwa pasieki</string>
     <string name="apiary_creation_form_submit">Potwierdź</string>
