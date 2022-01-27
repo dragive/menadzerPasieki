@@ -24,7 +24,7 @@
     <string name="HiveDetailsQueenBreedLabel">Rasa matki pszczelej</string>
     <string name="HiveDetailsQueenDateOfBirthLabel">Data wygryzienia</string>
     <string name="WeatherTemperatureLabel">Temperatura:</string>
-    <string name="WeatherRainLabel">Deszcz:</string>
+    <string name="WeatherRainLabel">Chmury:</string>
     <string name="WeatherWindLabel">Wiatr:</string>
     <string name="FragmentTaskItemNameOfHiveLabel">Nazwa roju</string>
     <string name="FragmentTaskItemDescOfHiveLabel">Opis:</string>

@@ -24,7 +24,7 @@
     <string name="HiveDetailsQueenBreedLabel">Queen breed</string>
     <string name="HiveDetailsQueenDateOfBirthLabel">Queen date of birth</string>
     <string name="WeatherTemperatureLabel">Temperature:</string>
-    <string name="WeatherRainLabel">Rain:</string>
+    <string name="WeatherRainLabel">Clouds:</string>
     <string name="WeatherWindLabel">Wind:</string>
     <string name="FragmentTaskItemNameOfHiveLabel">Name of hive</string>
     <string name="FragmentTaskItemDescOfHiveLabel">Description:</string>
