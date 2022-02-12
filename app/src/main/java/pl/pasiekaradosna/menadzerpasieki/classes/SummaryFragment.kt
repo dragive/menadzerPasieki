@@ -36,9 +36,9 @@ class SummaryFragment : Fragment() {
 
         val apiaryManagerDbHelper = ApiaryManagerDbHelper(requireContext())
 
-        val hives:Int = apiaryManagerDbHelper.countAllHives()
-        val apiaries:Int = apiaryManagerDbHelper.countApiaries()
-        val tasks:Int = apiaryManagerDbHelper.countTasks()
+        val hives: Int = apiaryManagerDbHelper.countAllHives()
+        val apiaries: Int = apiaryManagerDbHelper.countApiaries()
+        val tasks: Int = apiaryManagerDbHelper.countTasks()
 
 
         this.tvSummaryApiaries.text = apiaries.toString()

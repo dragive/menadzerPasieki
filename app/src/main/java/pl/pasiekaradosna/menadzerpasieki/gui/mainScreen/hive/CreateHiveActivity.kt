@@ -17,40 +17,33 @@ import pl.pasiekaradosna.menadzerpasieki.R.string
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.hive.HiveData
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
 import pl.pasiekaradosna.menadzerpasieki.services.Settings
-import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG_APP
 
 class CreateHiveActivity : AppCompatActivity() {
     private var hiveId: Int? = null
     private var apiaryId: Int? = null
-    lateinit var hiveData :HiveData
+    lateinit var hiveData: HiveData
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_hive)
 
-
-
         hiveId = intent?.getIntExtra("HiveId", -1)!!
         apiaryId = intent?.getIntExtra("ApiaryId", -1)!!
 
-        if(hiveId == null){
-            hiveId = -1
-        }
-        if(hiveId == -1){
+        if (hiveId == null || hiveId == -1) {
+            hiveId = -1;
             setCreateListener()
-        }
-        else{
+        } else {
             val apiaryManagerDbHelper = ApiaryManagerDbHelper(this)
 
             hiveData = apiaryManagerDbHelper.getHiveById(hiveId!!)!!
             etHiveAddName.setText(hiveData.name)
             etHiveAddQueenBreed.setText(hiveData.queenBreed)
-//            etHiveAddQueenBi.setText(hiveData.queenBirthDate)
-//            calvHiveAddQueenBirth.date = getMilis(hiveData.queenBirthDate)
             setUpdateListener()
         }
     }
 
-    private fun setCreateListener(){
+    private fun setCreateListener() {
 
         bHiveAddSubmit.setOnClickListener {
             val name: String = etHiveAddName.text.toString()
@@ -60,19 +53,24 @@ class CreateHiveActivity : AppCompatActivity() {
 
             val hive = HiveData(-1, name, apiaryId!!, breed, date)
 
-            if(ApiaryManagerDbHelper(this).insertHive(hive)){
-                Toast.makeText(this,getString(string.ToastHiveWasAddedSuccessfully), Toast.LENGTH_SHORT).show()
-                Log.d(Settings.TAG,"true")
+            if (ApiaryManagerDbHelper(this).insertHive(hive)) {
+                Toast.makeText(
+                    this,
+                    getString(string.ToastHiveWasAddedSuccessfully),
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d(TAG_APP, "true")
                 finish()
-            }
-            else{
-                Toast.makeText(this,getString(string.ToastAddingTaskFailed), Toast.LENGTH_SHORT).show()
-                Log.d(Settings.TAG,"false")
+            } else {
+                Toast.makeText(this, getString(string.ToastAddingTaskFailed), Toast.LENGTH_SHORT)
+                    .show()
+                Log.d(TAG_APP, "false")
 
             }
 
         }
     }
+
     private fun getDate(milliSeconds: Long, dateFormat: String?): String? {
         // Create a DateFormatter object for displaying date in specified format.
         val formatter = SimpleDateFormat(dateFormat)
@@ -83,7 +81,7 @@ class CreateHiveActivity : AppCompatActivity() {
         return formatter.format(calendar.getTime())
     }
 
-    private fun getMilis(date :String): Long {
+    private fun getMilis(date: String): Long {
         val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern(
             "yyyy MM dd", Locale.ROOT
         )
@@ -95,10 +93,10 @@ class CreateHiveActivity : AppCompatActivity() {
     }
 
 
-    private fun setUpdateListener(){
+    private fun setUpdateListener() {
 
-        Log.d(TAG,"apiaryId"+apiaryId)
-        Log.d(TAG,"hiveId"+hiveId)
+        Log.d(TAG_APP, "apiaryId" + apiaryId)
+        Log.d(TAG_APP, "hiveId" + hiveId)
 
         bHiveAddSubmit.setOnClickListener {
             val name: String = etHiveAddName.text.toString()

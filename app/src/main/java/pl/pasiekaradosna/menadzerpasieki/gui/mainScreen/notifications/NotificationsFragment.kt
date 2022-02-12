@@ -12,11 +12,11 @@ import kotlinx.android.synthetic.main.fragment_notifications.rcTaskListView
 import pl.pasiekaradosna.menadzerpasieki.databinding.FragmentNotificationsBinding
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.task.TaskAdapter
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
-import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG_APP
 
 class NotificationsFragment : Fragment() {
 
-    private lateinit var taskAdapter : TaskAdapter
+    private lateinit var taskAdapter: TaskAdapter
     private lateinit var notificationsViewModel: NotificationsViewModel
     private var _binding: FragmentNotificationsBinding? = null
 
@@ -26,27 +26,19 @@ class NotificationsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         notificationsViewModel =
             ViewModelProvider(this).get(NotificationsViewModel::class.java)
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        return root
+        return binding.root
     }
 
     override fun onStart() {
         super.onStart()
-//
-//        fabCreateNewTask.setOnClickListener{
-//            val intent = Intent(context, CreateTaskActivity::class.java)
-//
-//            startActivity(intent)
-//        }
 
         val list = ApiaryManagerDbHelper(requireContext()).getAllTasks()
-        Log.d(TAG,"####"+list)
         taskAdapter = TaskAdapter(list!!)
 
         rcTaskListView.adapter = taskAdapter

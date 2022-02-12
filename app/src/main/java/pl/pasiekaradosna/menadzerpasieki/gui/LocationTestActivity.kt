@@ -33,15 +33,14 @@ class LocationTestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_location_test)
-        Log.d(Settings.TAG,""+object : Any() {}.javaClass.enclosingMethod.name)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         bGetLocation.setOnClickListener {
-            try {Log.d(Settings.TAG,"onclick "+object : Any() {}.javaClass.enclosingMethod.name)
+            try {
                 pullLocation()
             } catch (ex: Exception) {
-                Log.e(Settings.TAG, "error", ex)
+                Log.e(Settings.TAG_APP, "error", ex)
             }
         }
 
@@ -54,7 +53,7 @@ class LocationTestActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            Log.d(Settings.TAG,"if begin"+object : Any() {}.javaClass.enclosingMethod.name)
+
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(
@@ -74,19 +73,17 @@ class LocationTestActivity : AppCompatActivity() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        Log.d(Settings.TAG,"s "+object : Any() {}.javaClass.enclosingMethod.name)
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        Log.d(Settings.TAG,""+object : Any() {}.javaClass.enclosingMethod.name)
+
         if (requestCode == this.locationRequestCode) {
 
             // If request is cancelled, the result arrays are empty.
             if (grantResults.isNotEmpty()
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED
             ) {
-                Log.d(Settings.TAG,"pull"+object : Any() {}.javaClass.enclosingMethod.name)
                 pullLocation()
             } else {
-                Log.d(Settings.TAG,"toast"+object : Any() {}.javaClass.enclosingMethod.name)
+                Log.i(Settings.TAG_APP, "Permission denied for Location Sensor")
                 Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
             }
 
@@ -95,14 +92,16 @@ class LocationTestActivity : AppCompatActivity() {
     }
 
     private fun pullLocation() {
-        Log.i(Settings.TAG,"true "+(getSystemService(Context.LOCATION_SERVICE) as LocationManager).isProviderEnabled(
-            LocationManager.GPS_PROVIDER
-        ))
-        if ((getSystemService(Context.LOCATION_SERVICE) as LocationManager).isProviderEnabled(
+        Log.i(
+            Settings.TAG_APP,
+            "true " + (getSystemService(Context.LOCATION_SERVICE) as LocationManager).isProviderEnabled(
                 LocationManager.GPS_PROVIDER
             )
         )
-        {
+        if ((getSystemService(Context.LOCATION_SERVICE) as LocationManager).isProviderEnabled(
+                LocationManager.GPS_PROVIDER
+            )
+        ) {
 
             if (ActivityCompat.checkSelfPermission(
                     this,
@@ -121,21 +120,19 @@ class LocationTestActivity : AppCompatActivity() {
             )
 
             currentLocationTask.addOnSuccessListener(this, fun(location) {
-                if(location!=null) {
+                if (location != null) {
                     this.latitude = location.latitude;
                     this.longitude = location.longitude;
 
-                    Log.i(Settings.TAG, "Longitude: $longitude, Latitude: $latitude")
+                    Log.i(Settings.TAG_APP, "Longitude: $longitude, Latitude: $latitude")
                     tvLocation.text = "$latitude $longitude"
 
-                }
-                else{
-                    Log.i(Settings.TAG,"Lokalizacja to null")
+                } else {
+                    Log.i(Settings.TAG_APP, "Lokalizacja to null")
                 }
             })
-        }
-        else{
-            Toast.makeText(this,"Uruchom Lokalizację!",Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Uruchom Lokalizację!", Toast.LENGTH_SHORT).show()
         }
     }
 

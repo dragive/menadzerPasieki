@@ -21,7 +21,7 @@ class DashboardFragment : Fragment() {
     private lateinit var dashboardViewModel: DashboardViewModel
     private var _binding: FragmentDashboardBinding? = null
 
-    private lateinit var apiaryAdapter : ApiaryAdapter
+    private lateinit var apiaryAdapter: ApiaryAdapter
 
     private val binding get() = _binding!!
 
@@ -36,9 +36,8 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        //val textView: TextView = binding.textView2
         dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-            //textView.text = it
+
         })
 
         return root
@@ -46,8 +45,8 @@ class DashboardFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        fabCreateNewApiary.setOnClickListener{ view ->
-            val intent = Intent(context,CreateApiaryActivity::class.java)
+        fabCreateNewApiary.setOnClickListener { view ->
+            val intent = Intent(context, CreateApiaryActivity::class.java)
             startActivity(intent)
         }
         val list = ApiaryManagerDbHelper(requireContext()).getAllApiaries()
@@ -57,13 +56,10 @@ class DashboardFragment : Fragment() {
         rvDashboardMenu.adapter = apiaryAdapter
 
         rvDashboardMenu.layoutManager = LinearLayoutManager(context)
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

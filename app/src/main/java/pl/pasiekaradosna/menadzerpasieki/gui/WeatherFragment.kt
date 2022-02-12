@@ -25,7 +25,7 @@ import pl.pasiekaradosna.menadzerpasieki.R
 import pl.pasiekaradosna.menadzerpasieki.classes.weather.WeatherData
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.AIR_TEMPERATURE_UNIT
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.CLOUD_AREA_UNIT
-import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG_APP
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.WIND_SPEED_UNIT
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,8 +59,8 @@ class WeatherFragment : Fragment(), OnClickListener {
 
 
         ivIcon.setOnLongClickListener {
-            val intent = Intent(context,MainActivity::class.java)
-            intent.putExtra("LUNCH",0)
+            val intent = Intent(context, MainActivity::class.java)
+            intent.putExtra("LUNCH", 0)
             startActivity(intent)
             true
         }
@@ -94,8 +94,9 @@ class WeatherFragment : Fragment(), OnClickListener {
             }
     }
 
-    fun getAndUpdateWeatherParameters(){
-        Log.d(TAG,"getAndUpdateWeatherParameters")
+    //todo przeniesienie tego do interfejsu i klasy
+    fun getAndUpdateWeatherParameters() {
+        Log.d(TAG_APP, "getAndUpdateWeatherParameters")
         run("https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=52.12257&lon=20.44369")
     }
 
@@ -107,31 +108,32 @@ class WeatherFragment : Fragment(), OnClickListener {
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Log.e(TAG, "OnFailure run in weatherFragment", e)
+                Log.e(TAG_APP, "OnFailure run in weatherFragment", e)
             }
 
             override fun onResponse(call: Call, response: Response) {
                 try {
                     val rawJson: String = response.body()?.string().toString()
                     val json = JSONObject(rawJson)
-                    val weatherData =  WeatherData.parseFromJson(json)
+                    val weatherData = WeatherData.parseFromJson(json)
                     updateView(weatherData)
                 } catch (err: Exception) {
-                    Log.e(TAG, "Error while Calling Api", err)
+                    Log.e(TAG_APP, "Error while Calling Api", err)
                 }
             }
         })
     }
 
     @SuppressLint("SetTextI18n")
-    private fun updateView(weatherData: WeatherData){
+    private fun updateView(weatherData: WeatherData) {
         this.tvWeatherCloudsTextView.text = "${weatherData.cloudAreaFraction} $CLOUD_AREA_UNIT"
-        this.tvWeatherTemperatureTextView.text = "${weatherData.airTemperature} $AIR_TEMPERATURE_UNIT"
+        this.tvWeatherTemperatureTextView.text =
+            "${weatherData.airTemperature} $AIR_TEMPERATURE_UNIT"
         this.tvWeatherWindTextView.text = "${weatherData.windSpeed} $WIND_SPEED_UNIT"
     }
 
     override fun onClick(v: View?) {
         getAndUpdateWeatherParameters()
-        Toast.makeText(context,"Updated weather widget",Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Updated weather widget", Toast.LENGTH_SHORT).show()
     }
 }

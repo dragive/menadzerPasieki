@@ -21,7 +21,6 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlinx.android.synthetic.main.activity_create_apiary.*
-import kotlinx.android.synthetic.main.activity_location_test.*
 import kotlinx.android.synthetic.main.activity_location_test.bGetLocation
 import pl.pasiekaradosna.menadzerpasieki.R
 import pl.pasiekaradosna.menadzerpasieki.R.string
@@ -72,7 +71,6 @@ class CreateApiaryActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            Log.d(Settings.TAG, "if begin" + object : Any() {}.javaClass.enclosingMethod.name)
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(
@@ -96,7 +94,7 @@ class CreateApiaryActivity : AppCompatActivity() {
                 pullLocation()
 
             } catch (ex: Exception) {
-                Log.i(Settings.TAG, "Unable to get location")
+                Log.i(Settings.TAG_APP, "Unable to get location")
                 Toast.makeText(this, "Unable to get Location!", Toast.LENGTH_SHORT).show()
             }
         }
@@ -119,20 +117,21 @@ class CreateApiaryActivity : AppCompatActivity() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        Log.d(Settings.TAG, "s " + object : Any() {}.javaClass.enclosingMethod.name)
+        Log.d(Settings.TAG_APP, "s " + object : Any() {}.javaClass.enclosingMethod.name)
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        Log.d(Settings.TAG, "" + object : Any() {}.javaClass.enclosingMethod.name)
+        Log.d(Settings.TAG_APP, "" + object : Any() {}.javaClass.enclosingMethod.name)
         if (requestCode == this.locationRequestCode) {
 
             // If request is cancelled, the result arrays are empty.
             if (grantResults.isNotEmpty()
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED
             ) {
-                Log.d(Settings.TAG, "pull" + object : Any() {}.javaClass.enclosingMethod.name)
+                Log.d(Settings.TAG_APP, "pull" + object : Any() {}.javaClass.enclosingMethod.name)
                 pullLocation()
             } else {
-                Log.d(Settings.TAG, "toast" + object : Any() {}.javaClass.enclosingMethod.name)
-                Toast.makeText(this, getString(string.ToastPermissionDenied), Toast.LENGTH_SHORT).show();
+                Log.d(Settings.TAG_APP, "toast" + object : Any() {}.javaClass.enclosingMethod.name)
+                Toast.makeText(this, getString(string.ToastPermissionDenied), Toast.LENGTH_SHORT)
+                    .show();
             }
 
 
@@ -173,12 +172,12 @@ class CreateApiaryActivity : AppCompatActivity() {
                     this.latitude = location.latitude;
                     this.longitude = location.longitude;
 
-                    Log.i(Settings.TAG, "Longitude: $longitude, Latitude: $latitude")
+                    Log.i(Settings.TAG_APP, "Longitude: $longitude, Latitude: $latitude")
 //                    tvLocation.text = "$latitude $longitude"
                     etLocationCoordinates.setText("$latitude, $longitude")
 
                 } else {
-                    Log.i(Settings.TAG, "Lokalizacja to null")
+                    Log.i(Settings.TAG_APP, "Lokalizacja to null")
                 }
             })
         } else {
@@ -196,8 +195,12 @@ class CreateApiaryActivity : AppCompatActivity() {
             val date =
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
             if (name == "") {
-                Log.i(Settings.TAG, Date().toString())
-                Toast.makeText(this, getString(string.ToastEmptyNameOfApiary), Toast.LENGTH_SHORT) //todo
+                Log.i(Settings.TAG_APP, Date().toString())
+                Toast.makeText(
+                    this,
+                    getString(string.ToastEmptyNameOfApiary),
+                    Toast.LENGTH_SHORT
+                ) //todo
                     .show()
                 return@setOnClickListener
             }
@@ -215,7 +218,7 @@ class CreateApiaryActivity : AppCompatActivity() {
             val date =
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
             if (name == "") {
-                Log.i(Settings.TAG, Date().toString())
+                Log.i(Settings.TAG_APP, Date().toString())
                 Toast.makeText(this, getString(string.ToastEmptyNameOfApiary), Toast.LENGTH_SHORT)
                     .show()
                 return@setOnClickListener

@@ -11,7 +11,7 @@ import pl.pasiekaradosna.menadzerpasieki.R.layout
 import pl.pasiekaradosna.menadzerpasieki.R.string
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.task.TaskData
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
-import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG_APP
 
 class CreateTaskActivity : AppCompatActivity() {
 
@@ -23,7 +23,7 @@ class CreateTaskActivity : AppCompatActivity() {
 
         hiveId = intent?.getIntExtra("HiveId", -1)!!
 
-        if(hiveId == -1){
+        if (hiveId == -1) {
             throw Exception("Activity has to have hive id!")
 
         }
@@ -37,7 +37,11 @@ class CreateTaskActivity : AppCompatActivity() {
         bTaskCreateSubmit.setOnClickListener {
 
             if (hiveId == -1) {
-                Toast.makeText(this, getString(string.ToastUnableToCreateTaskNoHive), Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    this,
+                    getString(string.ToastUnableToCreateTaskNoHive),
+                    Toast.LENGTH_SHORT
+                )
                     .show()
                 finish()
             } else {
@@ -51,7 +55,7 @@ class CreateTaskActivity : AppCompatActivity() {
                 val result = ApiaryManagerDbHelper(this).insertTask(
                     taskd
                 )
-                Log.d(TAG, "" + result)
+                Log.d(TAG_APP, "" + result)
                 finish()
             }
         }
