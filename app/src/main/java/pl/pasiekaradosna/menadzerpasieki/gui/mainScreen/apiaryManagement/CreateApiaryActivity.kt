@@ -22,22 +22,15 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlinx.android.synthetic.main.activity_create_apiary.*
 import kotlinx.android.synthetic.main.activity_location_test.bGetLocation
+import pl.pasiekaradosna.menadzerpasieki.CustomLocationAppCompatActivity
 import pl.pasiekaradosna.menadzerpasieki.R
 import pl.pasiekaradosna.menadzerpasieki.R.string
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.apiary.ApiaryData
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
 import pl.pasiekaradosna.menadzerpasieki.services.Settings
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.*
 
-class CreateApiaryActivity : AppCompatActivity() {
-
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
-
-    private val locationRequestCode = 1000
-
-    private var latitude = 0.0
-    private var longitude = 0.0
-
-    private var cancellationTokenSource = CancellationTokenSource()
+class CreateApiaryActivity : CustomLocationAppCompatActivity() {
 
     private var apiaryId: Int = -1
     private lateinit var apiaryData: ApiaryData
@@ -61,28 +54,6 @@ class CreateApiaryActivity : AppCompatActivity() {
             apiaryId = apiaryIdWithNull
         }
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ),
-                locationRequestCode
-            )
-            return
-        }
-
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -92,9 +63,8 @@ class CreateApiaryActivity : AppCompatActivity() {
         bGetLocation.setOnClickListener {
             try {
                 pullLocation()
-
             } catch (ex: Exception) {
-                Log.i(Settings.TAG_APP, "Unable to get location")
+                Log.i(TAG_APP, "Unable to get location")
                 Toast.makeText(this, "Unable to get Location!", Toast.LENGTH_SHORT).show()
             }
         }
@@ -112,101 +82,24 @@ class CreateApiaryActivity : AppCompatActivity() {
         }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        Log.d(Settings.TAG_APP, "s " + object : Any() {}.javaClass.enclosingMethod.name)
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        Log.d(Settings.TAG_APP, "" + object : Any() {}.javaClass.enclosingMethod.name)
-        if (requestCode == this.locationRequestCode) {
-
-            // If request is cancelled, the result arrays are empty.
-            if (grantResults.isNotEmpty()
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED
-            ) {
-                Log.d(Settings.TAG_APP, "pull" + object : Any() {}.javaClass.enclosingMethod.name)
-                pullLocation()
-            } else {
-                Log.d(Settings.TAG_APP, "toast" + object : Any() {}.javaClass.enclosingMethod.name)
-                Toast.makeText(this, getString(string.ToastPermissionDenied), Toast.LENGTH_SHORT)
-                    .show();
-            }
-
-
-        }
-    }
-
-
-    private fun pullLocation(): List<String>? {
-//        Log.i(
-//            Settings.TAG,
-//            "true " + (getSystemService(Context.LOCATION_SERVICE) as LocationManager).isProviderEnabled(
-//                LocationManager.GPS_PROVIDER
-//            )
-//        )
-        if ((getSystemService(Context.LOCATION_SERVICE) as LocationManager).isProviderEnabled(
-                LocationManager.GPS_PROVIDER
-            )
-        ) {
-
-            if (ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                return null
-            }
-            // Main code
-            val currentLocationTask: Task<Location> = fusedLocationClient.getCurrentLocation(
-                LocationRequest.PRIORITY_HIGH_ACCURACY,
-                cancellationTokenSource.token
-            )
-
-            currentLocationTask.addOnSuccessListener(this, fun(location) {
-                if (location != null) {
-                    this.latitude = location.latitude;
-                    this.longitude = location.longitude;
-
-                    Log.i(Settings.TAG_APP, "Longitude: $longitude, Latitude: $latitude")
-//                    tvLocation.text = "$latitude $longitude"
-                    etLocationCoordinates.setText("$latitude, $longitude")
-
-                } else {
-                    Log.i(Settings.TAG_APP, "Lokalizacja to null")
-                }
-            })
-        } else {
-            Toast.makeText(this, "Trun on GPS!", Toast.LENGTH_SHORT).show()//todo
-        }
-
-        return listOf(this.latitude.toString(), this.longitude.toString())
-    }
-
-
     private fun setCreateListener() {
         bApiaryCreateSubmit.setOnClickListener {
             val name = etApiaryCreationName.text.toString()
-            val coords = etLocationCoordinates.text.toString()
+            val cords = etLocationCoordinates.text.toString()
             val date =
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
             if (name == "") {
-                Log.i(Settings.TAG_APP, Date().toString())
+                Log.i(TAG_APP, Date().toString())
                 Toast.makeText(
                     this,
                     getString(string.ToastEmptyNameOfApiary),
                     Toast.LENGTH_SHORT
-                ) //todo
+                )
                     .show()
-                return@setOnClickListener
+            } else {
+                ApiaryManagerDbHelper(this).createApiary(ApiaryData(null, name, date, cords))
+                finish()
             }
-
-            ApiaryManagerDbHelper(this).createApiary(ApiaryData(null, name, date, coords))
-            finish()
         }
     }
 
@@ -218,23 +111,21 @@ class CreateApiaryActivity : AppCompatActivity() {
             val date =
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
             if (name == "") {
-                Log.i(Settings.TAG_APP, Date().toString())
+                Log.i(TAG_APP, Date().toString())
                 Toast.makeText(this, getString(string.ToastEmptyNameOfApiary), Toast.LENGTH_SHORT)
                     .show()
-                return@setOnClickListener
-            }
+            } else {
 
-            ApiaryManagerDbHelper(this).updateApiary(ApiaryData(apiaryId, name, date, coords))
-            finish()
+                ApiaryManagerDbHelper(this).updateApiary(ApiaryData(apiaryId, name, date, coords))
+                finish()
+            }
         }
     }
 
     private fun setValuesToView() {
         etApiaryCreationName.setText(apiaryData.name)
         etLocationCoordinates.setText(apiaryData.location)
-
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
