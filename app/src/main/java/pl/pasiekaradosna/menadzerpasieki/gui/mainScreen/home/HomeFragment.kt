@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_home.fcvWeather
+import pl.pasiekaradosna.menadzerpasieki.classes.weather.WeatherService
 import pl.pasiekaradosna.menadzerpasieki.databinding.FragmentHomeBinding
 import pl.pasiekaradosna.menadzerpasieki.gui.WeatherFragment
 
@@ -38,8 +39,14 @@ class HomeFragment : Fragment() {
         super.onStart()
 
         fcvWeather.setOnClickListener {
-            (childFragmentManager.fragments[0] as WeatherFragment)
-                .getAndUpdateWeatherParameters()
+
+            WeatherService.getInstance()
+                .getAndUpdateWeatherParameters(
+                    "52.12257",
+                    "20.44369",
+                    (childFragmentManager.fragments[0] as WeatherFragment)::updateView
+                )
+            //todo do zmiany
         }
 
     }
