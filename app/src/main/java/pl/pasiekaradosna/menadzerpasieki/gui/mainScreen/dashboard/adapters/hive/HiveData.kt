@@ -8,11 +8,11 @@ data class HiveData(
     var apiaryId: Int,
     var queenBreed: String,
     var queenBirthDate: String
-){
+) {
     fun mapToValues(): ContentValues {
         val values = ContentValues()
-        if(id!=null && id !=-1){
-            values.put("id",id)
+        if (id != null && id != -1) {
+            values.put("id", id)
         }
         values.put("name", name)
         values.put("apiary_id", apiaryId)

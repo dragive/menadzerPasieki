@@ -24,7 +24,11 @@ class TaskAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         return TaskViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(pl.pasiekaradosna.menadzerpasieki.R.layout.fragment_task_item, parent, false)
+                .inflate(
+                    pl.pasiekaradosna.menadzerpasieki.R.layout.fragment_task_item,
+                    parent,
+                    false
+                )
         )
     }
 
@@ -34,23 +38,23 @@ class TaskAdapter(
         holder.itemView.apply {
             this.setOnLongClickListener {
                 ApiaryManagerDbHelper(context).deleteTask(element.id!!)
-                elements = (ArrayList(elements).stream().filter{it.id != element.id!!} ).collect(
-                    Collectors.toList())
+                elements = (ArrayList(elements).stream().filter { it.id != element.id!! }).collect(
+                    Collectors.toList()
+                )
 
                 notifyDataSetChanged()
-                Toast.makeText(context,context.getString(string.ToastCompletedTask),Toast.LENGTH_SHORT).show()
-
+                Toast.makeText(
+                    context,
+                    context.getString(string.ToastCompletedTask),
+                    Toast.LENGTH_SHORT
+                ).show()
                 true
-
             }
-
-
 
             tvFragmentTaskItemName.text = element.name
             tvFragmentTaskItemNameOfHive.text =
                 ApiaryManagerDbHelper(context).getHiveById(element.hiveId)?.name
             tvFragmentTaskItemDesc.text = element.description
-
 
         }
     }

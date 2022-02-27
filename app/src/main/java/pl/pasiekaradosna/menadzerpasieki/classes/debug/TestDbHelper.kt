@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import pl.pasiekaradosna.menadzerpasieki.services.Settings
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_USERS_OLD
-import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG_APP
 
 
 class TestDbHelper(context: Context) : SQLiteOpenHelper(context,
@@ -39,14 +39,14 @@ class TestDbHelper(context: Context) : SQLiteOpenHelper(context,
                     ")"
             sQLiteDatabase?.execSQL(sql)
 
-            Log.i(TAG,sQLiteDatabase.toString())
+            Log.i(TAG_APP,sQLiteDatabase.toString())
             val sqlInsert = "insert into $TABLE_USERS_OLD (" +
                     "field " +
                     ")" +
                     "values (" + "\'123\'" + ")"
             sQLiteDatabase?.execSQL(sqlInsert)
         }catch(ex : Exception){
-            Log.e(TAG,"onCreate",ex)
+            Log.e(TAG_APP,"onCreate",ex)
         }
     }
     fun readAllUsers():List<String >?{
@@ -62,7 +62,7 @@ class TestDbHelper(context: Context) : SQLiteOpenHelper(context,
             cursor = db.rawQuery(selectQuery, null)
         }catch (e: SQLiteException) {
 //            db.execSQL(selectQuery)
-            Log.e(TAG,"rawQuery",e)
+            Log.e(TAG_APP,"rawQuery",e)
             return null
         }
         with(cursor) {
@@ -85,10 +85,10 @@ class TestDbHelper(context: Context) : SQLiteOpenHelper(context,
         values.put("field",field)
         try{
             this.writableDatabase.insert(TABLE_USERS_OLD,null, values)
-            Log.i(TAG,"Inserted Values")
+            Log.i(TAG_APP,"Inserted Values")
         }
         catch (ex:Exception){
-            Log.e(TAG,"Error inserting",ex)
+            Log.e(TAG_APP,"Error inserting",ex)
         }
     }
 

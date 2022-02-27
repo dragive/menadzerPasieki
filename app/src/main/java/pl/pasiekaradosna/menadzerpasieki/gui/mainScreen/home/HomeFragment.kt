@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
 
         fcvWeather.setOnClickListener {
             (childFragmentManager.fragments[0] as WeatherFragment)
-            .getAndUpdateWeatherParameters()
+                .getAndUpdateWeatherParameters()
         }
 
     }

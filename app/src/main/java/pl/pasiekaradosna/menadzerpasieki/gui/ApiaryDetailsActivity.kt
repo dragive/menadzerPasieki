@@ -21,7 +21,7 @@ import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.ApiaryItemFrag
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.hive.HiveAdapter
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.hive.CreateHiveActivity
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
-import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG_APP
 
 class ApiaryDetailsActivity : AppCompatActivity() {
 
@@ -71,7 +71,7 @@ class ApiaryDetailsActivity : AppCompatActivity() {
 
                 startActivity(intent)
             } catch (err: Exception) {
-                Log.e(TAG, "ERROR while goinf to CreateHiveActivity", err)
+                Log.e(TAG_APP, "ERROR while goinf to CreateHiveActivity", err)
             }
         }
 
@@ -106,8 +106,6 @@ class ApiaryDetailsActivity : AppCompatActivity() {
         }
 
         bApiaryDetailsEdit.setOnClickListener {
-            Log.d(TAG, "bApiaryDetailsEdit")
-            Log.d(TAG, "apiary!!.id!! " + apiary!!.id!!)
             val intent = Intent(this, CreateApiaryActivity::class.java)
             intent.putExtra("ApiaryId", apiary!!.id!!)
             startActivity(intent)

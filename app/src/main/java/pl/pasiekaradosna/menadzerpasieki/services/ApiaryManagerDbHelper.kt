@@ -23,7 +23,7 @@ import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_TASK
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_TASK_OLD
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_TASK_TYPE
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_USERS_OLD
-import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG_APP
 
 
 class ApiaryManagerDbHelper(context: Context) :
@@ -52,15 +52,15 @@ class ApiaryManagerDbHelper(context: Context) :
     private fun executeQueriesNoEx(sqlList: List<String>) {
         try {
             sqlList.forEach { sql ->
-                Log.d(TAG, "sql executed: $sql")
+                Log.d(TAG_APP, "sql executed: $sql")
 
                 sQLiteDatabase?.execSQL(sql)
 
-                Log.d(TAG, "DONE")
+                Log.d(TAG_APP, "DONE")
             }
 
         } catch (ex: Exception) {
-            Log.e(TAG, "onCreate databease", ex)
+            Log.e(TAG_APP, "onCreate databease", ex)
         }
     }
 
@@ -212,18 +212,18 @@ class ApiaryManagerDbHelper(context: Context) :
         values.put("field", field)
         try {
             this.writableDatabase.insert(TABLE_APIARIES_OLD, null, values)
-            Log.i(TAG, "Inserted Values")
+            Log.i(TAG_APP, "Inserted Values")
         } catch (ex: Exception) {
-            Log.e(TAG, "Error inserting", ex)
+            Log.e(TAG_APP, "Error inserting", ex)
         }
     }
 
     fun createApiary(apiaryData: ApiaryData) {
         try {
             this.writableDatabase.insert(TABLE_APIARIES_OLD, null, apiaryData.mapToValues())
-            Log.i(TAG, "Inserted Values")
+            Log.i(TAG_APP, "Inserted Values")
         } catch (ex: Exception) {
-            Log.e(TAG, "Error inserting", ex)
+            Log.e(TAG_APP, "Error inserting", ex)
         }
     }
 
@@ -236,9 +236,9 @@ class ApiaryManagerDbHelper(context: Context) :
                 "id=?",
                 arrayOf(apiaryData.id.toString())
             )
-            Log.i(TAG, "Inserted Values")
+            Log.i(TAG_APP, "Inserted Values")
         } catch (ex: Exception) {
-            Log.e(TAG, "Error inserting", ex)
+            Log.e(TAG_APP, "Error inserting", ex)
         }
     }
 
@@ -250,9 +250,9 @@ class ApiaryManagerDbHelper(context: Context) :
                 "id=?",
                 arrayOf(hiveData.id.toString())
             )
-            Log.i(TAG, "Inserted Values")
+            Log.i(TAG_APP, "Inserted Values")
         } catch (ex: Exception) {
-            Log.e(TAG, "Error inserting", ex)
+            Log.e(TAG_APP, "Error inserting", ex)
         }
     }
 
@@ -270,7 +270,7 @@ class ApiaryManagerDbHelper(context: Context) :
         try {
             cursor = db.rawQuery(selectQuery, null)
         } catch (e: SQLiteException) {
-            Log.e(TAG, "Select all apiaries error\n", e)
+            Log.e(TAG_APP, "Select all apiaries error\n", e)
             return null
         }
         with(cursor) {
@@ -308,7 +308,7 @@ class ApiaryManagerDbHelper(context: Context) :
         try {
             cursor = db.rawQuery(selectQuery, null)
         } catch (e: SQLiteException) {
-            Log.e(TAG, "Select  apiaries error\n", e)
+            Log.e(TAG_APP, "Select  apiaries error\n", e)
             return null
         }
         with(cursor) {
@@ -346,7 +346,7 @@ class ApiaryManagerDbHelper(context: Context) :
         try {
             cursor = db.rawQuery(selectQuery, null)
         } catch (e: SQLiteException) {
-            Log.e(TAG, "Select all apiaries error\n", e)
+            Log.e(TAG_APP, "Select all apiaries error\n", e)
             return null
         }
         with(cursor) {
@@ -392,7 +392,7 @@ class ApiaryManagerDbHelper(context: Context) :
         try {
             cursor = db.rawQuery(selectQuery, null)
         } catch (e: SQLiteException) {
-            Log.e(TAG, "Select all hives error\n", e)
+            Log.e(TAG_APP, "Select all hives error\n", e)
             return null
         }
         with(cursor) {
@@ -439,7 +439,7 @@ class ApiaryManagerDbHelper(context: Context) :
         try {
             cursor = db.rawQuery(selectQuery, null)
         } catch (e: SQLiteException) {
-            Log.e(TAG, "Select all hives error\n", e)
+            Log.e(TAG_APP, "Select all hives error\n", e)
             return null
         }
         with(cursor) {
@@ -486,7 +486,7 @@ class ApiaryManagerDbHelper(context: Context) :
         try {
             cursor = db.rawQuery(selectQuery, null)
         } catch (e: SQLiteException) {
-            Log.e(TAG, "Select all hives error\n", e)
+            Log.e(TAG_APP, "Select all hives error\n", e)
             return null
         }
         with(cursor) {
@@ -543,7 +543,7 @@ class ApiaryManagerDbHelper(context: Context) :
         try {
             cursor = db.rawQuery(selectQuery, null)
         } catch (e: SQLiteException) {
-            Log.e(TAG, "Select all hives error\n", e)
+            Log.e(TAG_APP, "Select all hives error\n", e)
             return -1
         }
         with(cursor) {
@@ -573,7 +573,7 @@ class ApiaryManagerDbHelper(context: Context) :
         try {
             cursor = db.rawQuery(selectQuery, null)
         } catch (e: SQLiteException) {
-            Log.e(TAG, "Select all apiaries error\n", e)
+            Log.e(TAG_APP, "Select all apiaries error\n", e)
             return -1
         }
         with(cursor) {
@@ -603,7 +603,7 @@ class ApiaryManagerDbHelper(context: Context) :
         try {
             cursor = db.rawQuery(selectQuery, null)
         } catch (e: SQLiteException) {
-            Log.e(TAG, "Select all TASK error\n", e)
+            Log.e(TAG_APP, "Select all TASK error\n", e)
             return -1
         }
         with(cursor) {
@@ -618,14 +618,14 @@ class ApiaryManagerDbHelper(context: Context) :
     }
 
     fun insertHive(hiveData: HiveData): Boolean {
-        Log.d(TAG, "hives list in DB:" + this.getAllHivesByApiaryId(hiveData.apiaryId))
+        Log.d(TAG_APP, "hives list in DB:" + this.getAllHivesByApiaryId(hiveData.apiaryId))
         try {
 
             val r = this.writableDatabase.insert(TABLE_HIVES_OLD, null, hiveData.mapToValues())
-            Log.i(TAG, "Inserted Values?")
+            Log.i(TAG_APP, "Inserted Values?")
             return r != -1L
         } catch (ex: Exception) {
-            Log.e(TAG, "Error inserting", ex)
+            Log.e(TAG_APP, "Error inserting", ex)
             return false
         }
 
@@ -641,10 +641,10 @@ class ApiaryManagerDbHelper(context: Context) :
                     TABLE_TASK_OLD, null,
                     taskData.mapToValues()
                 )
-            Log.i(TAG, "Inserted Values?")
+            Log.i(TAG_APP, "Inserted Values?")
             return r != -1L
         } catch (ex: Exception) {
-            Log.e(TAG, "Error inserting", ex)
+            Log.e(TAG_APP, "Error inserting", ex)
             return false
         }
 
@@ -659,7 +659,7 @@ class ApiaryManagerDbHelper(context: Context) :
 
             b = 1 <= affectedRows
         } catch (err: Exception) {
-            Log.e(TAG, "Error while deleting from $TABLE_APIARIES_OLD id $apiaryId! err: ", err)
+            Log.e(TAG_APP, "Error while deleting from $TABLE_APIARIES_OLD id $apiaryId! err: ", err)
         }
         return b
     }
@@ -674,7 +674,7 @@ class ApiaryManagerDbHelper(context: Context) :
 
             b = 1 <= affectedRows
         } catch (err: Exception) {
-            Log.e(TAG, "Error while deleting from $TABLE_HIVES_OLD id $hiveId! err: ", err)
+            Log.e(TAG_APP, "Error while deleting from $TABLE_HIVES_OLD id $hiveId! err: ", err)
         }
         return b
     }
@@ -689,7 +689,7 @@ class ApiaryManagerDbHelper(context: Context) :
 
             b = 1 <= affectedRows
         } catch (err: Exception) {
-            Log.e(TAG, "Error while deleting from $TABLE_TASK_OLD id $taskId! err: ", err)
+            Log.e(TAG_APP, "Error while deleting from $TABLE_TASK_OLD id $taskId! err: ", err)
         }
         return b
     }

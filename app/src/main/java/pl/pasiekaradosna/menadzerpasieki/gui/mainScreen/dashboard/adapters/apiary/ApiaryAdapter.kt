@@ -13,12 +13,11 @@ import kotlinx.android.synthetic.main.fragment_apiary_item.view.tvHivesNumber
 import pl.pasiekaradosna.menadzerpasieki.R
 import pl.pasiekaradosna.menadzerpasieki.gui.ApiaryDetailsActivity
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
-import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG_APP
 
 class ApiaryAdapter(
     private val elements: List<ApiaryData>
 ) : RecyclerView.Adapter<ApiaryAdapter.ApiaryViewHolder>() {
-
 
     class ApiaryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -40,13 +39,14 @@ class ApiaryAdapter(
             tvApiaryLocation.text = element.location
 
             this.setOnClickListener {
-                try{val intent = Intent(context, ApiaryDetailsActivity::class.java)
-                val bundle = Bundle()
-                bundle.putInt("ApiaryId", elements[position].id!!)
-                intent.putExtras(bundle)
-                context.startActivity(intent)}
-                catch (err:Exception){
-                    Log.e(TAG,"ERROR while apiary activity details", err)
+                try {
+                    val intent = Intent(context, ApiaryDetailsActivity::class.java)
+                    val bundle = Bundle()
+                    bundle.putInt("ApiaryId", elements[position].id!!)
+                    intent.putExtras(bundle)
+                    context.startActivity(intent)
+                } catch (err: Exception) {
+                    Log.e(TAG_APP, "Error while lunching activity with apiary details", err)
                 }
             }
         }
