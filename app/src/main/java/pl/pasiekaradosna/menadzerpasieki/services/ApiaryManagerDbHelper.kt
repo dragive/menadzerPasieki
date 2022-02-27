@@ -12,11 +12,17 @@ import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.hive.
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.task.TaskData
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.DATABASE_NAME
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.DATABASE_VERSION
-import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_APIARIES
-import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_HIVES
-import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_HIVES_AND_TASKS
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_APIARIES_OLD
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_APIARY
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_HIVE
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_HIVES_AND_TASKS_OLD
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_HIVES_OLD
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_QUEEN
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_QUEEN_BREED
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_TASK
-import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_USERS
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_TASK_OLD
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_TASK_TYPE
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_USERS_OLD
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
 
 
@@ -39,85 +45,11 @@ class ApiaryManagerDbHelper(context: Context) :
 
     private fun createTable(db: SQLiteDatabase?) {
         sQLiteDatabase = db
-        val sqlList = ArrayList<String>()
-        sqlList.add(
-            """CREATE TABLE $TABLE_APIARIES (
-                id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                date_of_creation TEXT,
-                location TEXT
-            );"""
-        )
+        val sqlList = getListOfQueries();
+        executeQueriesNoEx(sqlList)
+    }
 
-        sqlList.add(
-            """
-            CREATE TABLE $TABLE_HIVES (
-            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            apiary_id INTEGER,
-            queen_bread TEXT,
-            queen_birth_date TEXT
-            );"""
-        )
-
-
-        sqlList.add(
-            """CREATE TABLE $TABLE_TASK (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            description text not null,
-            hive_id INTEGER NOT NULL
-
-            );"""
-        )
-        /*
-                    duration NUMERIC,
-            due_date TEXT
-         */
-        sqlList.add(
-            """CREATE TABLE $TABLE_HIVES_AND_TASKS (
-            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-            complete INTEGER DEFAULT 0,
-            hive_id INTEGER NOT NULL,
-            task_id INTEGER NOT NULL
-            );"""
-        )
-        sqlList.add(
-            """
-            INSERT INTO Apiaries
-            (name, date_of_creation, location)
-            VALUES( 'nazwa2', 'today1', '4');
-            """
-        )
-        sqlList.add(
-            """
-            INSERT INTO Apiaries
-            (name, date_of_creation, location)
-            VALUES('nazwa3', 'today2', '333');"""
-        )
-        sqlList.add(
-            """
-            INSERT INTO Apiaries
-            ( name, date_of_creation, location)
-            VALUES('nazwa4', 'today3', 'there22');"""
-        )
-        sqlList.add(
-            """
-            INSERT INTO Apiaries
-            ( name, date_of_creation, location)
-            VALUES( 'nazwa5', 'today4', '2');"""
-        )
-        sqlList.add(
-            """
-            INSERT INTO Apiaries
-            ( name, date_of_creation, location)
-            VALUES('nazwa6', 'today5', '11');
-        """.trimIndent()
-        )
-//        sqlList.add("""""")
-//        sqlList.add("""""")
-
-
+    private fun executeQueriesNoEx(sqlList: List<String>) {
         try {
             sqlList.forEach { sql ->
                 Log.d(TAG, "sql executed: $sql")
@@ -128,30 +60,149 @@ class ApiaryManagerDbHelper(context: Context) :
             }
 
         } catch (ex: Exception) {
-            Log.e(TAG, "onCreate", ex)
+            Log.e(TAG, "onCreate databease", ex)
         }
     }
 
+    private fun getListOfQueries(): List<String> {
+        val sqlList = ArrayList<String>()
+        sqlList.add(
+            """
+            CREATE TABLE $TABLE_APIARY (
+            	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            	name TEXT NOT NULL,
+            	date_of_creation TEXT NOT NULL,
+            	date_of_last_modification TEXT,
+            	location TEXT,
+            	humidity INTEGER,
+            	sun_exposure INTEGER,
+            	deleted INTEGER
+            );
+            """.trimIndent()
+        )
+        sqlList.add(
+            """
+            CREATE TABLE $TABLE_HIVE (
+            	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            	name TEXT NOT NULL,
+            	date_of_creation TEXT NOT NULL,
+            	date_of_last_modification TEXT,
+            	queen_id text,
+            	size_of_hive integer,
+            	deleted Integer
+            );
+            """.trimIndent()
+        )
+        sqlList.add(
+            """
+            CREATE TABLE $TABLE_QUEEN_BREED (
+            	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            	name TEXT NOT NULL,
+            	date_of_creation TEXT NOT NULL,
+            	date_of_last_modification TEXT,
+            	description BLOB,
+            	rating Integer,
+            	deleted Integer
+            );
+            """.trimIndent()
+        )
+        sqlList.add(
+            """
+            create table $TABLE_QUEEN (
+                id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            	name TEXT NOT NULL,
+            	date_of_creation TEXT NOT NULL,
+            	date_of_last_modification TEXT,
+            	queen_breed_id integer,
+            	birth_date text
+            );
+            """.trimIndent()
+        )
+        sqlList.add(
+            """
+            CREATE TABLE $TABLE_TASK (
+            	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            	name TEXT NOT NULL,
+            	date_of_creation TEXT NOT NULL,
+            	date_of_last_modification TEXT,
+            	description BLOB,
+            	priority Integer,
+            	type_id Integer,
+            	status Integer,
+            	deadline Text
+            );
+            """.trimIndent()
+        )
+        sqlList.add(
+            """
+            CREATE TABLE $TABLE_TASK_TYPE (
+            	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            	name TEXT NOT NULL,
+            	date_of_creation TEXT NOT NULL,
+            	date_of_last_modification TEXT,
+            	description BLOB,
+            	predefined Integer
+            );
+        """.trimIndent()
+        )
+        return sqlList;
+    }
+
     fun dropTables() {
+
         sQLiteDatabase = this.writableDatabase
+        dropOldTables()
+
+
+        dropNewTables()
+    }
+
+    private fun dropOldTables() {
         try {
-            sQLiteDatabase?.execSQL("""drop table $TABLE_APIARIES""")
+            sQLiteDatabase?.execSQL("""drop table $TABLE_APIARIES_OLD""")
         } catch (ex: Exception) {
         }
         try {
-            sQLiteDatabase?.execSQL("""drop table $TABLE_HIVES""")
+            sQLiteDatabase?.execSQL("""drop table $TABLE_HIVES_OLD""")
         } catch (ex: Exception) {
         }
         try {
-            sQLiteDatabase?.execSQL("""drop table $TABLE_HIVES_AND_TASKS""")
+            sQLiteDatabase?.execSQL("""drop table $TABLE_HIVES_AND_TASKS_OLD""")
         } catch (ex: Exception) {
         }
         try {
-            sQLiteDatabase?.execSQL("""drop TABLE $TABLE_USERS""")
+            sQLiteDatabase?.execSQL("""drop TABLE $TABLE_USERS_OLD""")
+        } catch (ex: Exception) {
+        }
+        try {
+            sQLiteDatabase?.execSQL("""drop TABLE $TABLE_TASK_OLD""")
+        } catch (ex: Exception) {
+        }
+    }
+
+    private fun dropNewTables() {
+        try {
+            sQLiteDatabase?.execSQL("""drop TABLE $TABLE_TASK_TYPE""")
         } catch (ex: Exception) {
         }
         try {
             sQLiteDatabase?.execSQL("""drop TABLE $TABLE_TASK""")
+        } catch (ex: Exception) {
+        }
+        try {
+            sQLiteDatabase?.execSQL("""drop TABLE $TABLE_QUEEN""")
+        } catch (ex: Exception) {
+        }
+        try {
+            sQLiteDatabase?.execSQL("""drop TABLE  $TABLE_QUEEN_BREED""")
+        } catch (ex: Exception) {
+        }
+        try {
+            sQLiteDatabase?.execSQL("""drop TABLE $TABLE_HIVE""")
+        } catch (ex: Exception) {
+        }
+        try {
+            sQLiteDatabase?.execSQL("""drop TABLE $TABLE_APIARY""")
         } catch (ex: Exception) {
         }
     }
@@ -160,7 +211,7 @@ class ApiaryManagerDbHelper(context: Context) :
         val values = ContentValues()
         values.put("field", field)
         try {
-            this.writableDatabase.insert(TABLE_APIARIES, null, values)
+            this.writableDatabase.insert(TABLE_APIARIES_OLD, null, values)
             Log.i(TAG, "Inserted Values")
         } catch (ex: Exception) {
             Log.e(TAG, "Error inserting", ex)
@@ -169,7 +220,7 @@ class ApiaryManagerDbHelper(context: Context) :
 
     fun createApiary(apiaryData: ApiaryData) {
         try {
-            this.writableDatabase.insert(TABLE_APIARIES, null, apiaryData.mapToValues())
+            this.writableDatabase.insert(TABLE_APIARIES_OLD, null, apiaryData.mapToValues())
             Log.i(TAG, "Inserted Values")
         } catch (ex: Exception) {
             Log.e(TAG, "Error inserting", ex)
@@ -180,7 +231,7 @@ class ApiaryManagerDbHelper(context: Context) :
     fun updateApiary(apiaryData: ApiaryData) {
         try {
             this.writableDatabase.update(
-                TABLE_APIARIES,
+                TABLE_APIARIES_OLD,
                 apiaryData.mapToValues(),
                 "id=?",
                 arrayOf(apiaryData.id.toString())
@@ -194,7 +245,7 @@ class ApiaryManagerDbHelper(context: Context) :
     fun updateHive(hiveData: HiveData) {
         try {
             this.writableDatabase.update(
-                TABLE_HIVES,
+                TABLE_HIVES_OLD,
                 hiveData.mapToValues(),
                 "id=?",
                 arrayOf(hiveData.id.toString())
@@ -209,7 +260,7 @@ class ApiaryManagerDbHelper(context: Context) :
         val db = this.readableDatabase
 
         val selectQuery = """
-            SELECT id, name, date_of_creation, location FROM $TABLE_APIARIES
+            SELECT id, name, date_of_creation, location FROM $TABLE_APIARIES_OLD
             """.trimIndent()
 
         val apiaryList = ArrayList<ApiaryData>()
@@ -243,13 +294,11 @@ class ApiaryManagerDbHelper(context: Context) :
     }
 
 
-
-
     fun getAllTasks(): List<TaskData>? {
         val db = this.readableDatabase
 
         val selectQuery = """
-            SELECT id, name, description, hive_id FROM $TABLE_TASK
+            SELECT id, name, description, hive_id FROM $TABLE_TASK_OLD
             """.trimIndent()
 
         val taskList = ArrayList<TaskData>()
@@ -286,7 +335,7 @@ class ApiaryManagerDbHelper(context: Context) :
         val db = this.readableDatabase
 
         val selectQuery = """
-            SELECT id, name, date_of_creation, location FROM $TABLE_APIARIES
+            SELECT id, name, date_of_creation, location FROM $TABLE_APIARIES_OLD
              where id = $id
             """.trimIndent()
 
@@ -331,7 +380,7 @@ class ApiaryManagerDbHelper(context: Context) :
             apiary_id,
             queen_bread,
             queen_birth_date 
-            FROM $TABLE_HIVES
+            FROM $TABLE_HIVES_OLD
             where apiary_id = $apiaryId 
             """.trimIndent() //FIXME zmiana na BREED zamiast BREAD
 
@@ -379,7 +428,7 @@ class ApiaryManagerDbHelper(context: Context) :
             apiary_id,
             queen_bread,
             queen_birth_date 
-            FROM $TABLE_HIVES
+            FROM $TABLE_HIVES_OLD
             """.trimIndent() //FIXME zmiana na BREED zamiast BREAD
 
 
@@ -425,7 +474,7 @@ class ApiaryManagerDbHelper(context: Context) :
             apiary_id,
             queen_bread,
             queen_birth_date 
-            FROM $TABLE_HIVES
+            FROM $TABLE_HIVES_OLD
             where id = $hiveId 
             """.trimIndent() //FIXME zmiana na BREED zamiast BREAD
 
@@ -477,13 +526,13 @@ class ApiaryManagerDbHelper(context: Context) :
             selectQuery = """
                 SELECT             
                 count(1) c
-                FROM $TABLE_HIVES
+                FROM $TABLE_HIVES_OLD
                 """.trimIndent() //FIXME zmiana w deklaracji na BREED zamiast BREAD
         } else {
             selectQuery = """
                 SELECT             
                 count(1) c
-                FROM $TABLE_HIVES
+                FROM $TABLE_HIVES_OLD
                 where apiary_id = $apiaryId
                 """.trimIndent()
         }
@@ -509,14 +558,13 @@ class ApiaryManagerDbHelper(context: Context) :
     }
 
 
-
     fun countApiaries(): Int {
         val db = this.readableDatabase
 
         var selectQuery: String = """
                 SELECT             
                 count(1) c
-                FROM $TABLE_APIARIES
+                FROM $TABLE_APIARIES_OLD
                 """.trimIndent()
         val cursor: Cursor?
 
@@ -540,14 +588,13 @@ class ApiaryManagerDbHelper(context: Context) :
     }
 
 
-
     fun countTasks(): Int {
         val db = this.readableDatabase
 
         var selectQuery: String = """
                 SELECT             
                 count(1) c
-                FROM $TABLE_TASK
+                FROM $TABLE_TASK_OLD
                 """.trimIndent()
         val cursor: Cursor?
 
@@ -574,7 +621,7 @@ class ApiaryManagerDbHelper(context: Context) :
         Log.d(TAG, "hives list in DB:" + this.getAllHivesByApiaryId(hiveData.apiaryId))
         try {
 
-            val r = this.writableDatabase.insert(TABLE_HIVES, null, hiveData.mapToValues())
+            val r = this.writableDatabase.insert(TABLE_HIVES_OLD, null, hiveData.mapToValues())
             Log.i(TAG, "Inserted Values?")
             return r != -1L
         } catch (ex: Exception) {
@@ -590,8 +637,10 @@ class ApiaryManagerDbHelper(context: Context) :
         try {
 
             val r = this.writableDatabase
-                .insert(TABLE_TASK, null,
-                    taskData.mapToValues())
+                .insert(
+                    TABLE_TASK_OLD, null,
+                    taskData.mapToValues()
+                )
             Log.i(TAG, "Inserted Values?")
             return r != -1L
         } catch (ex: Exception) {
@@ -606,11 +655,11 @@ class ApiaryManagerDbHelper(context: Context) :
         try {
             val args = Array(1) { apiaryId.toString() }
             val affectedRows =
-                this.writableDatabase.delete(TABLE_APIARIES, "id=?", args)
+                this.writableDatabase.delete(TABLE_APIARIES_OLD, "id=?", args)
 
             b = 1 <= affectedRows
         } catch (err: Exception) {
-            Log.e(TAG, "Error while deleting from $TABLE_APIARIES id $apiaryId! err: ", err)
+            Log.e(TAG, "Error while deleting from $TABLE_APIARIES_OLD id $apiaryId! err: ", err)
         }
         return b
     }
@@ -621,11 +670,11 @@ class ApiaryManagerDbHelper(context: Context) :
         try {
             val args = Array(1) { hiveId.toString() }
             val affectedRows =
-                this.writableDatabase.delete(TABLE_HIVES, "id=?", args)
+                this.writableDatabase.delete(TABLE_HIVES_OLD, "id=?", args)
 
             b = 1 <= affectedRows
         } catch (err: Exception) {
-            Log.e(TAG, "Error while deleting from $TABLE_HIVES id $hiveId! err: ", err)
+            Log.e(TAG, "Error while deleting from $TABLE_HIVES_OLD id $hiveId! err: ", err)
         }
         return b
     }
@@ -636,11 +685,11 @@ class ApiaryManagerDbHelper(context: Context) :
         try {
             val args = Array(1) { taskId.toString() }
             val affectedRows =
-                this.writableDatabase.delete(TABLE_TASK, "id=?", args)
+                this.writableDatabase.delete(TABLE_TASK_OLD, "id=?", args)
 
             b = 1 <= affectedRows
         } catch (err: Exception) {
-            Log.e(TAG, "Error while deleting from $TABLE_TASK id $taskId! err: ", err)
+            Log.e(TAG, "Error while deleting from $TABLE_TASK_OLD id $taskId! err: ", err)
         }
         return b
     }

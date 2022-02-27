@@ -9,11 +9,19 @@ public abstract class Settings {
     public static final String TAG = "menadzerPasieki";
 
 
-    public static final String TABLE_APIARIES = "Apiaries";
-    public static final String TABLE_HIVES = "Hive";
-    public static final String TABLE_USERS = "users";
-    public static final String TABLE_TASK = "Task";
-    public static final String TABLE_HIVES_AND_TASKS = "Hives_tasks";
+    public static final String TABLE_APIARIES_OLD = "Apiary";
+    public static final String TABLE_HIVES_OLD = "Hive";
+    public static final String TABLE_USERS_OLD = "Users";
+    public static final String TABLE_TASK_OLD = "Task";
+    public static final String TABLE_HIVES_AND_TASKS_OLD = "Hives_tasks";
+
+
+    public static final String TABLE_TASK_TYPE  = "Task_Type";
+    public static final String TABLE_TASK  = "Task";
+    public static final String TABLE_QUEEN  = "Queen";
+    public static final String TABLE_QUEEN_BREED  = "Queen_Breed";
+    public static final String TABLE_HIVE  = "Hive";
+    public static final String TABLE_APIARY  = "Apiary";
 
 
     public static final String WIND_SPEED_UNIT = "m/s";

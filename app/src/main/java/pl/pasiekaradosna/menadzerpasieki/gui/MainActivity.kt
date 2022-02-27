@@ -32,8 +32,6 @@ class MainActivity : AppCompatActivity() {
 
         elementAdapter = ElementAdapter(mutableListOf(Element("123"),Element("123"),Element("123"),Element("123"),Element("123")))
 
-
-
         rvMenu.adapter = elementAdapter
 
         rvMenu.layoutManager = LinearLayoutManager(this)
@@ -92,8 +90,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
-
         bClearDb2.setOnClickListener{
             var bError = false
             try{
@@ -130,10 +126,11 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-        var req = intent?.getIntExtra("LUNCH",-1)
-            if(req == null || req == -1){
-                finish()
-                startActivity(Intent(this,MainScreenActivity::class.java))
-            }
+        // do produkcji
+//        val req = intent?.getIntExtra("LUNCH",-1)
+//            if(req == null || req == -1){
+//                finish()
+//                startActivity(Intent(this,MainScreenActivity::class.java))
+//            }
     }
 }

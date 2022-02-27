@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import pl.pasiekaradosna.menadzerpasieki.services.Settings
-import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_USERS
+import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_USERS_OLD
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG
 
 
@@ -33,14 +33,14 @@ class TestDbHelper(context: Context) : SQLiteOpenHelper(context,
     private fun createTable(db: SQLiteDatabase?){
         sQLiteDatabase = db
         try{
-            val sql = "Create Table $TABLE_USERS (" +
+            val sql = "Create Table $TABLE_USERS_OLD (" +
                     "id integer primary key autoincrement," +
                     "field varchar(255)" +
                     ")"
             sQLiteDatabase?.execSQL(sql)
 
             Log.i(TAG,sQLiteDatabase.toString())
-            val sqlInsert = "insert into $TABLE_USERS (" +
+            val sqlInsert = "insert into $TABLE_USERS_OLD (" +
                     "field " +
                     ")" +
                     "values (" + "\'123\'" + ")"
@@ -52,7 +52,7 @@ class TestDbHelper(context: Context) : SQLiteOpenHelper(context,
     fun readAllUsers():List<String >?{
         sQLiteDatabase = this.writableDatabase
         val selectQuery = """
-            SELECT field FROM $TABLE_USERS
+            SELECT field FROM $TABLE_USERS_OLD
             """.trimIndent()
         val empList:ArrayList<String > = ArrayList<String >()
         val db = this.readableDatabase
@@ -77,14 +77,14 @@ class TestDbHelper(context: Context) : SQLiteOpenHelper(context,
 
     fun deleteTable(){
         sQLiteDatabase = this.writableDatabase
-        sQLiteDatabase?.execSQL("""drop table $TABLE_USERS""")
+        sQLiteDatabase?.execSQL("""drop table $TABLE_USERS_OLD""")
     }
 
     fun insertValue(field:String){
         val values = ContentValues()
         values.put("field",field)
         try{
-            this.writableDatabase.insert(TABLE_USERS,null, values)
+            this.writableDatabase.insert(TABLE_USERS_OLD,null, values)
             Log.i(TAG,"Inserted Values")
         }
         catch (ex:Exception){
