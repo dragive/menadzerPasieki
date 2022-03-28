@@ -22,7 +22,7 @@ import okhttp3.Request
 import okhttp3.Response
 import org.json.JSONObject
 import pl.pasiekaradosna.menadzerpasieki.R
-import pl.pasiekaradosna.menadzerpasieki.classes.weather.WeatherData
+import pl.pasiekaradosna.menadzerpasieki.classes.data.WeatherData
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.AIR_TEMPERATURE_UNIT
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.CLOUD_AREA_UNIT
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG_APP

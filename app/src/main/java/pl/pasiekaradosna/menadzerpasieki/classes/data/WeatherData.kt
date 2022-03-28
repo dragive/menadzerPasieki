@@ -1,4 +1,4 @@
-package pl.pasiekaradosna.menadzerpasieki.classes.weather
+package pl.pasiekaradosna.menadzerpasieki.classes.data
 
 import org.json.JSONObject
 
