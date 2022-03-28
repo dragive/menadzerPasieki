@@ -32,19 +32,19 @@
 
         >
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fcvWeather"
-            android:name="pl.pasiekaradosna.menadzerpasieki.gui.WeatherFragment"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/shape_border_white"
-            android:clickable="false"
+<!--        <androidx.fragment.app.FragmentContainerView-->
+<!--            android:id="@+id/fcvWeather"-->
+<!--            android:name="pl.pasiekaradosna.menadzerpasieki.gui.WeatherFragment"-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:background="@drawable/shape_border_white"-->
+<!--            android:clickable="false"-->
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout="@layout/fragment_weather" />
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            tools:layout="@layout/fragment_weather" />-->
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fcvSummary"
@@ -57,8 +57,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fcvWeather"
+
             tools:layout="@layout/fragment_summary" />
+        <!--            app:layout_constraintTop_toBottomOf="@id/fcvWeather"-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

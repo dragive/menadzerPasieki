@@ -1,6 +1,5 @@
 package pl.pasiekaradosna.menadzerpasieki.services
 
-import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
@@ -158,64 +157,43 @@ class ApiaryManagerDbHelper(context: Context) :
     }
 
     private fun dropOldTables() {
-        try {
-            sQLiteDatabase?.execSQL("""drop table $TABLE_APIARIES_OLD""")
-        } catch (ex: Exception) {
+        val list: List<String> = listOf(
+            TABLE_APIARIES_OLD,
+            TABLE_HIVES_OLD, TABLE_HIVES_AND_TASKS_OLD,
+            TABLE_USERS_OLD,
+            TABLE_TASK_OLD,
+        )
+
+        for (i in list) {
+            try {
+                sQLiteDatabase?.execSQL("""drop table $i""")
+                Log.d(TAG_APP, "Dropped OLD $i")
+            } catch (ex: Exception) {
+                Log.e(TAG_APP, "Unable to drop OLD $i")
+            }
         }
-        try {
-            sQLiteDatabase?.execSQL("""drop table $TABLE_HIVES_OLD""")
-        } catch (ex: Exception) {
-        }
-        try {
-            sQLiteDatabase?.execSQL("""drop table $TABLE_HIVES_AND_TASKS_OLD""")
-        } catch (ex: Exception) {
-        }
-        try {
-            sQLiteDatabase?.execSQL("""drop TABLE $TABLE_USERS_OLD""")
-        } catch (ex: Exception) {
-        }
-        try {
-            sQLiteDatabase?.execSQL("""drop TABLE $TABLE_TASK_OLD""")
-        } catch (ex: Exception) {
-        }
+
     }
 
     private fun dropNewTables() {
-        try {
-            sQLiteDatabase?.execSQL("""drop TABLE $TABLE_TASK_TYPE""")
-        } catch (ex: Exception) {
-        }
-        try {
-            sQLiteDatabase?.execSQL("""drop TABLE $TABLE_TASK""")
-        } catch (ex: Exception) {
-        }
-        try {
-            sQLiteDatabase?.execSQL("""drop TABLE $TABLE_QUEEN""")
-        } catch (ex: Exception) {
-        }
-        try {
-            sQLiteDatabase?.execSQL("""drop TABLE  $TABLE_QUEEN_BREED""")
-        } catch (ex: Exception) {
-        }
-        try {
-            sQLiteDatabase?.execSQL("""drop TABLE $TABLE_HIVE""")
-        } catch (ex: Exception) {
-        }
-        try {
-            sQLiteDatabase?.execSQL("""drop TABLE $TABLE_APIARY""")
-        } catch (ex: Exception) {
-        }
-    }
+        val list: List<String> = listOf(
+            TABLE_TASK_TYPE,
+            TABLE_TASK,
+            TABLE_QUEEN,
+            TABLE_QUEEN_BREED,
+            TABLE_HIVE,
+            TABLE_APIARY
+        )
 
-    fun insertValueTest(field: String) {
-        val values = ContentValues()
-        values.put("field", field)
-        try {
-            this.writableDatabase.insert(TABLE_APIARIES_OLD, null, values)
-            Log.i(TAG_APP, "Inserted Values")
-        } catch (ex: Exception) {
-            Log.e(TAG_APP, "Error inserting", ex)
+        for (i in list) {
+            try {
+                sQLiteDatabase?.execSQL("""drop table $i""")
+                Log.d(TAG_APP, "Dropped $i")
+            } catch (ex: Exception) {
+                Log.e(TAG_APP, "Unable to drop $i")
+            }
         }
+
     }
 
     fun createApiary(apiaryData: ApiaryData) {
@@ -349,6 +327,7 @@ class ApiaryManagerDbHelper(context: Context) :
             Log.e(TAG_APP, "Select all apiaries error\n", e)
             return null
         }
+        //todo remake na nową wersje
         with(cursor) {
             moveToFirst()
             val apiaryName = getString(getColumnIndexOrThrow("name"))
@@ -561,7 +540,7 @@ class ApiaryManagerDbHelper(context: Context) :
     fun countApiaries(): Int {
         val db = this.readableDatabase
 
-        var selectQuery: String = """
+        val selectQuery: String = """
                 SELECT             
                 count(1) c
                 FROM $TABLE_APIARIES_OLD
@@ -591,7 +570,7 @@ class ApiaryManagerDbHelper(context: Context) :
     fun countTasks(): Int {
         val db = this.readableDatabase
 
-        var selectQuery: String = """
+        val selectQuery: String = """
                 SELECT             
                 count(1) c
                 FROM $TABLE_TASK_OLD
@@ -619,14 +598,14 @@ class ApiaryManagerDbHelper(context: Context) :
 
     fun insertHive(hiveData: HiveData): Boolean {
         Log.d(TAG_APP, "hives list in DB:" + this.getAllHivesByApiaryId(hiveData.apiaryId))
-        try {
+        return try {
 
             val r = this.writableDatabase.insert(TABLE_HIVES_OLD, null, hiveData.mapToValues())
             Log.i(TAG_APP, "Inserted Values?")
-            return r != -1L
+            r != -1L
         } catch (ex: Exception) {
             Log.e(TAG_APP, "Error inserting", ex)
-            return false
+            false
         }
 
     }
@@ -634,7 +613,7 @@ class ApiaryManagerDbHelper(context: Context) :
 
     fun insertTask(taskData: TaskData): Boolean {
 //        Log.d(TAG, "task list in DB:" + this.getAllHivesByApiaryId(taskData.apiaryId))
-        try {
+        return try {
 
             val r = this.writableDatabase
                 .insert(
@@ -642,16 +621,16 @@ class ApiaryManagerDbHelper(context: Context) :
                     taskData.mapToValues()
                 )
             Log.i(TAG_APP, "Inserted Values?")
-            return r != -1L
+            r != -1L
         } catch (ex: Exception) {
             Log.e(TAG_APP, "Error inserting", ex)
-            return false
+            false
         }
 
     }
 
     fun deleteApiary(apiaryId: Int): Boolean {
-        var b: Boolean = false
+        var b = false
         try {
             val args = Array(1) { apiaryId.toString() }
             val affectedRows =
@@ -666,7 +645,7 @@ class ApiaryManagerDbHelper(context: Context) :
 
 
     fun deleteHive(hiveId: Int): Boolean {
-        var b: Boolean = false
+        var b = false
         try {
             val args = Array(1) { hiveId.toString() }
             val affectedRows =
@@ -681,7 +660,7 @@ class ApiaryManagerDbHelper(context: Context) :
 
 
     fun deleteTask(taskId: Int): Boolean {
-        var b: Boolean = false
+        var b = false
         try {
             val args = Array(1) { taskId.toString() }
             val affectedRows =

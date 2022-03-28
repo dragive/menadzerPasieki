@@ -8,13 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_dashboard.fabCreateNewApiary
-import kotlinx.android.synthetic.main.fragment_dashboard.rvDashboardMenu
 import pl.pasiekaradosna.menadzerpasieki.databinding.FragmentDashboardBinding
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.apiaryManagement.CreateApiaryActivity
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.apiary.ApiaryAdapter
-import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
 
 class DashboardFragment : Fragment() {
 
@@ -49,13 +46,14 @@ class DashboardFragment : Fragment() {
             val intent = Intent(context, CreateApiaryActivity::class.java)
             startActivity(intent)
         }
-        val list = ApiaryManagerDbHelper(requireContext()).getAllApiaries()
-
-        apiaryAdapter = ApiaryAdapter(list!!)
-
-        rvDashboardMenu.adapter = apiaryAdapter
-
-        rvDashboardMenu.layoutManager = LinearLayoutManager(context)
+        //todo remake
+//        val list = ApiaryManagerDbHelper(requireContext()).getAllApiaries()
+//
+//        apiaryAdapter = ApiaryAdapter(list!!)
+//
+//        rvDashboardMenu.adapter = apiaryAdapter
+//
+//        rvDashboardMenu.layoutManager = LinearLayoutManager(context)
     }
 
     override fun onDestroyView() {

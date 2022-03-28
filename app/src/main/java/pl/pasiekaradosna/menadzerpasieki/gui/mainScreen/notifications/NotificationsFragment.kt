@@ -6,11 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_notifications.rcTaskListView
 import pl.pasiekaradosna.menadzerpasieki.databinding.FragmentNotificationsBinding
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.task.TaskAdapter
-import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
 
 class NotificationsFragment : Fragment() {
 
@@ -35,13 +32,13 @@ class NotificationsFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
-        val list = ApiaryManagerDbHelper(requireContext()).getAllTasks()
-        taskAdapter = TaskAdapter(list!!)
-
-        rcTaskListView.adapter = taskAdapter
-
-        rcTaskListView.layoutManager = LinearLayoutManager(context)
+        // todo remake
+//        val list = ApiaryManagerDbHelper(requireContext()).getAllTasks()
+//        taskAdapter = TaskAdapter(list!!)
+//
+//        rcTaskListView.adapter = taskAdapter
+//
+//        rcTaskListView.layoutManager = LinearLayoutManager(context)
     }
 
     override fun onDestroyView() {
