@@ -6,9 +6,9 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.apiary.ApiaryData
-import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.hive.HiveData
-import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.task.TaskData
+import pl.pasiekaradosna.menadzerpasieki.classes.data.ApiaryData
+import pl.pasiekaradosna.menadzerpasieki.classes.data.HiveData
+import pl.pasiekaradosna.menadzerpasieki.classes.data.TaskData
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.DATABASE_NAME
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.DATABASE_VERSION
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.TABLE_APIARIES_OLD
@@ -86,7 +86,7 @@ class ApiaryManagerDbHelper(context: Context) :
             	name TEXT NOT NULL,
             	date_of_creation TEXT NOT NULL,
             	date_of_last_modification TEXT,
-            	queen_id text,
+            	queen_id integer,
             	size_of_hive integer,
             	deleted Integer
             );
@@ -257,14 +257,15 @@ class ApiaryManagerDbHelper(context: Context) :
                 val apiaryId = getInt(getColumnIndexOrThrow("id"))
                 val apiaryDateOfCreation = getString(getColumnIndexOrThrow("date_of_creation"))
                 val apiaryLocation = getString(getColumnIndexOrThrow("location"))
-                apiaryList.add(
-                    ApiaryData(
-                        apiaryId,
-                        apiaryName,
-                        apiaryDateOfCreation,
-                        apiaryLocation
-                    )
-                )
+//                todo remake
+            //                apiaryList.add(
+//                    ApiaryData(
+//                        apiaryId,
+//                        apiaryName,
+//                        apiaryDateOfCreation,
+//                        apiaryLocation
+//                    )
+//                )
             }
         }
         cursor.close()
@@ -330,17 +331,18 @@ class ApiaryManagerDbHelper(context: Context) :
         //todo remake na nową wersje
         with(cursor) {
             moveToFirst()
-            val apiaryName = getString(getColumnIndexOrThrow("name"))
-            val apiaryId = getInt(getColumnIndexOrThrow("id"))
-            val apiaryDateOfCreation = getString(getColumnIndexOrThrow("date_of_creation"))
-            val apiaryLocation = getString(getColumnIndexOrThrow("location"))
-            apiaryResult =
-                ApiaryData(
-                    apiaryId,
-                    apiaryName,
-                    apiaryDateOfCreation,
-                    apiaryLocation
-                )
+            //todo remake
+//            val apiaryName = getString(getColumnIndexOrThrow("name"))
+//            val apiaryId = getInt(getColumnIndexOrThrow("id"))
+//            val apiaryDateOfCreation = getString(getColumnIndexOrThrow("date_of_creation"))
+//            val apiaryLocation = getString(getColumnIndexOrThrow("location"))
+//            apiaryResult =
+//                ApiaryData(
+//                    apiaryId,
+//                    apiaryName,
+//                    apiaryDateOfCreation,
+//                    apiaryLocation
+//                )
 
 
         }
@@ -376,20 +378,21 @@ class ApiaryManagerDbHelper(context: Context) :
         }
         with(cursor) {
             while (moveToNext()) {
-                val hiveId = getInt(getColumnIndexOrThrow("id"))
-                val hiveName = getString(getColumnIndexOrThrow("name"))
-                val hiveApiaryId = getInt(getColumnIndexOrThrow("apiary_id"))
-                val hiveQueenBreed = getString(getColumnIndexOrThrow("queen_bread"))
-                val hiveQueenBirthDate = getString(getColumnIndexOrThrow("queen_birth_date"))
-                hiveList.add(
-                    HiveData(
-                        hiveId,
-                        hiveName,
-                        hiveApiaryId,
-                        hiveQueenBreed,
-                        hiveQueenBirthDate
-                    )
-                )
+                //todo remake
+//                val hiveId = getInt(getColumnIndexOrThrow("id"))
+//                val hiveName = getString(getColumnIndexOrThrow("name"))
+//                val hiveApiaryId = getInt(getColumnIndexOrThrow("apiary_id"))
+//                val hiveQueenBreed = getString(getColumnIndexOrThrow("queen_bread"))
+//                val hiveQueenBirthDate = getString(getColumnIndexOrThrow("queen_birth_date"))
+//                hiveList.add(
+//                    HiveData(
+//                        hiveId,
+//                        hiveName,
+//                        hiveApiaryId,
+//                        hiveQueenBreed,
+//                        hiveQueenBirthDate
+//                    )
+//                )
             }
         }
         cursor.close()
@@ -423,20 +426,21 @@ class ApiaryManagerDbHelper(context: Context) :
         }
         with(cursor) {
             while (moveToNext()) {
-                val hiveId = getInt(getColumnIndexOrThrow("id"))
-                val hiveName = getString(getColumnIndexOrThrow("name"))
-                val hiveApiaryId = getInt(getColumnIndexOrThrow("apiary_id"))
-                val hiveQueenBreed = getString(getColumnIndexOrThrow("queen_bread"))
-                val hiveQueenBirthDate = getString(getColumnIndexOrThrow("queen_birth_date"))
-                hiveList.add(
-                    HiveData(
-                        hiveId,
-                        hiveName,
-                        hiveApiaryId,
-                        hiveQueenBreed,
-                        hiveQueenBirthDate
-                    )
-                )
+//                todo remake
+            //                val hiveId = getInt(getColumnIndexOrThrow("id"))
+//                val hiveName = getString(getColumnIndexOrThrow("name"))
+//                val hiveApiaryId = getInt(getColumnIndexOrThrow("apiary_id"))
+//                val hiveQueenBreed = getString(getColumnIndexOrThrow("queen_bread"))
+//                val hiveQueenBirthDate = getString(getColumnIndexOrThrow("queen_birth_date"))
+//                hiveList.add(
+//                    HiveData(
+//                        hiveId,
+//                        hiveName,
+//                        hiveApiaryId,
+//                        hiveQueenBreed,
+//                        hiveQueenBirthDate
+//                    )
+//                )
             }
         }
         cursor.close()
@@ -458,7 +462,7 @@ class ApiaryManagerDbHelper(context: Context) :
             """.trimIndent() //FIXME zmiana na BREED zamiast BREAD
 
 
-        val hiveData: HiveData?
+        val hiveData: HiveData? = null
 
         val cursor: Cursor?
 
@@ -470,18 +474,19 @@ class ApiaryManagerDbHelper(context: Context) :
         }
         with(cursor) {
             moveToFirst()
-            val hiveId = getInt(getColumnIndexOrThrow("id"))
-            val hiveName = getString(getColumnIndexOrThrow("name"))
-            val hiveApiaryId = getInt(getColumnIndexOrThrow("apiary_id"))
-            val hiveQueenBreed = getString(getColumnIndexOrThrow("queen_bread"))
-            val hiveQueenBirthDate = getString(getColumnIndexOrThrow("queen_birth_date"))
-            hiveData = HiveData(
-                hiveId,
-                hiveName,
-                hiveApiaryId,
-                hiveQueenBreed,
-                hiveQueenBirthDate
-            )
+            //todo remake
+//            val hiveId = getInt(getColumnIndexOrThrow("id"))
+//            val hiveName = getString(getColumnIndexOrThrow("name"))
+//            val hiveApiaryId = getInt(getColumnIndexOrThrow("apiary_id"))
+//            val hiveQueenBreed = getString(getColumnIndexOrThrow("queen_bread"))
+//            val hiveQueenBirthDate = getString(getColumnIndexOrThrow("queen_birth_date"))
+//            hiveData = HiveData(
+//                hiveId,
+//                hiveName,
+//                hiveApiaryId,
+//                hiveQueenBreed,
+//                hiveQueenBirthDate
+//            )
 
         }
 
@@ -597,7 +602,7 @@ class ApiaryManagerDbHelper(context: Context) :
     }
 
     fun insertHive(hiveData: HiveData): Boolean {
-        Log.d(TAG_APP, "hives list in DB:" + this.getAllHivesByApiaryId(hiveData.apiaryId))
+        // todo remake Log.d(TAG_APP, "hives list in DB:" + this.getAllHivesByApiaryId(hiveData.apiaryId))
         return try {
 
             val r = this.writableDatabase.insert(TABLE_HIVES_OLD, null, hiveData.mapToValues())

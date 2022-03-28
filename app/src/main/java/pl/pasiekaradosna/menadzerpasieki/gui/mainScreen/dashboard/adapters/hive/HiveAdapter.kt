@@ -1,16 +1,11 @@
 package pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.hive
 
-import android.content.Intent
-import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_hive_summary.view.tvHiveListItemBreed
-import kotlinx.android.synthetic.main.fragment_hive_summary.view.tvHiveListItemName
 import pl.pasiekaradosna.menadzerpasieki.R
-import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG_APP
+import pl.pasiekaradosna.menadzerpasieki.classes.data.HiveData
 
 class HiveAdapter(
     private val elements: List<HiveData>
@@ -27,20 +22,21 @@ class HiveAdapter(
     override fun onBindViewHolder(holder: HiveViewHolder, position: Int) {
         val element = elements[position]
         holder.itemView.apply {
-            this.tvHiveListItemBreed.text = element.queenBreed
-            this.tvHiveListItemName.text = element.name
-
-            this.setOnClickListener {
-                try {
-                    val intent = Intent(context, HiveDetailsActivity::class.java)
-                    val bundle = Bundle()
-                    bundle.putInt("HiveId", elements[position].id!!)
-                    intent.putExtras(bundle)
-                    context.startActivity(intent)
-                } catch (err: Exception) {
-                    Log.e(TAG_APP, "Error while lunching activity with hive details", err)
-                }
-            }
+            //todo remake
+//            this.tvHiveListItemBreed.text = element.queenBreed
+//            this.tvHiveListItemName.text = element.name
+//
+//            this.setOnClickListener {
+//                try {
+//                    val intent = Intent(context, HiveDetailsActivity::class.java)
+//                    val bundle = Bundle()
+//                    bundle.putInt("HiveId", elements[position].id!!)
+//                    intent.putExtras(bundle)
+//                    context.startActivity(intent)
+//                } catch (err: Exception) {
+//                    Log.e(TAG_APP, "Error while lunching activity with hive details", err)
+//                }
+//            }
         }
     }
     override fun getItemCount(): Int {

@@ -8,10 +8,9 @@ import kotlinx.android.synthetic.main.activity_hive_details.bActivityHiveDetails
 import kotlinx.android.synthetic.main.activity_hive_details.bActivityHiveDetailsEdit
 import kotlinx.android.synthetic.main.activity_hive_details.tvHiveDetailsApiaryName
 import kotlinx.android.synthetic.main.activity_hive_details.tvHiveDetailsName
-import kotlinx.android.synthetic.main.activity_hive_details.tvHiveDetailsQueenBreed
-import kotlinx.android.synthetic.main.activity_hive_details.tvHiveDetailsQueenDateOfBirth
 import pl.pasiekaradosna.menadzerpasieki.R
-import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.apiary.ApiaryData
+import pl.pasiekaradosna.menadzerpasieki.classes.data.ApiaryData
+import pl.pasiekaradosna.menadzerpasieki.classes.data.HiveData
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.hive.CreateHiveActivity
 import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.notifications.CreateTaskActivity
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
@@ -31,9 +30,10 @@ class HiveDetailsActivity : AppCompatActivity() {
         apiaryManagerDbHelper = ApiaryManagerDbHelper(this)
         hiveData = apiaryManagerDbHelper!!.getHiveById(hiveId)
 
-        if (hiveData != null && hiveData?.apiaryId != null) {
-            apiaryData = apiaryManagerDbHelper!!.getApiaryById(hiveData?.apiaryId!!)
-        }
+//todo remake
+    //        if (hiveData != null && hiveData?.apiaryId != null) {
+//            apiaryData = apiaryManagerDbHelper!!.getApiaryById(hiveData?.apiaryId!!)
+//        }
 
     }
 
@@ -48,8 +48,8 @@ class HiveDetailsActivity : AppCompatActivity() {
 
         tvHiveDetailsName.text = hiveDataParsed.name
         tvHiveDetailsApiaryName.text = apiaryData?.name
-        tvHiveDetailsQueenBreed.text = hiveDataParsed.queenBreed
-        tvHiveDetailsQueenDateOfBirth.text = hiveDataParsed.queenBirthDate
+// todo remake        tvHiveDetailsQueenBreed.text = hiveDataParsed.queenBreed
+//        tvHiveDetailsQueenDateOfBirth.text = hiveDataParsed.queenBirthDate
 
 
         bActivityHiveDetailsDelete.setOnClickListener {

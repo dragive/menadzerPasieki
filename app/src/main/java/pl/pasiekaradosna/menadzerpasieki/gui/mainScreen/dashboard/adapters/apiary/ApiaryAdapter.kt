@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.fragment_apiary_item.view.tvApiaryLocation
 import kotlinx.android.synthetic.main.fragment_apiary_item.view.tvHiveListItemName
 import kotlinx.android.synthetic.main.fragment_apiary_item.view.tvHivesNumber
 import pl.pasiekaradosna.menadzerpasieki.R
+import pl.pasiekaradosna.menadzerpasieki.classes.data.ApiaryData
 import pl.pasiekaradosna.menadzerpasieki.gui.ApiaryDetailsActivity
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG_APP

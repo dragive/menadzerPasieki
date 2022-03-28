@@ -2,7 +2,6 @@ package pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.hive
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
 import java.time.OffsetDateTime
@@ -13,8 +12,7 @@ import kotlinx.android.synthetic.main.activity_create_hive.calvHiveAddQueenBirth
 import kotlinx.android.synthetic.main.activity_create_hive.etHiveAddName
 import kotlinx.android.synthetic.main.activity_create_hive.etHiveAddQueenBreed
 import pl.pasiekaradosna.menadzerpasieki.R
-import pl.pasiekaradosna.menadzerpasieki.R.string
-import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.hive.HiveData
+import pl.pasiekaradosna.menadzerpasieki.classes.data.HiveData
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG_APP
 
@@ -36,8 +34,9 @@ class CreateHiveActivity : AppCompatActivity() {
             val apiaryManagerDbHelper = ApiaryManagerDbHelper(this)
 
             hiveData = apiaryManagerDbHelper.getHiveById(hiveId!!)!!
-            etHiveAddName.setText(hiveData.name)
-            etHiveAddQueenBreed.setText(hiveData.queenBreed)
+//            todo remake
+//            etHiveAddName.setText(hiveData.name)
+//            etHiveAddQueenBreed.setText(hiveData.queenBreed)
             setUpdateListener()
         }
     }
@@ -50,22 +49,23 @@ class CreateHiveActivity : AppCompatActivity() {
 
             val date: String = getDate(calvHiveAddQueenBirth.date, "yyyy MM dd")!!
 
-            val hive = HiveData(-1, name, apiaryId!!, breed, date)
+            //todo remake val hive = HiveData(-1, name, apiaryId!!, breed, date)
 
-            if (ApiaryManagerDbHelper(this).insertHive(hive)) {
-                Toast.makeText(
-                    this,
-                    getString(string.ToastHiveWasAddedSuccessfully),
-                    Toast.LENGTH_SHORT
-                ).show()
-                Log.d(TAG_APP, "true")
-                finish()
-            } else {
-                Toast.makeText(this, getString(string.ToastAddingTaskFailed), Toast.LENGTH_SHORT)
-                    .show()
-                Log.d(TAG_APP, "false")
-
-            }
+//            todo remake
+            //            if (ApiaryManagerDbHelper(this).insertHive(hive)) {
+//                Toast.makeText(
+//                    this,
+//                    getString(string.ToastHiveWasAddedSuccessfully),
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//                Log.d(TAG_APP, "true")
+//                finish()
+//            } else {
+//                Toast.makeText(this, getString(string.ToastAddingTaskFailed), Toast.LENGTH_SHORT)
+//                    .show()
+//                Log.d(TAG_APP, "false")
+//
+//            }
 
         }
     }
@@ -76,19 +76,17 @@ class CreateHiveActivity : AppCompatActivity() {
 
         // Create a calendar object that will convert the date and time value in milliseconds to date.
         val calendar: Calendar = Calendar.getInstance()
-        calendar.setTimeInMillis(milliSeconds)
-        return formatter.format(calendar.getTime())
+        calendar.timeInMillis = milliSeconds
+        return formatter.format(calendar.time)
     }
 
     private fun getMilis(date: String): Long {
         val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern(
             "yyyy MM dd", Locale.ROOT
         )
-        val givenDateString = date
-        val timeInMilliseconds: Long = OffsetDateTime.parse(givenDateString, formatter)
+        return OffsetDateTime.parse(date, formatter)
             .toInstant()
             .toEpochMilli()
-        return timeInMilliseconds
     }
 
 
@@ -103,9 +101,9 @@ class CreateHiveActivity : AppCompatActivity() {
 
             val date: String = getDate(calvHiveAddQueenBirth.date, "yyyy MM dd")!!
 
-            val hive = HiveData(hiveId, name, apiaryId!!, breed, date)
+            //todo remake val hive = HiveData(hiveId, name, apiaryId!!, breed, date)
 
-            ApiaryManagerDbHelper(this).updateHive(hive)
+            //todo remake ApiaryManagerDbHelper(this).updateHive(hive)
             finish()
 
         }

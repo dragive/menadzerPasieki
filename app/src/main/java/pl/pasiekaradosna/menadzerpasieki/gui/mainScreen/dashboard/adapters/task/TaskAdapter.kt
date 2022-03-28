@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.fragment_task_item.view.tvFragmentTaskItem
 import kotlinx.android.synthetic.main.fragment_task_item.view.tvFragmentTaskItemName
 import kotlinx.android.synthetic.main.fragment_task_item.view.tvFragmentTaskItemNameOfHive
 import pl.pasiekaradosna.menadzerpasieki.R.string
+import pl.pasiekaradosna.menadzerpasieki.classes.data.TaskData
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
 
 

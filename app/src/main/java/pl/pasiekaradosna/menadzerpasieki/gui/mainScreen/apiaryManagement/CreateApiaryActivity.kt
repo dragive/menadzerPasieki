@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_create_apiary.*
 import kotlinx.android.synthetic.main.activity_location_test.bGetLocation
 import pl.pasiekaradosna.menadzerpasieki.R
 import pl.pasiekaradosna.menadzerpasieki.R.string
-import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.apiary.ApiaryData
+import pl.pasiekaradosna.menadzerpasieki.classes.data.ApiaryData
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
 import pl.pasiekaradosna.menadzerpasieki.services.Settings
 
@@ -205,7 +205,7 @@ class CreateApiaryActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            ApiaryManagerDbHelper(this).createApiary(ApiaryData(null, name, date, coords))
+            //todo remake ApiaryManagerDbHelper(this).createApiary(ApiaryData(null, name, date, coords))
             finish()
         }
     }
@@ -224,7 +224,7 @@ class CreateApiaryActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            ApiaryManagerDbHelper(this).updateApiary(ApiaryData(apiaryId, name, date, coords))
+            //todo remake ApiaryManagerDbHelper(this).updateApiary(ApiaryData(apiaryId, name, date, coords))
             finish()
         }
     }

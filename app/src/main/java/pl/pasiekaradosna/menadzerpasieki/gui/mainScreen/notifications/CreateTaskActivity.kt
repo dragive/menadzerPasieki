@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_create_task.edTaskCreateDescripti
 import kotlinx.android.synthetic.main.activity_create_task.edTaskCreateName
 import pl.pasiekaradosna.menadzerpasieki.R.layout
 import pl.pasiekaradosna.menadzerpasieki.R.string
-import pl.pasiekaradosna.menadzerpasieki.gui.mainScreen.dashboard.adapters.task.TaskData
+import pl.pasiekaradosna.menadzerpasieki.classes.data.TaskData
 import pl.pasiekaradosna.menadzerpasieki.services.ApiaryManagerDbHelper
 import pl.pasiekaradosna.menadzerpasieki.services.Settings.TAG_APP
 
